@@ -14,7 +14,7 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    padding: 30px 40px; /* Вэбийн захаас авах зай */
+    padding: 30px 40px;
 }
 
 /* ==========================================================================
@@ -49,7 +49,6 @@ footer {
     flex-direction: column;
 }
 
-/* reference бичгэн дээр хулгана очиход доогуур нь зурах эффект */
 #reference-btn:hover {
     text-decoration: underline;
 }
@@ -77,8 +76,6 @@ footer {
     max-width: 100%;
     object-fit: contain;
     display: block;
-    
-    /* Зургийг чирэх, хуулахаас хамгаалах */
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -90,47 +87,71 @@ footer {
    Шууд доошоо дэлгэгдэх хэсэг (Reference)
    ========================================================================== */
 .reference-section {
-    max-height: 0; /* Анхлан нууц байна */
+    max-height: 0; 
     overflow: hidden;
-    transition: max-height 0.8s cubic-bezier(0, 1, 0, 1); /* Зөөлөн дэлгэгдэх эффект */
+    transition: max-height 0.8s cubic-bezier(0, 1, 0, 1); 
     background-color: #ffffff;
 }
 
-/* reference дээр дарах үед идэвхжих хэсэг */
 .reference-section.active {
-    max-height: 5000px; /* Текстүүдийг хачихгүй бүтэн багтаах өндөр */
+    max-height: 6000px; /* Текст маш урт тул хязгаарыг 6000px болгож ихэсгэв */
     padding: 40px 0;
 }
 
+/* 🛠️ Зураг дээрх улаан сумны дагуу өргөнийг дэлгэцийн зах руу илүү шахсан (850px болгов) */
 .content-wrapper {
-    max-width: 650px;
-    margin: 0 auto; /* Текстийг яг хуудасны голд байрлуулна */
+    max-width: 850px; 
+    margin: 0 auto; 
     width: 100%;
-    padding: 0 10px; /* Жижиг дэлгэц дээр захаас авах аюулгүйн зай */
+    padding: 0 20px; 
+}
+
+/* 🛠️ Гарчиг болон X товчийг зэрэгцүүлж тэгшлэх хэсэг */
+.reference-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 35px;
+    position: relative;
 }
 
 .content-wrapper h2 {
     font-size: 16px;
     font-weight: bold;
-    margin-bottom: 30px;
     text-transform: uppercase;
     letter-spacing: 1px;
+    margin-bottom: 0; /* Header ашиглаж байгаа тул доод зайг 0 болгов */
+}
+
+/* 🛠️ ЗУРАГ ДЭЭРХ ШИГ УЛААН ӨНГӨТЭЙ ХААХ (X) ТОВЧЛУУР */
+.close-x {
+    font-size: 36px;       /* 👈 Хэмжээг том, тод харагдуулна */
+    color: #ff0000;        /* 👈 Яг зураг дээрх шиг тод улаан өнгө */
+    cursor: pointer;
+    font-weight: 300;      /* 👈 Нарийн цэвэрхэн зураастай харагдуулна */
+    line-height: 1;
+    transition: transform 0.2s ease;
+}
+
+.close-x:hover {
+    transform: scale(1.1); /* Хулгана очиход бага зэрэг томорно */
+    opacity: 0.8;
 }
 
 /* Текстийг хоёр тал руу нь тулгаж тэгшлэх тохиргоо */
 .quotes-list p {
     font-size: 14px;
-    line-height: 1.8;
-    margin-bottom: 22px;
+    line-height: 1.9;
+    margin-bottom: 24px;
     color: #000000;
     
-    text-align: justify;         /* 👈 Баруун зүүн талыг жигд тэгшилнэ */
-    text-justify: inter-word;     /* 👈 Үг хоорондын зайг тэгш хуваана */
-    word-break: break-word;       /* 👈 Урт үгсийг мөр шилжүүлнэ */
+    text-align: justify;         
+    text-justify: inter-word;     
+    word-break: break-word;       
 }
 
 /* ==========================================================================
-   Гар утас болон ухаалаг төхөөрөмжийн тохиргоо (Responsive)
+   Гар утасны тохиргоо (Responsive)
    ========================================================================== */
 @media (max-width: 768px) {
     body {
