@@ -19,7 +19,7 @@ body {
 header, footer {
     display: flex;
     justify-content: space-between;
-    font-size: 16px;       /* 4 талын текстийн хэмжээ ижил */
+    font-size: 18px;       /* 4 талын текстийн хэмжээ ижил */
     font-weight: bold;     /* 4 талын текстийн бүдүүн ижил */
     line-height: 1.5;
 }
