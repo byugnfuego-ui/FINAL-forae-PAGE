@@ -81,13 +81,13 @@ footer {
 .reference-section {
     max-height: 0; /* Анхлан нууц байна */
     overflow: hidden;
-    transition: max-height 0.5s ease-out; /* Зөөлөн доошоо дэлгэгдэх эффект */
+    transition: max-height 0.8s cubic-bezier(0, 1, 0, 1); /* Урт текстийг гацаахгүй зөөлөн нээх эффект */
     background-color: #ffffff;
 }
 
 /* reference дээр дарах үед идэвхжих хэсэг */
 .reference-section.active {
-    max-height: 2000px; /* Текстүүд багтахуйц өндөр */
+    max-height: 5000px; /* 👈 Урт текстүүдийг хачихгүй багтаахын тулд өндрийг 5000px болгож ихэсгэв */
     padding: 40px 0;
 }
 
