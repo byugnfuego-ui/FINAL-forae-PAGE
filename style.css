@@ -72,3 +72,16 @@ footer .contact span {
         display: block;
     }
 }
+/* Зураг дээр хулганаар сонголт хийхийг хаах */
+.image-container img {
+    -webkit-user-select: none;  /* Safari */
+    -moz-user-select: none;     /* Firefox */
+    -ms-user-select: none;      /* IE10+ */
+    user-select: none;          /* Бусад хөтөчүүд */
+    
+    /* Ухаалаг утас дээр зураг дээр удаан дарахад татах цэс гарч ирэхийг хаах */
+    -webkit-touch-callout: none; 
+}
+
+
+
