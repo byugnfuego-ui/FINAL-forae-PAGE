@@ -10,10 +10,13 @@
 
     <!-- Дээд талын 2 булан -->
     <header>
-        <!-- 🛠️ id="bio-btn" нэмж, хулгана очиход гар гардаг болгов -->
-        <div class="top-left" id="bio-btn" style="cursor: pointer;">forae architects</div>
+        <div class="header-left">
+            <div class="nav-item" id="bio-btn">forae architects</div>
+            <!-- 🛠️ ШИНЭЭР НЭМЭГДСЭН: News цэс -->
+            <div class="nav-item" id="news-btn">news</div>
+        </div>
         <div class="top-right">
-            <a href="mailto:info@forea.net">info@forea.net</a>
+            <!-- Эндээс info хасагдаж, доор TEL-ийн урд орсон -->
         </div>
     </header>
 
@@ -24,7 +27,30 @@
         </div>
     </main>
 
-    <!-- 🛠️ ШИНЭЭР НЭМЭГДСЭН: Танилцуулга (Bio) зургийн доороос дэлгэгдэх хэсэг -->
+    <!-- 🛠️ ШИНЭЭР НЭМЭГДСЭН: News хэсэг (Зургийн доор хурдан дэлгэгдэнэ) -->
+    <section id="news-content" class="reference-section">
+        <div class="content-wrapper">
+            <div class="reference-header">
+                <h2>News</h2>
+                <span id="close-news-btn" class="close-x">&times;</span>
+            </div>
+            <div class="news-list">
+                <div class="news-item">
+                    <span class="news-date">2026.05</span>
+                    <p>VOLUME 2: КОНТЕМПОРАРИ АРХИТЕКТУРЫН ХИЛ ХЯЗГААР хүрээнд Архитектурын хүсэл сэдвээр илтгэл тавив.</p>
+                    <a href="https://instagram.com" target="_blank" class="news-link">Үзэх ↗</a>
+                </div>
+                
+                <div class="news-item">
+                    <span class="news-date">2026.03</span>
+                    <p>Мэдээллийн технологийн үндэсний паркаас (МТҮП) санаачлан зохион байгуулсан Хойд жигүүрийн дахин төлөвлөлтийн интерьер зураг төслийн уралдаанд 1-р байр эзэллээ.</p>
+                    <a href="https://barilga.mn" target="_blank" class="news-link">Эх сурвалж ↗</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Танилцуулга (Profile) хэсэг -->
     <section id="bio-content" class="reference-section">
         <div class="content-wrapper">
             <div class="reference-header">
@@ -38,20 +64,16 @@
         </div>
     </section>
 
-    <!-- Текстүүд шууд зургийн доороос дэлгэгдэж харагдах хэсэг (Reference) -->
+    <!-- Ишлэлүүд (Reference) хэсэг -->
     <section id="reference-content" class="reference-section">
         <div class="content-wrapper">
             <div class="reference-header">
                 <h2>Reference</h2>
                 <span id="close-x-btn" class="close-x">&times;</span>
             </div>
-            
             <div class="quotes-list">
-                <!-- Эх текстүүд -->
                 <p>1. Агуулга, шинж чанар, материал нь хэлбэрээ тодорхойлно. Нэг төвлөрсөн үзэл санаагаар хийгдээгүй, үзэл санаа тухайн зүйлийнхээ бүх хэсэгт шингээгүй байх юм бол юу ч тийм сайхан, төгс байж чадахгүй.</p>
                 <p>2. PM: архитектороор ажиллахад, өөрөөсөө миний дотоод ертөнц хаана оршиж байгааг асуудаг...</p>
-                
-                <!-- Source (Номын жагсаалт) -->
                 <div class="source-list">
                     <p>1. The Fountainhead — Novel by Ayn Rand</p>
                     <p>2. Architecture Dialogues: Positions–Concepts–Vision — Marc Angélil, Jørg Himmelreich</p>
@@ -67,11 +89,12 @@
         </div>
         <div class="bottom-right">
             <span>Ulaanbaatar, Mongolia</span>
-            <span>TEL: +98105421</span>
+            <!-- 🛠️ ЗАСАГДСАН: info@forea.net-ийг TEL-ийн урд оруулж ирэв -->
+            <span><a href="mailto:info@forea.net" class="footer-email">info@forea.net</a> &nbsp;&nbsp; TEL: +98105421</span>
         </div>
     </footer>
 
-    <!-- JavaScript логик (Bio болон Reference-ийг удирдах) -->
+    <!-- JavaScript (Хурдан гулсаж нээгдэх логик) -->
     <script>
         const bioBtn = document.getElementById('bio-btn');
         const closeBioBtn = document.getElementById('close-bio-btn');
@@ -81,12 +104,41 @@
         const closeXBtn = document.getElementById('close-x-btn');
         const refContent = document.getElementById('reference-content');
 
-        // --- БИО (Танилцуулга) нээж хаах ---
+        // 🛠️ Шинэ нэмэгдсэн News-ийн хувьсагчид
+        const newsBtn = document.getElementById('news-btn');
+        const closeNewsBtn = document.getElementById('close-news-btn');
+        const newsContent = document.getElementById('news-content');
+
+        function closeAllSections() {
+            bioContent.classList.remove('active');
+            refContent.classList.remove('active');
+            newsContent.classList.remove('active');
+        }
+
+        // News нээх хаах
+        newsBtn.onclick = function() {
+            const isOpen = newsContent.classList.contains('active');
+            closeAllSections();
+            if (!isOpen) {
+                newsContent.classList.add('active');
+                setTimeout(() => { newsContent.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 150);
+            } else {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+        closeNewsBtn.onclick = function(e) {
+            e.stopPropagation();
+            newsContent.classList.remove('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Profile нээх хаах
         bioBtn.onclick = function() {
-            refContent.classList.remove('active'); // Нөгөө цонх нээлттэй бол хаана
-            bioContent.classList.toggle('active');
-            if (bioContent.classList.contains('active')) {
-                setTimeout(() => { bioContent.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 300);
+            const isOpen = bioContent.classList.contains('active');
+            closeAllSections();
+            if (!isOpen) {
+                bioContent.classList.add('active');
+                setTimeout(() => { bioContent.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 150);
             } else {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }
@@ -97,12 +149,13 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // --- РЕФЕРЕНС нээж хаах ---
+        // Reference нээх хаах
         refBtn.onclick = function() {
-            bioContent.classList.remove('active'); // Нөгөө цонх нээлттэй бол хаана
-            refContent.classList.toggle('active');
-            if (refContent.classList.contains('active')) {
-                setTimeout(() => { refContent.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 300);
+            const isOpen = refContent.classList.contains('active');
+            closeAllSections();
+            if (!isOpen) {
+                refContent.classList.add('active');
+                setTimeout(() => { refContent.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 150);
             } else {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }
