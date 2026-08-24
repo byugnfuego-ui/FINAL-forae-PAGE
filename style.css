@@ -35,6 +35,9 @@ header .top-right a {
 
 footer {
     padding-top: 20px;
+    background: #ffffff;
+    position: relative;
+    z-index: 10;
 }
 
 .bottom-left {
@@ -42,7 +45,7 @@ footer {
     flex-direction: column;
 }
 
-#reference-link:hover {
+#reference-btn:hover {
     text-decoration: underline;
 }
 
@@ -59,11 +62,11 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px 0;
+    padding: 40px 0;
 }
 
 .image-container img {
-    max-height: 600px;
+    max-height: 550px;
     max-width: 100%;
     object-fit: contain;
     display: block;
@@ -74,78 +77,40 @@ footer {
     -webkit-touch-callout: none;
 }
 
-/* --- REFERENCE ЦОНХНЫ ЗАСВАР (БҮРЭН ШИНЭЧЛЭЛТ) --- */
-.modal {
-    display: none; 
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(255, 255, 255, 0.98); /* Цагаан тунгалаг суурь */
-    justify-content: center; 
-    align-items: center;    
-}
-
-.modal-content {
+/* --- ШУУД ДООШОО ДЭЛГЭГДЭХ ХЭСГИЙН CSS --- */
+.reference-section {
+    max-height: 0; /* Анхлан нууц байна */
+    overflow: hidden;
+    transition: max-height 0.5s ease-out; /* Зөөлөн доошоо дэлгэгдэх эффект */
     background-color: #ffffff;
-    padding: 40px;
-    border: 1px solid #000000; 
-    max-width: 700px; /* Урт текстүүдэд зориулж өргөнийг бага зэрэг нэмэв */
-    width: 90%;
-    max-height: 85vh; /* 👈 Цонхыг дэлгэцнээс дээш халихаас хамгаална */
-    position: relative;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-    display: flex;
-    flex-direction: column;
 }
 
-.close-btn {
-    position: absolute;
-    top: 15px;
-    right: 20px;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
-    color: #000000;
-    z-index: 10;
+/* reference дээр дарах үед идэвхжих хэсэг */
+.reference-section.active {
+    max-height: 2000px; /* Текстүүд багтахуйц өндөр */
+    padding: 40px 0;
 }
 
-.close-btn:hover {
-    color: #666666;
+.content-wrapper {
+    max-width: 650px;
+    margin: 0 auto; /* Текстийг яг хуудасны голд байрлуулна */
+    width: 100%;
 }
 
-.modal-content h2 {
+.content-wrapper h2 {
     font-size: 16px;
     font-weight: bold;
-    margin-bottom: 25px;
+    margin-bottom: 30px;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
 
-/* 👈 Таны нээсэн ангилал болон 28 ишлэлүүдийг доош нь гүйлгэж уншдаг болгох хэсэг */
-.quotes-list, .references {
-    overflow-y: auto; /* Текст ихдэхэд цонхон дотроо scroll үүсгэнэ */
-    padding-right: 15px;
-    flex: 1;
-}
-
-/* Ишлэлүүдийн хоорондын зай ба загвар */
-.quotes-list p, .references p {
+.quotes-list p {
     font-size: 14px;
     line-height: 1.8;
-    margin-bottom: 18px;
+    margin-bottom: 22px;
     color: #000000;
-    text-align: justify; /* Баруун зүүн ирмэгийг тэгшилнэ */
-}
-
-/* Гүйлгэх зурвасыг (Scrollbar) нарийн, минималист харагдуулах тохиргоо */
-.quotes-list::-webkit-scrollbar, .references::-webkit-scrollbar {
-    width: 4px;
-}
-.quotes-list::-webkit-scrollbar-thumb, .references::-webkit-scrollbar-thumb {
-    background-color: #000000;
+    text-align: justify; /* Ном шиг баруун зүүн талыг тэгшилнэ */
 }
 
 /* Гар утасны тохиргоо */
@@ -161,8 +126,5 @@ footer {
     }
     .bottom-right {
         text-align: center;
-    }
-    .modal-content {
-        padding: 30px 20px;
     }
 }
