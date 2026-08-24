@@ -18,30 +18,39 @@ body {
 }
 
 /* ==========================================================================
-   Дээд ба Доод текстүүд (4 булан)
+   Дээд талын цэсүүд (forae architects ба news)
    ========================================================================== */
-header, footer {
+header {
     display: flex;
     justify-content: space-between;
     font-size: 14px;       
     font-weight: bold;     
     line-height: 1.5;
-}
-
-header {
     padding-bottom: 20px;
 }
 
-header .top-right a {
-    color: #000000;
-    text-decoration: none;
+.header-left {
+    display: flex;
+    gap: 30px; /* Нэр болон news хоорондын зай */
 }
 
-#bio-btn:hover {
+.nav-item {
+    cursor: pointer;
+}
+
+.nav-item:hover {
     text-decoration: underline;
 }
 
+/* ==========================================================================
+   Хөл хэсэг (4 булан)
+   ========================================================================== */
 footer {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;       
+    font-weight: bold;     
+    line-height: 1.5;
     padding-top: 20px;
     background: #ffffff;
     position: relative;
@@ -61,6 +70,15 @@ footer {
     display: flex;
     flex-direction: column;
     text-align: right;
+}
+
+.footer-email {
+    color: #000000;
+    text-decoration: none;
+}
+
+.footer-email:hover {
+    text-decoration: underline;
 }
 
 /* ==========================================================================
@@ -88,12 +106,13 @@ footer {
 }
 
 /* ==========================================================================
-   Шууд доошоо дэлгэгдэх хэсэг (Profile & Reference)
+   Шууд доошоо дэлгэгдэх хэсгүүдийн CSS тохиргоо
    ========================================================================== */
 .reference-section {
     max-height: 0; 
     overflow: hidden;
-    transition: max-height 0.8s cubic-bezier(0, 1, 0, 1); 
+    /* 🛠️ ЗАСАГДСАН: Шилжилтийн хугацааг 0.8с байсныг 0.3с болгож маш хурдан нээгддэг болгов */
+    transition: max-height 0.3s cubic-bezier(0.25, 1, 0.5, 1); 
     background-color: #ffffff;
 }
 
@@ -124,7 +143,6 @@ footer {
     letter-spacing: 1px;
 }
 
-/* Нарийн хар өнгөтэй Хаах (X) товчлуур */
 .close-x {
     font-size: 34px;       
     color: #000000;        
@@ -139,7 +157,50 @@ footer {
     transform: scale(1.05); 
 }
 
-/* Танилцуулгын текстийн CSS тохиргоо */
+/* 🛠️ ШИНЭЭР НЭМЭГДСЭН: News жагсаалтын дизайн */
+.news-list {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.news-item {
+    border-bottom: 1px solid #f0f0f0;
+    padding-bottom: 20px;
+}
+
+.news-item:last-child {
+    border-bottom: none;
+}
+
+.news-date {
+    font-size: 13px;
+    font-weight: bold;
+    color: #888888;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.news-item p {
+    font-size: 14px;
+    line-height: 1.8;
+    color: #000000;
+    text-align: justify;
+    margin-bottom: 10px;
+}
+
+.news-link {
+    font-size: 13px;
+    color: #000000;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.news-link:hover {
+    text-decoration: underline;
+}
+
+/* Profile текстийн CSS тохиргоо */
 .bio-text h3 {
     font-size: 15px;
     font-weight: bold;
@@ -154,7 +215,7 @@ footer {
     text-align: justify;
 }
 
-/* Ишлэлүүдийн CSS тохиргоо */
+/* Ишлэлүүдийн CSS тохиргоо (Хоёр тал руу нь тулгасан) */
 .quotes-list > p {
     font-size: 14px;
     line-height: 1.8;       
@@ -165,7 +226,7 @@ footer {
     word-break: break-word;       
 }
 
-/* Номын жагсаалтын (Source) CSS тохиргоо */
+/* Source (Номын жагсаалт) хэсгийн зайг багасгах код */
 .source-list {
     margin-top: 40px;       
     border-top: 1px solid #eeeeee; 
@@ -193,6 +254,9 @@ footer {
         align-items: center;
         text-align: center;
         gap: 10px;
+    }
+    .header-left {
+        gap: 20px;
     }
     .bottom-right {
         text-align: center;
