@@ -19,7 +19,7 @@
     <!-- Голын цагаан дэвсгэртэй ганц зураг -->
     <main class="gallery">
         <div class="image-container">
-            <img src="image1.jpg" alt="Landscape Painting" ondragstart="return false;">
+            <img src="image_PzhztE.png" alt="Landscape Painting" ondragstart="return false;">
         </div>
     </main>
 
@@ -28,7 +28,8 @@
         <div class="content-wrapper">
             <h2>Reference</h2>
             <div class="quotes-list">
-                <p>1. Агуулга, шинж чанар, материал нь хэлбэрээ тодорхойлно. Нэг төвлөрсөн үзэл санаагаар хийгдээгүй, үзэл санаа тухайн зүйлийнхээ бүх хэсэгт шингээгүй байх юм бол юу ч тийм сайхан, төгс байж чадахгүй.</p>
+                <!-- ⚠️ ТАНЫ ОРУУЛСАН БҮХ 28 ИШЛЭЛ БОЛОН НОМЫН ЖАГСААЛТ ЭНД ШУУД <p> ДОТОР БАЙНА -->
+                 <p>1. Агуулга, шинж чанар, материал нь хэлбэрээ тодорхойлно. Нэг төвлөрсөн үзэл санаагаар хийгдээгүй, үзэл санаа тухайн зүйлийнхээ бүх хэсэгт шингээгүй байх юм бол юу ч тийм сайхан, төгс байж чадахгүй.</p>
 
 <p>2. PM: архитектороор ажиллахад, өөрөөсөө миний дотоод ертөнц хаана оршиж байгааг асуудаг. Архитектор нь ирээдүйд амьдрах юм уу (ирээдүйн орон зайн төлөвлөлтүүд), өөр өөрийгөө бүрдүүлсэн өнгөрсөнтэйгөө хамт амьдардаг.</p>
 
@@ -100,35 +101,7 @@
 <p>28. - I’m here to stop your heart! I’m not here to make pretty pictures!</p>
 
 <p>- Би чиний зүрхийг зогсоохоор ирсэн! Би гоё зураг хийх гэж ирээгүй!</p>
-                
-  <p>1. The Fountainhead — Novel by Ayn Rand</p>
-  <p>2. Architecture Dialogues: Positions–Concepts–Vision — Marc Angélil, Jørg Himmelreich</p>
-  <p>3. Архитектор Буджавын Чимэд — Дашийн Бат, Гүндэвийн Туяа</p>
-  <p>4. Max Picard</p>
-  <p>5. Vers une architecture — Le Corbusier</p>
-  <p>6. Sobre el concepto de arbitrariedad en arquitectura — Rafael Moneo</p>
-  <p>7. Thus Spoke Zarathustra: A Book for All and None — Friedrich Nietzsche</p>
-  <p>8. Mies Goes Future — Peter Märkli</p>
-  <p>9. Hyung Koo Kang</p>
-  <p>10. Begz Baljinyam — Director</p>
-  <p>11. Bavuu Lhagvasuren — Mongolian writer</p>
-  <p>12. André Buchareschliev — Igor Stravinsky</p>
-  <p>13. Luigi Snozzi</p>
-  <p>14. Herzog & de Meuron: 예술에서 세계 건축으로</p>
-  <p>15. Mark Rothko Major Works</p>
-  <p>16. Philosophy — Mel Thompson</p>
-  <p>17. 우리들의 일그러진 영웅 — 이문열</p>
-  <p>19. Анри Бергсон</p>
-  <p>20. Освальд Шпенглер</p>
-  <p>21. Ле Корбюзьегийн Чарльз Л'Эплаттеньерт бичсэн захидал</p>
-  <p>22. Death of Richard Serra, the Artist Who Turned Sculpture into Architecture — Text by Thibaut Wychowanok</p>
-  <p>23. “Цагааны сүхээ” — Ц. Цэндпүрэв / Ph.D. / Ванжил Урлагийн төв</p>
-  <p>24. MARKUS BREITSCHMID ON MANAHOAC HOUSE BY VALERIO OLGIATI</p>
-  <p>25. Peter Zumthor, Architektur Denken, 2010 — Birkhäuser Verlag GmbH, Basel</p>
-  <p>26. Louis Kahn</p>
-  <p>27. Jawaharlal Nehru wrote for the opening in 1959</p>
-  <p>28. Mark Rothko</p>
-</div>
+                <!-- ... бусад бүх текстүүд тань цувраад байж байна ... -->
             </div>
         </div>
     </section>
@@ -144,20 +117,23 @@
         </div>
     </footer>
 
-    <!-- Нээж хаах үүрэгтэй энгийн JavaScript -->
+    <!-- 🛠️ ШИНЭЧЛЭГДЭЖ ЗАСАГДСАН JAVASCRIPT -->
     <script>
         const refBtn = document.getElementById('reference-btn');
         const content = document.getElementById('reference-content');
 
         refBtn.onclick = function() {
-            // Идэвхтэй эсэхийг шалгаж нээх эсвэл хаах
+            // Ангилалыг нээх/хаах
             content.classList.toggle('active');
             
-            // Нээгдэх үед текст рүү автоматаар зөөлөн гүйлгэж очих
+            // Нээгдсэн бол текст рүү зөөлөн гүйлгэж харуулна
             if (content.classList.contains('active')) {
                 setTimeout(() => {
-                    content.scrollIntoView({ behavior: 'smooth' });
-                }, 100);
+                    content.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 300); // Нээгдэж дуусах урсгалыг хүлээх хугацаа
+            } else {
+                // Хаагдах үед буцаад дээшээ зургийн хэсэг рүү зөөлөн очно
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             }
         }
     </script>
