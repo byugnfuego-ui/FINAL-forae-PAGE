@@ -19,17 +19,22 @@
     <!-- Голын цагаан дэвсгэртэй ганц зураг -->
     <main class="gallery">
         <div class="image-container">
-            <img src="image1.jpg" alt="Landscape Painting" ondragstart="return false;">
+            <img src="image_PzhztE.png" alt="Landscape Painting" ondragstart="return false;">
         </div>
     </main>
 
     <!-- Текстүүд шууд зургийн доороос дэлгэгдэж харагдах хэсэг -->
     <section id="reference-content" class="reference-section">
         <div class="content-wrapper">
-            <h2>Reference</h2>
+            <!-- 🛠️ Гарчиг болон X товчлуур байрлах шинэ толгой хэсэг -->
+            <div class="reference-header">
+                <h2>Reference</h2>
+                <span id="close-x-btn" class="close-x">&times;</span>
+            </div>
+            
             <div class="quotes-list">
-                <!-- ⚠️ ТАНЫ ОРУУЛСАН БҮХ 28 ИШЛЭЛ БОЛОН НОМЫН ЖАГСААЛТ ЭНД ШУУД <p> ДОТОР БАЙНА -->
-                 <p>1. Агуулга, шинж чанар, материал нь хэлбэрээ тодорхойлно. Нэг төвлөрсөн үзэл санаагаар хийгдээгүй, үзэл санаа тухайн зүйлийнхээ бүх хэсэгт шингээгүй байх юм бол юу ч тийм сайхан, төгс байж чадахгүй.</p>
+                <!-- ⚠️ Таны оруулсан бүх 28 ишлэл, номын жагсаалт энд <p> дотор байрлана -->
+                <p>1. Агуулга, шинж чанар, материал нь хэлбэрээ тодорхойлно. Нэг төвлөрсөн үзэл санаагаар хийгдээгүй, үзэл санаа тухайн зүйлийнхээ бүх хэсэгт шингээгүй байх юм бол юу ч тийм сайхан, төгс байж чадахгүй.</p>
 
 <p>2. PM: архитектороор ажиллахад, өөрөөсөө миний дотоод ертөнц хаана оршиж байгааг асуудаг. Архитектор нь ирээдүйд амьдрах юм уу (ирээдүйн орон зайн төлөвлөлтүүд), өөр өөрийгөө бүрдүүлсэн өнгөрсөнтэйгөө хамт амьдардаг.</p>
 
@@ -101,7 +106,7 @@
 <p>28. - I’m here to stop your heart! I’m not here to make pretty pictures!</p>
 
 <p>- Би чиний зүрхийг зогсоохоор ирсэн! Би гоё зураг хийх гэж ирээгүй!</p>
-                <!-- ... бусад бүх текстүүд тань цувраад байж байна ... -->
+                <!-- Бусад текстүүд цувраад үргэлжилнэ... -->
             </div>
         </div>
     </section>
@@ -117,24 +122,29 @@
         </div>
     </footer>
 
-    <!-- 🛠️ ШИНЭЧЛЭГДЭЖ ЗАСАГДСАН JAVASCRIPT -->
+    <!-- JavaScript логик (reference ба X товчийг холбосон) -->
     <script>
         const refBtn = document.getElementById('reference-btn');
+        const closeXBtn = document.getElementById('close-x-btn');
         const content = document.getElementById('reference-content');
 
+        // Доод талын reference товчлуур дээр дарах үед
         refBtn.onclick = function() {
-            // Ангилалыг нээх/хаах
             content.classList.toggle('active');
-            
-            // Нээгдсэн бол текст рүү зөөлөн гүйлгэж харуулна
             if (content.classList.contains('active')) {
                 setTimeout(() => {
                     content.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }, 300); // Нээгдэж дуусах урсгалыг хүлээх хугацаа
+                }, 300);
             } else {
-                // Хаагдах үед буцаад дээшээ зургийн хэсэг рүү зөөлөн очно
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }
+        }
+
+        // 🛠️ Баруун талын улаан X товчлуур дээр дарах үед хаах функц
+        closeXBtn.onclick = function(e) {
+            e.stopPropagation(); // Бусад даралтын үйлдэлд саад болохоос сэргийлнэ
+            content.classList.remove('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
     </script>
 
