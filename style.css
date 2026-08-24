@@ -37,6 +37,10 @@ header .top-right a {
     text-decoration: none;
 }
 
+#bio-btn:hover {
+    text-decoration: underline;
+}
+
 footer {
     padding-top: 20px;
     background: #ffffff;
@@ -84,7 +88,7 @@ footer {
 }
 
 /* ==========================================================================
-   Шууд доошоо дэлгэгдэх хэсэг (Reference)
+   Шууд доошоо дэлгэгдэх хэсэг (Profile & Reference)
    ========================================================================== */
 .reference-section {
     max-height: 0; 
@@ -94,19 +98,17 @@ footer {
 }
 
 .reference-section.active {
-    max-height: 6000px; /* Текст маш урт тул хязгаарыг 6000px болгож ихэсгэв */
+    max-height: 6000px; 
     padding: 40px 0;
 }
 
-/* 🛠️ Зураг дээрх улаан сумны дагуу өргөнийг дэлгэцийн зах руу илүү шахсан (850px болгов) */
 .content-wrapper {
-    max-width: 2000px; 
+    max-width: 850px; 
     margin: 0 auto; 
     width: 100%;
     padding: 0 20px; 
 }
 
-/* 🛠️ Гарчиг болон X товчийг зэрэгцүүлж тэгшлэх хэсэг */
 .reference-header {
     display: flex;
     justify-content: space-between;
@@ -120,34 +122,63 @@ footer {
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 1px;
-    margin-bottom: 0; /* Header ашиглаж байгаа тул доод зайг 0 болгов */
 }
 
-/* 🛠️ ЗУРАГ ДЭЭРХ ШИГ УЛААН ӨНГӨТЭЙ ХААХ (X) ТОВЧЛУУР */
+/* Нарийн хар өнгөтэй Хаах (X) товчлуур */
 .close-x {
-    font-size: 34px;       /* 👈 Хэмжээг том, тод харагдуулна */
-    color: #000000;        /* 👈 Яг зураг дээрх шиг тод улаан өнгө */
+    font-size: 34px;       
+    color: #000000;        
     cursor: pointer;
-    font-weight: 300;      /* 👈 Нарийн цэвэрхэн зураастай харагдуулна */
+    font-weight: 300;      
     line-height: 1;
-    transition: transform 0.2s ease;
+    transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
 .close-x:hover {
-    transform: scale(1.1); /* Хулгана очиход бага зэрэг томорно */
-    opacity: 0.8;
+    opacity: 0.5;          
+    transform: scale(1.05); 
 }
 
-/* Текстийг хоёр тал руу нь тулгаж тэгшлэх тохиргоо */
-.quotes-list p {
-    font-size: 14px;
-    line-height: 1.4;
-    margin-bottom: 8px;
+/* Танилцуулгын текстийн CSS тохиргоо */
+.bio-text h3 {
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 15px;
     color: #000000;
-    
+}
+
+.bio-text p {
+    font-size: 14px;
+    line-height: 1.9;
+    color: #000000;
+    text-align: justify;
+}
+
+/* Ишлэлүүдийн CSS тохиргоо */
+.quotes-list > p {
+    font-size: 14px;
+    line-height: 1.8;       
+    margin-bottom: 24px;    
+    color: #000000;
     text-align: justify;         
     text-justify: inter-word;     
     word-break: break-word;       
+}
+
+/* Номын жагсаалтын (Source) CSS тохиргоо */
+.source-list {
+    margin-top: 40px;       
+    border-top: 1px solid #eeeeee; 
+    padding-top: 30px;
+}
+
+.source-list p {
+    font-size: 13px;        
+    line-height: 1.3;       
+    margin-bottom: 6px;     
+    color: #333333;         
+    text-align: left;       
+    word-break: break-word;
 }
 
 /* ==========================================================================
