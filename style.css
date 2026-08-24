@@ -12,19 +12,18 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    padding: 30px 40px; /* 4 талын текстийн захаас авах зайг тэгшилсэн */
+    padding: 30px 40px;
 }
 
-/* Дээд ба Доод текстийн ижил өндөр, загварын тохиргоо */
+/* Дээд ба Доод текстүүд */
 header, footer {
     display: flex;
     justify-content: space-between;
-    font-size: 14px;       /* 4 талын текстийн хэмжээ ижил */
-    font-weight: bold;     /* 4 талын текстийн бүдүүн ижил */
+    font-size: 14px;       
+    font-weight: bold;     
     line-height: 1.5;
 }
 
-/* Толгой хэсэг */
 header {
     padding-bottom: 20px;
 }
@@ -34,7 +33,6 @@ header .top-right a {
     text-decoration: none;
 }
 
-/* Хөл хэсэг */
 footer {
     padding-top: 20px;
 }
@@ -44,7 +42,6 @@ footer {
     flex-direction: column;
 }
 
-/* reference бичгийг хулгана очиход идэвхжүүлэх */
 #reference-link:hover {
     text-decoration: underline;
 }
@@ -52,10 +49,10 @@ footer {
 .bottom-right {
     display: flex;
     flex-direction: column;
-    text-align: right; /* Баруун доод буланг баруун тийш шахна */
+    text-align: right;
 }
 
-/* Голын цагаан дэвсгэртэй зургийн хэсэг */
+/* Голын зураг */
 .gallery {
     background-color: #ffffff;
     flex: 1;
@@ -70,8 +67,6 @@ footer {
     max-width: 100%;
     object-fit: contain;
     display: block;
-    
-    /* Зураг хуулахыг хаах хамгаалалт */
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -79,27 +74,31 @@ footer {
     -webkit-touch-callout: none;
 }
 
-/* --- REFERENCE ИШЛЭЛИЙН ЦОНХНЫ CSS --- */
+/* --- REFERENCE ЦОНХНЫ ЗАСВАР (БҮРЭН ШИНЭЧЛЭЛТ) --- */
 .modal {
-    display: none; /* Анхлан нууц байна */
+    display: none; 
     position: fixed;
     z-index: 1000;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(255, 255, 255, 0.96); /* Минималист цагаан тунгалаг суурь */
-    justify-content: center;
-    align-items: center;
+    background-color: rgba(255, 255, 255, 0.98); /* Цагаан тунгалаг суурь */
+    justify-content: center; 
+    align-items: center;    
 }
 
 .modal-content {
     background-color: #ffffff;
     padding: 40px;
-    border: 1px solid #000000; /* Цэвэрхэн хар нарийн хүрээ */
-    max-width: 500px;
+    border: 1px solid #000000; 
+    max-width: 700px; /* Урт текстүүдэд зориулж өргөнийг бага зэрэг нэмэв */
     width: 90%;
+    max-height: 85vh; /* 👈 Цонхыг дэлгэцнээс дээш халихаас хамгаална */
     position: relative;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
 }
 
 .close-btn {
@@ -110,6 +109,7 @@ footer {
     font-weight: bold;
     cursor: pointer;
     color: #000000;
+    z-index: 10;
 }
 
 .close-btn:hover {
@@ -124,16 +124,31 @@ footer {
     letter-spacing: 1px;
 }
 
-.quotes-list p {
-    font-size: 14px;
-    line-height: 1.8;
-    margin-bottom: 15px;
-    color: #000000;
-    border-left: 2px solid #000000;
-    padding-left: 12px;
+/* 👈 Таны нээсэн ангилал болон 28 ишлэлүүдийг доош нь гүйлгэж уншдаг болгох хэсэг */
+.quotes-list, .references {
+    overflow-y: auto; /* Текст ихдэхэд цонхон дотроо scroll үүсгэнэ */
+    padding-right: 15px;
+    flex: 1;
 }
 
-/* Гар утаснаас орох үеийн тохиргоо */
+/* Ишлэлүүдийн хоорондын зай ба загвар */
+.quotes-list p, .references p {
+    font-size: 14px;
+    line-height: 1.8;
+    margin-bottom: 18px;
+    color: #000000;
+    text-align: justify; /* Баруун зүүн ирмэгийг тэгшилнэ */
+}
+
+/* Гүйлгэх зурвасыг (Scrollbar) нарийн, минималист харагдуулах тохиргоо */
+.quotes-list::-webkit-scrollbar, .references::-webkit-scrollbar {
+    width: 4px;
+}
+.quotes-list::-webkit-scrollbar-thumb, .references::-webkit-scrollbar-thumb {
+    background-color: #000000;
+}
+
+/* Гар утасны тохиргоо */
 @media (max-width: 768px) {
     body {
         padding: 20px;
@@ -146,5 +161,8 @@ footer {
     }
     .bottom-right {
         text-align: center;
+    }
+    .modal-content {
+        padding: 30px 20px;
     }
 }
