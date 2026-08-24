@@ -141,8 +141,8 @@ footer {
 /* Текстийг хоёр тал руу нь тулгаж тэгшлэх тохиргоо */
 .quotes-list p {
     font-size: 14px;
-    line-height: 1.9;
-    margin-bottom: 24px;
+    line-height: 1.4;
+    margin-bottom: 8px;
     color: #000000;
     
     text-align: justify;         
