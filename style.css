@@ -18,11 +18,12 @@ body {
 }
 
 /* ==========================================================================
-   Дээд талын цэсүүд (forae architects ба news)
+   Дээд талын цэсүүд (Зүүн буланд нэр, Баруун буланд news)
    ========================================================================== */
 header {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     font-size: 14px;       
     font-weight: bold;     
     line-height: 1.5;
@@ -31,7 +32,10 @@ header {
 
 .header-left {
     display: flex;
-    gap: 30px; /* Нэр болон news хоорондын зай */
+}
+
+.top-right {
+    display: flex;
 }
 
 .nav-item {
@@ -111,7 +115,6 @@ footer {
 .reference-section {
     max-height: 0; 
     overflow: hidden;
-    /* 🛠️ ЗАСАГДСАН: Шилжилтийн хугацааг 0.8с байсныг 0.3с болгож маш хурдан нээгддэг болгов */
     transition: max-height 0.3s cubic-bezier(0.25, 1, 0.5, 1); 
     background-color: #ffffff;
 }
@@ -157,7 +160,7 @@ footer {
     transform: scale(1.05); 
 }
 
-/* 🛠️ ШИНЭЭР НЭМЭГДСЭН: News жагсаалтын дизайн */
+/* News жагсаалтын дизайн */
 .news-list {
     display: flex;
     flex-direction: column;
@@ -215,7 +218,7 @@ footer {
     text-align: justify;
 }
 
-/* Ишлэлүүдийн CSS тохиргоо (Хоёр тал руу нь тулгасан) */
+/* Ишлэлүүдийн CSS тохиргоо */
 .quotes-list > p {
     font-size: 14px;
     line-height: 1.8;       
@@ -226,7 +229,7 @@ footer {
     word-break: break-word;       
 }
 
-/* Source (Номын жагсаалт) хэсгийн зайг багасгах код */
+/* Source (Номын жагсаалт) */
 .source-list {
     margin-top: 40px;       
     border-top: 1px solid #eeeeee; 
@@ -254,9 +257,6 @@ footer {
         align-items: center;
         text-align: center;
         gap: 10px;
-    }
-    .header-left {
-        gap: 20px;
     }
     .bottom-right {
         text-align: center;
