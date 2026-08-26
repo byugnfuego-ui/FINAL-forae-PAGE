@@ -85,14 +85,27 @@
                 <!-- Төсөл 3 -->
                 <div class="project-item">
                     <div class="project-title-bar">
-                        <span class="project-name">03. PROJECT NAME 03</span>
+                        <span class="project-name">03. МЭДЭЭЛЛИЙН ТЕХНОЛОГИЙН ҮНДЭСНИЙ ПАРК (МТҮП) ХОЙД ЖИГҮҮРИЙН ДАХИН ТӨЛӨВЛӨЛТ</span>
                         <span class="toggle-icon">+</span>
                     </div>
                     <div class="project-details">
                         <div class="project-meta">
                             <p><strong>location :</strong> TBD</p>
                         </div>
-                    </div>
+                        <!-- 🛠️ ТӨСЛИЙН ОЛОН ЗУРАГТАЙ СЛАЙДЕР ХЭСЭГ -->
+<div class="project-images">
+    <div class="slider-container">
+        <!-- Слайдерын зургууд (Та хүссэн хэмжээгээрээ зураг нэмж болно) -->
+        <div class="slider-slides">
+            <img src="project1_1.jpg" alt="Зураг 1" class="slide active" ondragstart="return false;">
+            <img src="project1_2.jpg" alt="Зураг 2" class="slide" ondragstart="return false;">
+            <img src="project1_3.jpg" alt="Зураг 3" class="slide" ondragstart="return false;">
+        </div>
+        
+        <!-- Хөтлөх сумууд -->
+        <button class="slider-btn prev-btn">&#8249;</button>
+        <button class="slider-btn next-btn">&#8250;</button>
+   </div>
                 </div>
 
                 <!-- Төсөл 4 -->
@@ -331,9 +344,40 @@
                     projectItems.forEach(i => { i.classList.remove('open'); const icon = i.querySelector('.toggle-icon'); if(icon) icon.textContent = '+'; });
                     if (!isOpen) { item.classList.add('open'); const icon = item.querySelector('.toggle-icon'); if(icon) icon.textContent = '−'; }
                 }
+
+                // 🛠️ Слайдер ажиллуулах логик код
+document.querySelectorAll('.slider-container').forEach(slider => {
+    const slides = slider.querySelectorAll('.slide');
+    const prevBtn = slider.querySelector('.prev-btn');
+    const nextBtn = slider.querySelector('.next-btn');
+    let currentIndex = 0;
+
+    if (slides.length <= 1) {
+        if(prevBtn) prevBtn.style.display = 'none';
+        if(nextBtn) nextBtn.style.display = 'none';
+        return;
+    }
+
+    function showSlide(index) {
+        slides[currentIndex].classList.remove('active');
+        currentIndex = (index + slides.length) % slides.length;
+        slides[currentIndex].classList.add('active');
+    }
+
+    nextBtn.onclick = function(e) {
+        e.stopPropagation(); // Төслийн акордион хаагдахаас сэргийлнэ
+        showSlide(currentIndex + 1);
+    }
+
+    prevBtn.onclick = function(e) {
+        e.stopPropagation();
+        showSlide(currentIndex - 1);
             }
         });
     </script>
 
 </body>
 </html>
+
+
+                
