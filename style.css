@@ -36,6 +36,7 @@ header {
 
 .top-right {
     display: flex;
+   gap: 30px; /* news болон projects хоорондын зай */
 }
 
 .nav-item {
@@ -159,6 +160,78 @@ footer {
     opacity: 0.5;          
     transform: scale(1.05); 
 }
+
+/* ==========================================================================
+   🛠️ PROJECTS ЦЭСНИЙ МИНИМАЛИСТ ДИЗАЙН (aoa architects загвар)
+   ========================================================================== */
+.projects-container {
+    border-top: 1px solid #000000;
+    margin-top: 10px;
+}
+
+.project-item {
+    border-bottom: 1px solid #000000;
+    width: 100%;
+}
+
+.project-title-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+.project-title-bar:hover .project-name {
+    text-decoration: underline;
+}
+
+.toggle-icon {
+    font-size: 20px;
+    font-weight: 300;
+}
+
+/* Дэлгэрэнгүй хэсэг (Хаалттай үед нууц байна) */
+.project-details {
+    display: none;
+    padding: 10px 0 40px 0;
+}
+
+.project-item.open .project-details {
+    display: block;
+}
+
+.project-meta {
+    font-size: 14px;
+    line-height: 2;
+    margin-bottom: 25px;
+}
+
+.project-meta strong {
+    display: inline-block;
+    width: 90px;
+    text-transform: lowercase;
+}
+
+.project-description {
+    font-size: 14px;
+    line-height: 1.8;
+    margin-bottom: 30px;
+    text-align: justify;
+}
+
+.project-images img {
+    width: 100%;
+    max-height: 700px;
+    object-fit: contain;
+    display: block;
+    margin-top: 20px;
+}
+
+
 
 /* News жагсаалтын дизайн */
 .news-list {
