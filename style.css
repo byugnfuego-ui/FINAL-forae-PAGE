@@ -162,7 +162,7 @@ footer {
 }
 
 /* ==========================================================================
-   PROJECTS ЦЭСНИЙ МИНИМАЛИСТ ДИЗАЙН (aoa architects загвар)
+   PROJECTS ЦЭСНИЙ МИНИМАЛИСТ ДИЗАЙН
    ========================================================================== */
 .projects-container {
     border-top: 1px solid #000000;
@@ -314,20 +314,7 @@ footer {
     word-break: break-word;
 }
 
-@media (max-width: 768px) {
-    body {
-        padding: 20px;
-    }
-    header, footer {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        gap: 10px;
-    }
-    .bottom-right {
-        text-align: center;
-    }
-   /* ==========================================================================
+/* ==========================================================================
    Минималист Зургийн Слайдер (Carousel)
    ========================================================================== */
 .slider-container {
@@ -341,7 +328,7 @@ footer {
 .slider-slides {
     position: relative;
     width: 100%;
-    height: 550px; /* Зургийн өндөр */
+    height: 550px; 
     display: flex;
     justify-content: center;
     align-items: center;
@@ -356,17 +343,15 @@ footer {
     height: 100%;
     object-fit: contain;
     opacity: 0;
-    transition: opacity 0.4s ease-in-out; /* Зураг солигдох зөөлөн эффект */
+    transition: opacity 0.4s ease-in-out; 
     z-index: 1;
 }
 
-/* Идэвхтэй харагдаж буй зураг */
 .slider-slides img.active {
     opacity: 1;
     z-index: 2;
 }
 
-/* Слайдерын сумууд */
 .slider-btn {
     position: absolute;
     top: 50%;
@@ -390,4 +375,17 @@ footer {
 .prev-btn { left: 10px; }
 .next-btn { right: 10px; }
 
+@media (max-width: 768px) {
+    body {
+        padding: 20px;
+    }
+    header, footer {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 10px;
+    }
+    .bottom-right {
+        text-align: center;
+    }
 }
