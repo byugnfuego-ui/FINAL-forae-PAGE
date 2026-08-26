@@ -18,7 +18,7 @@ body {
 }
 
 /* ==========================================================================
-   Дээд талын цэсүүд (Зүүн буланд нэр, Баруун буланд news)
+   Дээд талын цэсүүд
    ========================================================================== */
 header {
     display: flex;
@@ -36,7 +36,7 @@ header {
 
 .top-right {
     display: flex;
-   gap: 30px; /* news болон projects хоорондын зай */
+    gap: 30px;
 }
 
 .nav-item {
@@ -162,7 +162,7 @@ footer {
 }
 
 /* ==========================================================================
-   🛠️ PROJECTS ЦЭСНИЙ МИНИМАЛИСТ ДИЗАЙН (aoa architects загвар)
+   PROJECTS ЦЭСНИЙ МИНИМАЛИСТ ДИЗАЙН (aoa architects загвар)
    ========================================================================== */
 .projects-container {
     border-top: 1px solid #000000;
@@ -194,7 +194,6 @@ footer {
     font-weight: 300;
 }
 
-/* Дэлгэрэнгүй хэсэг (Хаалттай үед нууц байна) */
 .project-details {
     display: none;
     padding: 10px 0 40px 0;
@@ -231,9 +230,9 @@ footer {
     margin-top: 20px;
 }
 
-
-
-/* News жагсаалтын дизайн */
+/* ==========================================================================
+   Бусад хэсгүүд
+   ========================================================================== */
 .news-list {
     display: flex;
     flex-direction: column;
@@ -276,7 +275,6 @@ footer {
     text-decoration: underline;
 }
 
-/* Profile текстийн CSS тохиргоо */
 .bio-text h3 {
     font-size: 15px;
     font-weight: bold;
@@ -291,7 +289,6 @@ footer {
     text-align: justify;
 }
 
-/* Ишлэлүүдийн CSS тохиргоо */
 .quotes-list > p {
     font-size: 14px;
     line-height: 1.8;       
@@ -302,7 +299,6 @@ footer {
     word-break: break-word;       
 }
 
-/* Source (Номын жагсаалт) */
 .source-list {
     margin-top: 40px;       
     border-top: 1px solid #eeeeee; 
@@ -318,9 +314,6 @@ footer {
     word-break: break-word;
 }
 
-/* ==========================================================================
-   Гар утасны тохиргоо (Responsive)
-   ========================================================================== */
 @media (max-width: 768px) {
     body {
         padding: 20px;
