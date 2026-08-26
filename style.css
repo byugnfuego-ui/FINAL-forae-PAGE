@@ -388,4 +388,31 @@ footer {
     .bottom-right {
         text-align: center;
     }
+/* ==========================================================================
+   Мэдээний зургийн тохиргоо (News Image)
+   ========================================================================== */
+.news-image {
+    width: 100%;
+    max-width: 500px; /* 👈 Зургийн хамгийн дээд өргөнийг эндээс удирдана */
+    margin: 15px 0 20px 0; /* Дээрээсээ болон доороосоо авах зай */
+    overflow: hidden;
+    background-color: #ffffff;
+}
+
+.news-image img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    
+    /* Зураг хуулахыг хаах хамгаалалт */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+}
+
+
+   
 }
