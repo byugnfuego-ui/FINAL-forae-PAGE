@@ -346,6 +346,27 @@
             nextBtn.onclick = function(e) { e.stopPropagation(); showSlide(currentIndex + 1); }
             prevBtn.onclick = function(e) { e.stopPropagation(); showSlide(currentIndex - 1); }
         });
+
+        // 🛠️ F12 болон хөгжүүлэгчийн цонх нээдэг товчны хослолуудыг хаах
+document.onkeydown = function(e) {
+    // F12 товчийг хаах
+    if (e.keyCode == 123) {
+        return false;
+    }
+    // Ctrl + Shift + I (Inspect) хаах
+    if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
+        return false;
+    }
+    // Ctrl + Shift + J (Console) хаах
+    if (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
+        return false;
+    }
+    // Ctrl + U (Эх код харах)-ийг хаах
+    if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
+        return false;
+    }
+}
+
     </script>
 </body>
 </html>
