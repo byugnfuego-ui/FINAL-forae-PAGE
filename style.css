@@ -343,7 +343,7 @@ footer {
     height: 100%;
     object-fit: contain;
     opacity: 0;
-    transition: opacity 0.4s ease-in-out; 
+    transition: opacity 0.0s ease-in-out; 
     z-index: 1;
 }
 
@@ -364,7 +364,7 @@ footer {
     cursor: pointer;
     z-index: 10;
     padding: 10px;
-    transition: opacity 0.2s ease;
+    transition: opacity 0.0s ease;
     user-select: none;
 }
 
