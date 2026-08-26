@@ -327,4 +327,67 @@ footer {
     .bottom-right {
         text-align: center;
     }
+   /* ==========================================================================
+   Минималист Зургийн Слайдер (Carousel)
+   ========================================================================== */
+.slider-container {
+    position: relative;
+    width: 100%;
+    max-height: 700px;
+    margin-top: 20px;
+    overflow: hidden;
+}
+
+.slider-slides {
+    position: relative;
+    width: 100%;
+    height: 550px; /* Зургийн өндөр */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+}
+
+.slider-slides img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out; /* Зураг солигдох зөөлөн эффект */
+    z-index: 1;
+}
+
+/* Идэвхтэй харагдаж буй зураг */
+.slider-slides img.active {
+    opacity: 1;
+    z-index: 2;
+}
+
+/* Слайдерын сумууд */
+.slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #000000;
+    font-size: 40px;
+    font-weight: 300;
+    cursor: pointer;
+    z-index: 10;
+    padding: 10px;
+    transition: opacity 0.2s ease;
+    user-select: none;
+}
+
+.slider-btn:hover {
+    opacity: 0.5;
+}
+
+.prev-btn { left: 10px; }
+.next-btn { right: 10px; }
+
 }
