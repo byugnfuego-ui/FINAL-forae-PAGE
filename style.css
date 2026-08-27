@@ -18,6 +18,22 @@ body {
 }
 
 /* ==========================================================================
+   Бүх зургийг татаж авах / хадгалахаас хамгаалах (утас, компьютер аль алинд нь)
+   ========================================================================== */
+img {
+    -webkit-user-drag: none;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    /* Утас дээр удаан дараад "Зураг татах" цэс гарахаас сэргийлнэ.
+       Товч, слайдер зэрэг дээр дарах боломж алдагдахгүй,
+       учир нь тухайн товч/цонх нь өөр элемент дээр байрладаг. */
+    pointer-events: none;
+}
+
+/* ==========================================================================
    Дээд талын цэсүүд
    ========================================================================== */
 header {
@@ -396,6 +412,59 @@ footer {
     -ms-user-select: none;
     user-select: none;
     -webkit-touch-callout: none;
+}
+
+/* ==========================================================================
+   Project зургийг томруулж харах цонх (Lightbox)
+   ========================================================================== */
+.lightbox-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.92);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    cursor: zoom-out;
+    /* Томруулсан зургийг гар утаснаас pinch хийж зумлаж болно */
+    touch-action: pinch-zoom;
+}
+
+.lightbox-overlay.active {
+    display: flex;
+}
+
+.lightbox-overlay img {
+    max-width: 95vw;
+    max-height: 95vh;
+    object-fit: contain;
+    /* Томруулсан зураг дээр pinch-zoom хийхэд саад болохгүй байхаар тохируулсан */
+    pointer-events: none;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 16px;
+    right: 28px;
+    font-size: 42px;
+    font-weight: 300;
+    color: #ffffff;
+    cursor: pointer;
+    z-index: 1001;
+    line-height: 1;
+}
+
+.lightbox-close:hover {
+    opacity: 0.7;
+}
+
+/* Project зургийг дарж болохыг харуулах курсор */
+.project-images {
+    cursor: zoom-in;
 }
 
 /* ==========================================================================

@@ -2,7 +2,7 @@
 <html lang="mn">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>forae architects</title>
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="stylesheet" href="style.css">
@@ -159,8 +159,6 @@
                         </div>
                     </div>
                 </div>
-
-                </div>
                 <div class="project-item">
                     <div class="project-title-bar"><span class="project-name">05. BREAKTIME / ХАФ КОУРТ""</span><span class="toggle-icon">+</span></div>
                     <div class="project-details">
@@ -195,8 +193,6 @@
                         </div>
                     </div>
                 </div>
-
-                </div>
                 <div class="project-item">
                     <div class="project-title-bar"><span class="project-name">06. ИРГЭН ГАНТУЛГА-ЫН АМИНЫ ОРОН СУУЦ</span><span class="toggle-icon">+</span></div>
                     <div class="project-details">
@@ -230,8 +226,6 @@
                         </div>
                     </div>
                 </div>
-
-                </div>
                 <div class="project-item">
                     <div class="project-title-bar"><span class="project-name">07. ИРГЭН САЙНБИЛЭГ-ЫН АМИНЫ ОРОН СУУЦ </span><span class="toggle-icon">+</span></div>
                     <div class="project-details">
@@ -262,11 +256,11 @@
                                 <button class="slider-btn prev-btn">&#8249;</button>
                                 <button class="slider-btn next-btn">&#8250;</button>
                             </div>
-              
-
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
+            </div><!-- /.projects-container -->
+        </div><!-- /.content-wrapper -->
     </section>
 
     <!-- NEWS ХЭСЭГ -->
@@ -392,6 +386,12 @@
         </div>
     </footer>
 
+    <!-- Project зургийг томруулж харах цонх (Lightbox) -->
+    <div class="lightbox-overlay" id="lightbox-overlay">
+        <span class="lightbox-close" id="lightbox-close">&times;</span>
+        <img id="lightbox-img" src="" alt="Томруулсан зураг" ondragstart="return false;">
+    </div>
+
     <!-- JavaScript логик -->
     <script>
         const bioBtn = document.getElementById('bio-btn');
@@ -457,6 +457,35 @@
                 }
             }
         });
+
+        // Project зургийг томруулж харах цонх (Lightbox)
+        const lightboxOverlay = document.getElementById('lightbox-overlay');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxClose = document.getElementById('lightbox-close');
+
+        function openLightbox(src) {
+            if (!src) return;
+            lightboxImg.src = src;
+            lightboxOverlay.classList.add('active');
+        }
+        function closeLightbox() {
+            lightboxOverlay.classList.remove('active');
+            lightboxImg.src = '';
+        }
+
+        document.querySelectorAll('.project-images').forEach(container => {
+            container.addEventListener('click', function(e) {
+                if (e.target.closest('.slider-btn')) return; // слайдерийн товч бол алгасна
+                const activeSlide = container.querySelector('.slide.active');
+                const singleImg = container.querySelector('img');
+                const src = activeSlide ? activeSlide.src : (singleImg ? singleImg.src : null);
+                openLightbox(src);
+            });
+        });
+
+        lightboxOverlay.addEventListener('click', closeLightbox);
+        lightboxClose.addEventListener('click', function(e) { e.stopPropagation(); closeLightbox(); });
+        document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeLightbox(); });
 
         // Слайдер логик
         document.querySelectorAll('.slider-container').forEach(slider => {
