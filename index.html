@@ -2,36 +2,37 @@
 <html lang="mn">
 <head>
     <meta charset="UTF-8">
-    <!-- Утаснаас чимхэж томруулах (pinch-to-zoom) үйлдлийг хөтөч түвшинд хаана -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>forae architects</title>
+    <link rel="icon" type="image/png" href="favicon.png">
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body oncontextmenu="return false;">
 
+    <!-- Дээд талын цэсүүд -->
     <header>
         <div class="header-left">
-            <span class="nav-item">forae architects</span>
+            <div class="nav-item" id="bio-btn">forae architects</div>
         </div>
         <div class="top-right">
-            <span class="nav-item" id="news-btn">news</span>
-            <span class="nav-item" id="projects-btn">projects</span>
+            <div class="nav-item" id="news-btn">news</div>
+            <div class="nav-item" id="projects-btn">projects</div>
         </div>
     </header>
 
-    <!-- Голын үндсэн галерей зураг -->
-    <main class="gallery">
+    <!-- Голын цагаан дэвсгэртэй ганц зураг -->
+    <main class="gallery" id="main-gallery">
         <div class="image-container">
-            <img src="Landscape Painting.jpg" alt="Landscape Painting">
+            <img src="image_PzhztE.png" alt="Landscape Painting" ondragstart="return false;">
         </div>
     </main>
 
     <!-- PROJECTS ХЭСЭГ -->
-    <section class="reference-section" id="projects-section">
+    <section id="projects-content" class="reference-section">
         <div class="content-wrapper">
             <div class="reference-header">
                 <h2>Projects</h2>
-                <span class="close-x" id="projects-close">&times;</span>
+                <span id="close-projects-btn" class="close-x">&times;</span>
             </div>
             
             <div class="projects-container">
@@ -43,14 +44,16 @@
                     </div>
                     <div class="project-details">
                         <div class="project-meta">
-                            <strong>location :</strong> Ulaanbaatar, Mongolia<br>
-                            <strong>year :</strong> 2026<br>
-                            <strong>use :</strong> Museum<br>
-                            <strong>area :</strong> 2000m²
+                            <p><strong>location :</strong> Ulaanbaatar, Mongolia</p>
+                            <p><strong>year :</strong> 2026</p>
+                            <p><strong>use :</strong> Museum</p>
+                            <p><strong>area :</strong> 2000m²</p>
                         </div>
-                        <p class="project-description">Удахгүй мэдээлэл орно.</p>
+                        <div class="project-description">
+                            <p>Удахгүй мэдээлэл орно.</p>
+                        </div>
                         <div class="project-images">
-                            <img src="Project 1 Image.jpg" alt="Project 1">
+                            <img src="FO_01.jpg" alt="Project 1 Image" ondragstart="return false;">
                         </div>
                     </div>
                 </div>
@@ -63,19 +66,21 @@
                     </div>
                     <div class="project-details">
                         <div class="project-meta">
-                            <strong>location :</strong> Shargamorit, Ulaanbaatar<br>
-                            <strong>year :</strong> 2026<br>
-                            <strong>use :</strong> Single family use<br>
-                            <strong>area :</strong> 60m²
+                            <p><strong>location :</strong> Shargamorit, Ulaanbaatar</p>
+                            <p><strong>year :</strong> 2026</p>
+                            <p><strong>use :</strong> Single family use</p>
+                            <p><strong>area :</strong> 60m²</p>
                         </div>
-                        <p class="project-description">Удахгүй мэдээлэл орно.</p>
+                        <div class="project-description">
+                            <p>Удахгүй мэдээлэл орно.</p>
+                        </div>
                         <div class="project-images">
-                            <img src="Project 2 Image.jpg" alt="Project 2">
+                            <img src="FO_02.jpg" alt="Project 2 Image" ondragstart="return false;">
                         </div>
                     </div>
                 </div>
 
-                <!-- Төсөл 3 -->
+                <!-- Төсөл 3 (Слайдертай) -->
                 <div class="project-item">
                     <div class="project-title-bar">
                         <span class="project-name">03. МЭДЭЭЛЛИЙН ТЕХНОЛОГИЙН ҮНДЭСНИЙ ПАРК (МТҮП) ХОЙД ЖИГҮҮРИЙН ДАХИН ТӨЛӨВЛӨЛТ</span>
@@ -83,251 +88,419 @@
                     </div>
                     <div class="project-details">
                         <div class="project-meta">
-                            <strong>location :</strong> Ulaanbaatar, Mongolia<br>
-                            <strong>year :</strong> 2026<br>
-                            <strong>use :</strong> Gut renovation<br>
-                            <strong>area :</strong> 2000m²
+                            <p><strong>location :</strong> Ulaanbaatar, Mongolia</p>
+                            <p><strong>year :</strong> 2026</p>
+                            <p><strong>use :</strong> Gut renovation</p>
+                            <p><strong>area :</strong> 2000m²</p>
                         </div>
-                        <p class="project-description">Энэхүү төсөл нь зөвхөн барилгын шийдэл бус, Монгол улсын үе үеийн залуучуудын төсөөлөл, шинжлэх ухаан, мэдээллийн технологийн мэдлэг хуримтлагдсан орчныг шинэ түвшинд хүргэх оролдлого юм. “Цуглах, холбогдох, хамтдаа хөгжих” үзэл санаанд тулгуурлан Park-ийн орон зайг амрах, уулзах, санал копилцох, мөн архитектурын үнэ цэнийг мэдрэх нээлттэй орчин болгон төлөвлөсөн.</p>
-                        
-                        <!-- Зургийн Слайдер -->
-                        <div class="slider-container">
-                            <div class="slider-slides">
-                                <img src="Зураг 1.jpg" class="active" alt="Зураг 1">
-                                <img src="Зураг 2.jpg" alt="Зураг 2">
-                                <img src="Зураг 3.jpg" alt="Зураг 3">
+                        <div class="project-description">
+                            <p>Энэхүү төсөл нь зөвхөн барилгын шийдэл бус, Монгол улсын үе үеийн залуучуудын төсөөлөл, шинжлэх ухаан, мэдээллийн технологийн мэдлэг хуримтлагдсан орчныг шинэ түвшинд хүргэх оролдлого юм.
+“Цуглах, холбогдох, хамтдаа хөгжих” үзэл санаанд тулгуурлан Park-ийн орон зайг амрах, уулзах, санал солилцох, мөн архитектурын үнэ цэнийг мэдрэх нээлттэй орчин болгон төлөвлөсөн.
+Анхны төлөвлөлтийн үзэл баримтлалыг дахин идэвхжүүлэх зорилгоор парк-н орон зайг нээн мөн тойрсон алхалтын зам /Promenade/-ыг шийдсэн. Энэхүү орон зай нь нийтийн болон хувийн бүсүүдийг тасралтгүй уялдуулж, дотор ба гадаад орчныг нэгдмэл урсгалд холбон, цуглах ба хамтрах боломжийг бүрдүүлнэ.</p>
+                         </div>    
+                        <div class="project-images">
+                            <div class="slider-container">
+                                <div class="slider-slides">
+                                    <img src="project3_1.jpg" alt="Зураг 1" class="slide active" ondragstart="return false;">
+                                    <img src="project3_2.jpg" alt="Зураг 2" class="slide" ondragstart="return false;">
+                                    <img src="project3_3.jpg" alt="Зураг 3" class="slide" ondragstart="return false;">
+                                    <img src="project3_4.jpg" alt="Зураг 3" class="slide" ondragstart="return false;">
+                                    <img src="project3_5.jpg" alt="Зураг 3" class="slide" ondragstart="return false;">
+                                    <img src="project3_6.jpg" alt="Зураг 3" class="slide" ondragstart="return false;">
+                                    <img src="project3_7.jpg" alt="Зураг 3" class="slide" ondragstart="return false;">
+                                    <img src="project3_8.jpg" alt="Зураг 3" class="slide" ondragstart="return false;">
+
+
+                                    
+                                </div>
+                                <button class="slider-btn prev-btn">&#8249;</button>
+                                <button class="slider-btn next-btn">&#8250;</button>
                             </div>
-                            <button class="slider-btn prev-btn">&#8249;</button>
-                            <button class="slider-btn next-btn">&#8250;</button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Төсөл 4 -->
+                <!-- Төсөл 4-7 бэлдэцүүд -->
                 <div class="project-item">
-                    <div class="project-title-bar">
-                        <span class="project-name">04. Одон резорт "Лонг Вайт"</span>
-                        <span class="toggle-icon">+</span>
-                    </div>
+                    <div class="project-title-bar"><span class="project-name">04. Одон резорт "Лонг Вайт"</span><span class="toggle-icon">+</span></div>
                     <div class="project-details">
                         <div class="project-meta">
-                            <strong>location :</strong> Ulaanbaatar, Mongolia<br>
-                            <strong>year :</strong> 2026<br>
-                            <strong>use :</strong> Apartment Hotel<br>
-                            <strong>area :</strong> 6000m²
+                            <p><strong>location :</strong> Ulaanbaatar, Mongolia</p>
+                            <p><strong>year :</strong> 2026</p>
+                            <p><strong>use :</strong> Apartment Hotel</p>
+                            <p><strong>area :</strong> 6000m²</p>
                         </div>
-                        <p class="project-description">Энэхүү төсөл нь 130мx18м урттай үндсэн 3 блок, холбох блок, дулаан зогсоолын 2 блокоос бүрдэнэ.</p>
-                        <div class="slider-container">
-                            <div class="slider-slides">
-                                <img src="Зураг 1.jpg" class="active" alt="Зураг 1">
-                                <img src="Зураг 2.jpg" alt="Зураг 2">
+                        <div class="project-description">
+                            <p>Энэхүү төсөл нь 130мx18м урттай үндсэн 3 блок, холбох блок, дулаан зогсоолын 2 блокоос бүрдэнэ. Хотоос ирэх зочдыг амрах орон зайд шилжүүлэх үүднээс зогсоолын орон зайг амрах орон зайнаас салгаж төлөвлөсөн ба амрах, зугаалах, гүйлтийн зам, сагсан бөмбөг, теннисийн талбайг автозам, зогсоолоос тусдаа түвшинд шийдэж өгсөн.
+Цоолбортой металл фасадын хавтан нь гаднаасаа үргэлжилсэн урт цагаан цул харагдах бол дотор орон зайд нарны гэрэл бууруулах, нууцлалтай байдлыг ихэсгэх байдлаар төлөвлөгдсөн. Зогсоолын гэгээвчээр эхний вэлком байгалийн гэрлийг авах бол үндсэн барилгын дээврийн гэгээвчээр орж ирэх байгалийн гэрэл нь төслийг бусад төслөөс ялгарах байдлыг илэрхийлнэ.</p>
+                         </div>    
+                        <div class="project-images">
+                            <div class="slider-container">
+                                <div class="slider-slides">
+                                    <img src="project4_1.jpg" alt="Зураг 1" class="slide active" ondragstart="return false;">
+                                    <img src="project4_2.jpg" alt="Зураг 2" class="slide" ondragstart="return false;">
+                                    <img src="project4_3.jpg" alt="Зураг 3" class="slide" ondragstart="return false;">
+                                    <img src="project4_4.jpg" alt="Зураг 3" class="slide" ondragstart="return false;">
+                                    <img src="project4_5.jpg" alt="Зураг 3" class="slide" ondragstart="return false;">
+                                    <img src="project4_6.jpg" alt="Зураг 3" class="slide" ondragstart="return false;">
+                                    <img src="project4_7.jpg" alt="Зураг 3" class="slide" ondragstart="return false;">
+                                    <img src="project4_8.jpg" alt="Зураг 3" class="slide" ondragstart="return false;">
+                                    <img src="project4_9.jpg" alt="Зураг 3" class="slide" ondragstart="return false;">
+                                    <img src="project4_10.jpg" alt="Зураг 3" class="slide" ondragstart="return false;">
+                                    <img src="project4_11.jpg" alt="Зураг 3" class="slide" ondragstart="return false;">
+                                    <img src="project4_12.jpg" alt="Зураг 3" class="slide" ondragstart="return false;">
+                                    <img src="project4_13.jpg" alt="Зураг 3" class="slide" ondragstart="return false;">
+                                    <img src="project4_14.jpg" alt="Зураг 3" class="slide" ondragstart="return false;">
+                                    
+                                </div>
+                                <button class="slider-btn prev-btn">&#8249;</button>
+                                <button class="slider-btn next-btn">&#8250;</button>
                             </div>
-                            <button class="slider-btn prev-btn">&#8249;</button>
-                            <button class="slider-btn next-btn">&#8250;</button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Төсөл 5 -->
+                </div>
                 <div class="project-item">
-                    <div class="project-title-bar">
-                        <span class="project-name">05. BREAKTIME / ХАФ КОУРТ""</span>
-                        <span class="toggle-icon">+</span>
-                    </div>
+                    <div class="project-title-bar"><span class="project-name">05. BREAKTIME / ХАФ КОУРТ""</span><span class="toggle-icon">+</span></div>
                     <div class="project-details">
                         <div class="project-meta">
-                            <strong>location :</strong> Ulaanbaatar, Mongolia<br>
-                            <strong>year :</strong> 2026<br>
-                            <strong>use :</strong> Apartment Hotel<br>
-                            <strong>area :</strong> 6000m²
+                            <p><strong>location :</strong> Ulaanbaatar, Mongolia</p>
+                            <p><strong>year :</strong> 2026</p>
+                            <p><strong>use :</strong> Apartment Hotel</p>
+                            <p><strong>area :</strong> 6000m²</p>
                         </div>
-                        <p class="project-description">Энэхүү төсөл нь 130мx18м урттай үндсэн 3 блок, холбох блок, дулаан зогсоолын 2 блокоос бүрдэнэ.</p>
-                        <div class="slider-container">
-                            <div class="slider-slides">
-                                <img src="Зураг 1.jpg" class="active" alt="Зураг 1">
-                                <img src="Зураг 2.jpg" alt="Зураг 2">
+                        <div class="project-description">
+                            <p>Энэхүү төсөл нь 130мx18м урттай үндсэн 3 блок, холбох блок, дулаан зогсоолын 2 блокоос бүрдэнэ. Хотоос ирэх зочдыг амрах орон зайд шилжүүлэх үүднээс зогсоолын орон зайг амрах орон зайнаас салгаж төлөвлөсөн ба амрах, зугаалах, гүйлтийн зам, сагсан бөмбөг, теннисийн талбайг автозам, зогсоолоос тусдаа түвшинд шийдэж өгсөн.
+Цоолбортой металл фасадын хавтан нь гаднаасаа үргэлжилсэн урт цагаан цул харагдах бол дотор орон зайд нарны гэрэл бууруулах, нууцлалтай байдлыг ихэсгэх байдлаар төлөвлөгдсөн. Зогсоолын гэгээвчээр эхний вэлком байгалийн гэрлийг авах бол үндсэн барилгын дээврийн гэгээвчээр орж ирэх байгалийн гэрэл нь төслийг бусад төслөөс ялгарах байдлыг илэрхийлнэ.</p>
+                         </div>    
+                        <div class="project-images">
+                            <div class="slider-container">
+                                <div class="slider-slides">
+                                    <img src="project5_1.jpg" alt="Зураг 1" class="slide active" ondragstart="return false;">
+                                    <img src="project5_2.jpg" alt="Зураг 2" class="slide" ondragstart="return false;">
+                                    <img src="project5_3.jpg" alt="Зураг 3" class="slide" ondragstart="return false;">
+                                    <img src="project5_4.jpg" alt="Зураг 3" class="slide" ondragstart="return false;">
+                                    <img src="project5_5.jpg" alt="Зураг 3" class="slide" ondragstart="return false;">
+                                    <img src="project5_6.jpg" alt="Зураг 3" class="slide" ondragstart="return false;">
+                                    <img src="project5_7.jpg" alt="Зураг 3" class="slide" ondragstart="return false;">
+                                    <img src="project5_8.jpg" alt="Зураг 3" class="slide" ondragstart="return false;">
+
+
+                                    
+                                </div>
+                                <button class="slider-btn prev-btn">&#8249;</button>
+                                <button class="slider-btn next-btn">&#8250;</button>
                             </div>
-                            <button class="slider-btn prev-btn">&#8249;</button>
-                            <button class="slider-btn next-btn">&#8250;</button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Төсөл 6 (Хальж байсныг зассан) -->
+                </div>
                 <div class="project-item">
-                    <div class="project-title-bar">
-                        <span class="project-name">06. ИРГЭН ГАНТУЛГА-ЫН АМИНЫ ОРОН СУУЦ</span>
-                        <span class="toggle-icon">+</span>
-                    </div>
+                    <div class="project-title-bar"><span class="project-name">06. ИРГЭН ГАНТУЛГА-ЫН АМИНЫ ОРОН СУУЦ</span><span class="toggle-icon">+</span></div>
                     <div class="project-details">
                         <div class="project-meta">
-                            <strong>location :</strong> Ulaanbaatar, Mongolia<br>
-                            <strong>year :</strong> 2025<br>
-                            <strong>use :</strong> Single family use<br>
-                            <strong>area :</strong> 60m²
+                            <p><strong>location :</strong> Ulaanbaatar, Mongolia</p>
+                            <p><strong>year :</strong> 2025</p>
+                            <p><strong>use :</strong> Single family use</p>
+                            <p><strong>area :</strong> 60m²</p>
                         </div>
-                        <p class="project-description">Удахгүй.</p>
-                        <div class="slider-container">
-                            <div class="slider-slides">
-                                <img src="Зураг 1.jpg" class="active" alt="Зураг 1">
-                                <img src="Зураг 2.jpg" alt="Зураг 2">
+                        <div class="project-description">
+                            <p>Удахгүй.</p>
+                         </div>    
+                        <div class="project-images">
+                            <div class="slider-container">
+                                <div class="slider-slides">
+                                    <img src="project6_1.jpg" alt="Зураг 1" class="slide active" ondragstart="return false;">
+                                    <img src="project6_2.jpg" alt="Зураг 2" class="slide" ondragstart="return false;">
+                                    <img src="project6_3.jpg" alt="Зураг 3" class="slide" ondragstart="return false;">
+                                    <img src="project6_4.jpg" alt="Зураг 3" class="slide" ondragstart="return false;">
+                                    <img src="project6_5.jpg" alt="Зураг 3" class="slide" ondragstart="return false;">
+                                    <img src="project6_6.jpg" alt="Зураг 3" class="slide" ondragstart="return false;">
+                                    <img src="project6_7.jpg" alt="Зураг 3" class="slide" ondragstart="return false;">
+                                    <img src="project6_8.jpg" alt="Зураг 3" class="slide" ondragstart="return false;">
+
+
+                                    
+                                </div>
+                                <button class="slider-btn prev-btn">&#8249;</button>
+                                <button class="slider-btn next-btn">&#8250;</button>
                             </div>
-                            <button class="slider-btn prev-btn">&#8249;</button>
-                            <button class="slider-btn next-btn">&#8250;</button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Төсөл 7 (Хальж байсныг зассан) -->
+                </div>
                 <div class="project-item">
-                    <div class="project-title-bar">
-                        <span class="project-name">07. ИРГЭН САЙНБИЛЭГ-ЫН АМИНЫ ОРОН СУУЦ</span>
-                        <span class="toggle-icon">+</span>
-                    </div>
+                    <div class="project-title-bar"><span class="project-name">07. ИРГЭН САЙНБИЛЭГ-ЫН АМИНЫ ОРОН СУУЦ </span><span class="toggle-icon">+</span></div>
                     <div class="project-details">
                         <div class="project-meta">
-                            <strong>location :</strong> Ulaanbaatar, Mongolia<br>
-                            <strong>year :</strong> 2026<br>
-                            <strong>use :</strong> Apartment Hotel<br>
-                            <strong>area :</strong> 6000m²
+                            <p><strong>location :</strong> Ulaanbaatar, Mongolia</p>
+                            <p><strong>year :</strong> 2026</p>
+                            <p><strong>use :</strong> Apartment Hotel</p>
+                            <p><strong>area :</strong> 6000m²</p>
                         </div>
-                        <p class="project-description">Удахгүй.</p>
-                        <div class="slider-container">
-                            <div class="slider-slides">
-                                <img src="Зураг 1.jpg" class="active" alt="Зураг 1">
-                                <img src="Зураг 2.jpg" alt="Зураг 2">
+                        <div class="project-description">
+                            <p>Удахгүй.</p>
+                         </div>    
+                        <div class="project-images">
+                            <div class="slider-container">
+                                <div class="slider-slides">
+                                    <img src="project7_1.jpg" alt="Зураг 1" class="slide active" ondragstart="return false;">
+                                    <img src="project7_2.jpg" alt="Зураг 2" class="slide" ondragstart="return false;">
+                                    <img src="project7_3.jpg" alt="Зураг 3" class="slide" ondragstart="return false;">
+                                    <img src="project7_4.jpg" alt="Зураг 3" class="slide" ondragstart="return false;">
+                                    <img src="project7_5.jpg" alt="Зураг 3" class="slide" ondragstart="return false;">
+                                    <img src="project7_6.jpg" alt="Зураг 3" class="slide" ondragstart="return false;">
+                                    <img src="project7_7.jpg" alt="Зураг 3" class="slide" ondragstart="return false;">
+                                    <img src="project7_8.jpg" alt="Зураг 3" class="slide" ondragstart="return false;">
+
+
+                                    
+                                </div>
+                                <button class="slider-btn prev-btn">&#8249;</button>
+                                <button class="slider-btn next-btn">&#8250;</button>
                             </div>
-                            <button class="slider-btn prev-btn">&#8249;</button>
-                            <button class="slider-btn next-btn">&#8250;</button>
-                        </div>
-                    </div>
+              
+
                 </div>
             </div>
         </div>
     </section>
 
     <!-- NEWS ХЭСЭГ -->
-    <section class="reference-section" id="news-section">
+    <section id="news-content" class="reference-section">
         <div class="content-wrapper">
             <div class="reference-header">
                 <h2>News</h2>
-                <span class="close-x" id="news-close">&times;</span>
+                <span id="close-news-btn" class="close-x">&times;</span>
             </div>
             <div class="news-list">
                 <div class="news-item">
                     <span class="news-date">2026.05</span>
                     <p>VOLUME 2: КОНТЕМПОРАРИ АРХИТЕКТУРЫН ХИЛ ХЯЗГААР хүрээнд Архитектурын хүсэл сэдвээр илтгэл тавив.</p>
+                      <!-- 👈 ЭНД МЭДЭЭНИЙ ЗУРГИЙГ ОРУУЛЖ ӨГНӨ -->
                     <div class="news-image">
-                        <img src="Presentation Image.jpg" alt="Presentation Image">
+                        <img src="news_presentation.jpg" alt="Presentation Image" ondragstart="return false;">
                     </div>
-                    <a href="#" class="news-link">Үзэх &#8599;</a>
+                    <a href="https://www.instagram.com/p/DYKYrrXDxBw/?img_index=1" target="_blank" class="news-link">Үзэх ↗</a>
+                </div>
+                <div class="news-item">
+                    <span class="news-date">2026.03</span>
+                    <p>Мэдээллийн технологийн үндэсний паркаас (МТҮП) санаачлан зохион байгуулсан Хойд жигүүрийн дахин төлөвлөлтийн интерьер зураг төслийн уралдаанд 1-р байр эзэллээ.</p>
+                    <a href="https://www.barilga.mn/n/35146/" target="_blank" class="news-link">Эх сурвалж ↗</a>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- PRACTICE (PROFILE) ХЭСЭГ -->
+    <section id="bio-content" class="reference-section">
+        <div class="content-wrapper">
+            <div class="reference-header">
+                <h2>PRACTICE</h2>
+                <span id="close-bio-btn" class="close-x">&times;</span>
+            </div>
+            <div class="bio-text">
+                <h3>Батхуяг Ууганбаяр / Мэргэшсэн Архитектор-БА</h3>
+                <p>Hanyang University, School of Architecture-д архитектор мэргэжил эзэмшсэн төгсөөд Сөүл хотын Haenglim Architects & Engineers Co., Ltd.-д, мөн Улаанбаатар хотын Project Planner LLC-д тус тус мэргэжлийн туршлага хуримтлуулсан. 2026 оноос FORAE ARCHITECTS LLC-ийг үүсгэн байгуулав.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- REFERENCE ХЭСЭГ -->
+    <section id="reference-content" class="reference-section">
+        <div class="content-wrapper">
+            <div class="reference-header">
+                <h2>.</h2>
+                <span id="close-x-btn" class="close-x">&times;</span>
+            </div>
+            
+            <div class="quotes-list">
+                <p>1. Агуулга, шинж чанар, материал нь хэлбэрээ тодорхойлно. Нэг төвлөрсөн үзэл санаагаар хийгдээгүй, үзэл санаа тухайн зүйлийнхээ бүх хэсэгт шингээгүй байх юм бол юу ч тийм сайхан, төгс байж чадахгүй.</p>
+                <p>2. PM: архитектороор ажиллахад, өөрөөсөө миний дотоод ертөнц хаана оршиж байгааг асуудаг. Архитектор нь ирээдүйд амьдрах юм уу (ирээдүйн орон зайн төлөвлөлтүүд), өөр өөрийгөө бүрдүүлсэн өнгөрсөнтэйгөө хамт амьдардаг.</p>
+                <p>3. Архитектурт байдаг өвөрмөц шинж агуулгаас улбаатай хэлбэрийг нээн, өөр юунд ч үл хүрэх бүтээлч хэлбэрийг эрэлхийлэн олох нь чухал.</p>
+                <p>4. Амьд нам гүмийг олоогүй хот нь сүйрлийн замаар нам гүм байдлыг олдог.</p>
+                <p>5. План нь дотроос гадагшаа өрнөнө. Гадна тал нь дотор талын хариу юм. Архитектурын элемент нь гэрэл болон сүүдэр, хана болон орон зай. Тэдгээрийг байрлуулах нь гол зорилгын дэс дараа бөгөөд зорьж буй цаад санааны ангилал юм. Хын төрөлхтөн нь газрын гадаргуугаас 1 метр 70 см зайд буй өөрийн нүдээр архитектурын бүтээлийг харна. Нүдээр ойртон халдаж чадах ба архитектурын хэсгүүдийг авч үзэх зорилтыг л өмнөө тавина. Хэрвээ архитектурын хэлээр хэлж болохооргүй санаа мэдрэгдэх юм бол планы хуурмаг байдалд автах ба санааны хүрээнд эндүүрлээс бардамнал хооронд төөрөгдөж планы дүрмээс гажихад хүрнэ.</p>
+                <p>6. Архитекторууд нь анхандаа өөрийн сэдлийн үр дүн байсан боловч одоо зайлшгүй хэм хэмжээний агуулгад баттай баригдаж дахин түүнийхээ хэрэгсэл болжээ.</p>
+                <p>7. Хүн бол адгуус амьтан, ер бусын хүн хоёрын хооронд, ангал дээр татсан олс юм... Би амь үрэгдэхээс өөрөөр амьдарч чаддаггүй хүмүүст хайртай. Учир нь тэд гүүрээр гарч байна.</p>
+                <p>8. Big alone is not bad, ugly is bad, badly proportioned is bad.</p>
+                <p>9. Бүтээл /작품/ Бүтээхийн 작 ба юм гэдгийн 품. 작 гэдэг нь гарт баригддаг зүйл биш, толгой доторх туурвил, спирит, дур хүсэл юм уу өөрийн зураг зурах уг шалтгаан ийм зүйл нь “작”. 품 гэх нь бодитоор зураг зурж буй бодит цаг дор бодит материаллаг зүйл, эцэст нь үлдэх зүйл, эдгээр нь нэгдэж байж бүтээл бөгөөд 작 ба 품 гэх хэсэгүүдийг авч үзвэл 5:5 гэвэл бас үгүй 8:2-оор 작 нь цойлох хэрэгтэй.</p>
+                <p>10. Үзэгчдийг бас голмоор юм байна. Үзэгчийн төвшин гэж юм байна даа, тэр төвшингийн асуудал.</p>
+                <p>11. Сэдвийг нүүрс шиг залгиж Сэрэхүйн зууханд шатааж шинийг сүлэх Шүүдэр тоолон гэгээ цацах Би нүүдлийн цахилгаан станц</p>
+                <p>12. Хэт диатоник хэмнэл, хүчтэй, гайхалтай хэмнэл, уянгалаг тод байдал, энгийн бөгөөд ямар ч хольцгүй зохицол, хурц тод өнго, хөгжмийн энгийн бөгөөд ил тод байдал, албан ёсны бүтцийн тогтвортой байдал.</p>
+                <p>13. Гоо үзэсгэлэн нь уур амьсгалд байна.</p>
+                <p>14. Захиалагчыг итгүүлэхийн өмнө өөрийгөө ятгах хэрэгтэй. Өөрийгөө өөртөө ятгаж чадах юм бол үлдсэн процесс нь маш амархан үргэлжлэнэ. Сайн төлөвлөлт нь заримдаа нарийн төвөгтэй байдлаас улбаалж илүү сонирхолтой болдог. Учир нь олон төрлийн өнцгөөс асуулт асууж болохоор төвшинд хүрнэ.</p>
+                <p>15. Нарийн төвөгтэй сэтгэлгээний энгийн илэрхийлэл.</p>
+                <p>16. Декартын эргэлзэж чаддаггүй ганц зүйл бол өөрийнх нь оршиж буй явдал. Хэрэв тэр эргэлзэж байгаа юм бол чухамхүү тэр л эргэлзэж байгаа хэрэг. Тэгэхээр тэр оршин байна гэсэн үг. 'Би сэтгэж байна, тийм учраас оршин байна'</p>
+                <p>17. Өөрсдөдөө заяагдсан зүй ёсны үнэт зүйлсээ бусдад булаалгачихсан атлаа харамссан ч үгүй, уурласан ч үгүй, буруу зүйлд бууж өгсөн хэр нь бас ичсэн ч үгүй.</p>
+                <p>18. Үргэлж нүүдэллэж байдаг нүүдэлчид нь газар биш 'цаг хугацааг' санадаг, хүүхдүүд төрсөн ч ямар улиралд төрснөөр санадаг.</p>
+                <p>19. Уран бүтээл бол юуны өмнө сэтгэл хөдлөл юм.</p>
+                <p>20. Урлагийн бүтээл бол эцэс хязгааргүй зүйл. Түүний дотор хорвоо тэр чигээрээ багтана.</p>
+                <p>21. ...Тэд нар өвдөлт юм уу хэцүү үеийг туулаагүй. Өвдөлтгүйгээр урлаг нь бүтээгддэггүй. Урлаг нь амьдарч, амьсгалж буй сэтгэлийн орилоон юм. Тэд нар өөрсдөө сэтгэл зүрх тээж яваа гэдгээ хүртэл мэдэхгүйн улмаас тэдний сэтгэл нь эцэстээ амьд биш юм.</p>
+                <p>22. Хүч чадал, эмзэг байдал нь Серрагийн бүтээлүүдийн гол цөм юм. Тэд салхи, элс, наранд шаналж, тэнгэр өөд бардам гарна. Дараа нь ган нь гандах хүртлээ тасралтгүй хувьслын явцад алхимийн зотон шиг шар, улаан, улбар шар, хүрэн, хув зэрэг өнгийг авдаг.... "Би уран баримлын объектуудыг орон зайд байрлуулахыг хүсэхгүй, харин бүхэл бүтэн орон зайг уран баримал болгохыг хүсч байна."</p>
+                <p>23. Уран бүтээлчийг бүтээлээс нь салган ойлгох гэсэн оролдлого нь улирсан үзэл юм. Түүний бүтээлүүдэд нэгэн түгээмэл чанар харагдана. Түүний бүх бүтээлүүдэд тэр өөрөө харагдана. Цаг хугацаа зогссон мэт, эсвэл цаг өөрөө түр зуур амсхийж буй мэт. Уран бүтээлчийн өөртөө үнэнч байдлыг та Репиний Дүрслэх Урлагийн Академи төгссөнөөс хойших (1984) бүтээлүүдийн өнгө аясаас нь харж болно. Бүтээлийн сэдэв нь өргөн, ямар нэг үзэл суртал, урсгал чиглэлд үл хамаарсан, тухайн цаг хугацааны бүтээгдэхүүн гэхээсээ илүү тухайн бие хүний дотоод сэтгэлийн тусгал илүү харагдана. Дан ялангуяа, түүх, нийгэм, ёс заншлын нөлөө урлагт нь маш их нөлөөлдөг Монгол орны хувьд, бие хүнээ хамгаалан орших нь асар төвөгтэй үйлдэл юм. Зарим уран бүтээлчид нийгэмтэйгээ илээр тэрсэлдэн амьдардаг бол, түүний хувьд бараг нуугдмал гэмээр хэлбэрээр бүтээлээ туурвиж иржээ. Социализмын үед төрөн, өсөж, нийгмийн ташуурсан үзэл суртал ямар үр дагавартай байдгийг биеэр үзсэн болохоор тэр биз. Тэр нийгмийн нэг хэсэг боловч, нийгмээс гадуур орших мэт. Уран бүтээлч бүрийн амьдралдаа, бүтээл туурвилдаа хандах хандлага нь өөр. Тиймээс, түүнийг танихын тулд, та бүтээлийг нь хар. Ойлгох гээд үз. Юу бодож, юу сэтгэж ингэж бүтээсэн юм бол гэж өөрөөсөө асуу. 20-р зууны сүүл үе, 21-р зууны эхэн үеийн дүрслэх урлагийн мөн чанар бол сэтгэлгээ голлосон эсвэл давамгайлсан байдал билээ. Бидний үеийн залуу уран бүтээлчдэд дутагддаг нэг тал бол сэтгэлгээ нь байсан ч, тэр концепцоо бүтээлдээ бүрэн дүүрэн буулгаж чадахгүй байгаа явдал юм. Энэ талаа далдлахын тулд, Барууны бүтээлүүдээс хуулбарлан нь шинэ-ийг бүтээх хүсэлд автан, сонин содон хэлбэртэй харагдаж л байвал зорилгодоо хүрэх юм шиг ойлгоод байдаг... Америкийн алдарт уран бүтээлч Жеоржиа О'Кийф (1887–1986): Урлагт өөрийн гэсэн ертөнцийг бүтээхэд зориг шаардлагатай гэж нэгэнтээ хэлж байжээ. Өөрийнхөөрөө бүтээлээ туурвих ямар түвэгтэй гэдгийг ганцхан уран бүтээлч хүн биш, хүн бүр ойлгох боломжтой гэж би бодож байна. Өөрийнхөөрөө байх нь зөвхөн урлагийн хүмүүст биш орчин цагийн хүмүүст тулгараад байгаа сэтгэлзүйн томоохон асуудлуудын нэг юм.</p>
+                <p>24. It is a little fatalistic on my part, but I always took the position: You cannot ask a very good architect to build a building and then tell him what to do. If you want to dictate how a house should be like, get a mediocre architect. Энэ нь миний хувьд бага зэрэг хор хөнөөлтэй, гэхдээ би үргэлж ийм байр суурийг баримталдаг: Та маш сайн архитектороос барилга барихыг гуйж, дараа нь түүнд юу хийхийг хэлж болохгүй. Хэрэв та байшин ямар байх ёстойг зааж өгөхийг хүсч байвал дунд зэргийн архитектор аваарай.</p>
+                <p>25. 설계한 건물에서 특정 소재의 특정한 의미를 성공적으로 도출했을 때, 감각이 포출된다. Төлөвлөн барилгын тухайлсан материалын тухайлсан утгыг амжилттайгаар олборлох үед, мэдрэмж илэрдэг.</p>
+                <p>26. “A great building must begin with the immeasurable, must go through measurable means when it is being designed, and in the end must be unmeasured.” Агуу барилга нь хэмжээлшгүй зүйлээс эхэлж хэмжигдэхүйц арга хэрэгслээр дамжин бий болж эцэст нь хэмжигдэхүүнгүй болох ёстой.</p>
+                <p>27. Chandigarh is a great experiment in India. I do not like every building in Chandigarh. I like some of them very much. I like the general conception of the township very much but, above all, I like the creative approach, thinking in new terms, of light and air and ground and water and human beings. Чандигарх бол Энэтхэгт хийсэн гайхалтай туршилт юм. Би Чандигарх дахь барилга болгонд дургүй. Тэдний зарим нь надад маш их таалагддаг. Хотхоны тухай ерөнхий ойлголт надад маш их таалагддаг ч хамгийн гол нь гэрэл, агаар, газар, ус, хүний тухай шинэлэг ойлголтоор сэтгэх бүтээлч хандлага надад таалагддаг.</p>
+                <p>28. - I'm here to stop your heart! I'm not here to make pretty pictures! - Би чиний зүрхийг зогсоохоор ирсэн! Би гоё зураг хийх гэж ирээгүй!</p>
+
+                <!-- Номын жагсаалт -->
+                <div class="source-list">
+                    <p>1. The Fountainhead — Novel by Ayn Rand</p>
+                    <p>2. Architecture Dialogues: Positions–Concepts–Vision — Marc Angélil, Jørg Himmelreich</p>
+                    <p>3. Архитектор Буджавын Чимэд — Дашийн Бат, Гүндэвийн Туяа</p>
+                    <p>4. Max Picard</p>
+                    <p>5. Vers une architecture — Le Corbusier</p>
+                    <p>6. Sobre el concept de arbitrariedad en arquitectura — Rafael Moneo</p>
+                    <p>7. Thus Spoke Zarathustra: A Book for All and None — Friedrich Nietzsche</p>
+                    <p>8. Mies Goes Future — Peter Märkli</p>
+                    <p>9. Hyung Koo Kang</p>
+                    <p>10. Begz Baljinyam — Director</p>
+                    <p>11. Bavuu Lhagvasuren — Mongolian writer</p>
+                    <p>12. André Buchareschliev — Igor Stravinsky</p>
+                    <p>13. Luigi Snozzi</p>
+                    <p>14. Herzog & de Meuron: 예술에서 세계 건축으로</p>
+                    <p>15. Mark Rothko Major Works</p>
+                    <p>16. Philosophy — Mel Thompson</p>
+                    <p>17. 우리들의 일그러진 영웅 — 이문열</p>
+                    <p>19. Анри Бергсон</p>
+                    <p>20. Освальд Шпенглер</p>
+                    <p>21. Ле Корбюзьегийн Чарльз L'Эплаттеньерт бичсэн захидал</p>
+                    <p>22. Death of Richard Serra, the Artist Who Turned Sculpture into Architecture — Text by Thibaut Wychowanok</p>
+                    <p>23. “Цагааны сүхээ” — Ц. Цэндпүрэв / Ph.D. / Ванжил Урлагийн төв</p>
+                    <p>24. MARKUS BREITSCHMID ON MANAHOAC HOUSE BY VALERIO OLGIATI</p>
+                    <p>25. Peter Zumthor, Architektur Denken, 2010 — Birkhäuser Verlag GmbH, Basel</p>
+                    <p>26. Louis Kahn</p>
+                    <p>27. Jawaharlal Nehru wrote for the opening in 1959</p>
+                    <p>28. Mark Rothko</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Хөлийн холбоо барих хэсэг -->
     <footer>
-        <div class="bottom-left">
-            <span class="nav-item" id="reference-btn">reference</span>
+        <div class="bottom-left" id="reference-btn" style="cursor: pointer;">
+            <span>reference</span>
         </div>
         <div class="bottom-right">
             <span>Ulaanbaatar, Mongolia</span>
-            <a href="mailto:info@forae.net" class="footer-email">info@forae.net</a>
-            <span>TEL: +98105421</span>
+            <span><a href="mailto:info@forae.net" class="footer-email">info@forae.net</a> &nbsp;&nbsp; TEL: +98105421</span>
         </div>
     </footer>
 
-    <!-- ТОВААР ХАРАХ МОДАЛ БҮТЭЦ (Lightbox) -->
-    <div class="lightbox-modal">
-        <span class="lightbox-close">&times;</span>
-        <img class="lightbox-content" src="" alt="Zoomed Image">
-    </div>
-
-    <!-- ИНТЕРАКТИВ ЛОГИК (JavaScript) -->
+    <!-- JavaScript логик -->
     <script>
-        // Цэс нээх, хаах логик
+        const bioBtn = document.getElementById('bio-btn');
+        const closeBioBtn = document.getElementById('close-bio-btn');
+        const bioContent = document.getElementById('bio-content');
+
+        const refBtn = document.getElementById('reference-btn');
+        const closeXBtn = document.getElementById('close-x-btn');
+        const refContent = document.getElementById('reference-content');
+
         const newsBtn = document.getElementById('news-btn');
+        const closeNewsBtn = document.getElementById('close-news-btn');
+        const newsContent = document.getElementById('news-content');
+
         const projectsBtn = document.getElementById('projects-btn');
-        const newsSection = document.getElementById('news-section');
-        const projectsSection = document.getElementById('projects-section');
-        const newsClose = document.getElementById('news-close');
-        const projectsClose = document.getElementById('projects-close');
+        const closeProjectsBtn = document.getElementById('close-projects-btn');
+        const projectsContent = document.getElementById('projects-content');
 
-        newsBtn.addEventListener('click', () => {
-            newsSection.classList.add('active');
-            projectsSection.classList.remove('active');
+        function closeAllSections() {
+            bioContent.classList.remove('active');
+            refContent.classList.remove('active');
+            newsContent.classList.remove('active');
+            projectsContent.classList.remove('active');
+        }
+
+        newsBtn.onclick = function() {
+            const isOpen = newsContent.classList.contains('active'); closeAllSections();
+            if (!isOpen) { newsContent.classList.add('active'); setTimeout(() => { newsContent.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 150); }
+            else window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        closeNewsBtn.onclick = function(e) { e.stopPropagation(); newsContent.classList.remove('active'); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+
+        bioBtn.onclick = function() {
+            const isOpen = bioContent.classList.contains('active'); closeAllSections();
+            if (!isOpen) { bioContent.classList.add('active'); setTimeout(() => { bioContent.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 150); }
+            else window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        closeBioBtn.onclick = function(e) { e.stopPropagation(); bioContent.classList.remove('active'); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+
+        refBtn.onclick = function() {
+            const isOpen = refContent.classList.contains('active'); closeAllSections();
+            if (!isOpen) { refContent.classList.add('active'); setTimeout(() => { refContent.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 150); }
+            else window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        closeXBtn.onclick = function(e) { e.stopPropagation(); refContent.classList.remove('active'); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+
+        projectsBtn.onclick = function() {
+            const isOpen = projectsContent.classList.contains('active'); closeAllSections();
+            if (!isOpen) { projectsContent.classList.add('active'); setTimeout(() => { projectsContent.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 150); }
+            else window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        closeProjectsBtn.onclick = function(e) { e.stopPropagation(); projectsContent.classList.remove('active'); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+
+        // Акордион
+        const projectItems = document.querySelectorAll('.project-item');
+        projectItems.forEach(item => {
+            const titleBar = item.querySelector('.project-title-bar');
+            if(titleBar) {
+                titleBar.onclick = function() {
+                    const isOpen = item.classList.contains('open');
+                    projectItems.forEach(i => { i.classList.remove('open'); const icon = i.querySelector('.toggle-icon'); if(icon) icon.textContent = '+'; });
+                    if (!isOpen) { item.classList.add('open'); const icon = item.querySelector('.toggle-icon'); if(icon) icon.textContent = '−'; }
+                }
+            }
         });
-        newsClose.addEventListener('click', () => newsSection.classList.remove('active'));
 
-        projectsBtn.addEventListener('click', () => {
-            projectsSection.classList.add('active');
-            newsSection.classList.remove('active');
-        });
-        projectsClose.addEventListener('click', () => projectsSection.classList.remove('active'));
-
-        // Accordion нээж хаах (Төслүүд дээр)
-        document.querySelectorAll('.project-title-bar').forEach(bar => {
-            bar.addEventListener('click', () => {
-                const item = bar.parentElement;
-                item.classList.toggle('open');
-                const icon = bar.querySelector('.toggle-icon');
-                icon.textContent = item.classList.contains('open') ? '−' : '+';
-            });
-        });
-
-        // Слайдер (Carousel) ажиллуулах логик
+        // Слайдер логик
         document.querySelectorAll('.slider-container').forEach(slider => {
-            const slides = slider.querySelectorAll('.slider-slides img');
+            const slides = slider.querySelectorAll('.slide');
             const prevBtn = slider.querySelector('.prev-btn');
             const nextBtn = slider.querySelector('.next-btn');
             let currentIndex = 0;
 
+            if (slides.length <= 1) {
+                if(prevBtn) prevBtn.style.display = 'none';
+                if(nextBtn) nextBtn.style.display = 'none';
+                return;
+            }
+
             function showSlide(index) {
-                slides.forEach(img => img.classList.remove('active'));
-                slides[index].classList.add('active');
+                slides[currentIndex].classList.remove('active');
+                currentIndex = (index + slides.length) % slides.length;
+                slides[currentIndex].classList.add('active');
             }
 
-            prevBtn.addEventListener('click', (e) => {
-                e.stopPropagation(); // Accordion хаагдахаас сэргийлнэ
-                currentIndex = (currentIndex === 0) ? slides.length - 1 : currentIndex - 1;
-                showSlide(currentIndex);
-            });
-
-            nextBtn.addEventListener('click', (e) => {
-                e.stopPropagation(); // Accordion хаагдахаас сэргийлнэ
-                currentIndex = (currentIndex === slides.length - 1) ? 0 : currentIndex + 1;
-                showSlide(currentIndex);
-            });
+            nextBtn.onclick = function(e) { e.stopPropagation(); showSlide(currentIndex + 1); }
+            prevBtn.onclick = function(e) { e.stopPropagation(); showSlide(currentIndex - 1); }
         });
 
-        // ЛАЙТБОКС (Зургийг томоор үзэх, утасны хамгаалалт)
-        const modal = document.querySelector('.lightbox-modal');
-        const modalImg = document.querySelector('.lightbox-content');
-        const modalClose = document.querySelector('.lightbox-close');
+        // 🛠️ F12 болон хөгжүүлэгчийн цонх нээдэг товчны хослолуудыг хаах
+document.onkeydown = function(e) {
+    // F12 товчийг хаах
+    if (e.keyCode == 123) {
+        return false;
+    }
+    // Ctrl + Shift + I (Inspect) хаах
+    if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
+        return false;
+    }
+    // Ctrl + Shift + J (Console) хаах
+    if (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
+        return false;
+    }
+    // Ctrl + U (Эх код харах)-ийг хаах
+    if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
+        return false;
+    }
+}
 
-        // Вэб дээрх бүх зурагт дарах функц холбох
-        document.querySelectorAll('img').forEach(img => {
-            // Лайтбокс доторх зургийг алгасна
-            if (img.classList.contains('lightbox-content')) return;
-
-            img.addEventListener('click', (e) => {
-                e.stopPropagation();
-                modalImg.src = img.src;
-                modal.classList.add('active');
-            });
-        });
-
-        // Хаах үйлдлүүд
-        modalClose.addEventListener('click', () => modal.classList.remove('active'));
-        modal.addEventListener('click', () => modal.classList.remove('active'));
-        modalImg.addEventListener('click', (e) => e.stopPropagation()); // Зурган дээр дарахад хаагдахгүй
-
-        // Утаснаас зураг дээр удаан дарж татах сонголт гарахыг хаах нэмэлт хамгаалалт
-        window.addEventListener('contextmenu', function (e) {
-            if (e.target.tagName === 'IMG') {
-                e.preventDefault();
-            }
-        }, false);
     </script>
 </body>
 </html>
