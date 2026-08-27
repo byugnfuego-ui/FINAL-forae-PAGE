@@ -15,6 +15,7 @@ body {
     flex-direction: column;
     min-height: 100vh;
     padding: 30px 40px;
+    overflow-x: hidden; /* Хуудас хажуу тийш халихаас сэргийлнэ */
 }
 
 /* ==========================================================================
@@ -28,6 +29,7 @@ header {
     font-weight: bold;     
     line-height: 1.5;
     padding-bottom: 20px;
+    width: 100%;
 }
 
 .header-left {
@@ -60,6 +62,7 @@ footer {
     background: #ffffff;
     position: relative;
     z-index: 10;
+    width: 100%;
 }
 
 .bottom-left {
@@ -96,6 +99,7 @@ footer {
     justify-content: center;
     align-items: center;
     padding: 40px 0;
+    width: 100%;
 }
 
 .image-container img {
@@ -103,11 +107,15 @@ footer {
     max-width: 100%;
     object-fit: contain;
     display: block;
+    cursor: pointer; /* Дарахад томрох дохио */
+    
+    /* Зураг татаж авах, хуулахыг хаах тохиргоо */
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
     -webkit-touch-callout: none;
+    pointer-events: auto; /* Лайтбокс клик ажиллуулахын тулд идэвхтэй байна */
 }
 
 /* ==========================================================================
@@ -118,6 +126,7 @@ footer {
     overflow: hidden;
     transition: max-height 0.3s cubic-bezier(0.25, 1, 0.5, 1); 
     background-color: #ffffff;
+    width: 100%;
 }
 
 .reference-section.active {
@@ -167,11 +176,14 @@ footer {
 .projects-container {
     border-top: 1px solid #000000;
     margin-top: 10px;
+    width: 100%;
+    clear: both; /* Халилтаас бүрэн сэргийлнэ */
 }
 
 .project-item {
     border-bottom: 1px solid #000000;
     width: 100%;
+    display: block; /* Байрлалыг баталгаажуулна */
 }
 
 .project-title-bar {
@@ -183,6 +195,7 @@ footer {
     font-size: 15px;
     font-weight: bold;
     letter-spacing: 0.5px;
+    width: 100%;
 }
 
 .project-title-bar:hover .project-name {
@@ -197,6 +210,7 @@ footer {
 .project-details {
     display: none;
     padding: 10px 0 40px 0;
+    width: 100%;
 }
 
 .project-item.open .project-details {
@@ -228,6 +242,14 @@ footer {
     object-fit: contain;
     display: block;
     margin-top: 20px;
+    cursor: pointer;
+    
+    /* Зураг хадгалах, татахыг хязгаарлах */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
 }
 
 /* ==========================================================================
@@ -345,6 +367,13 @@ footer {
     opacity: 0;
     transition: opacity 0.0s ease-in-out; 
     z-index: 1;
+    cursor: pointer;
+    
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
 }
 
 .slider-slides img.active {
@@ -376,7 +405,7 @@ footer {
 .next-btn { right: 10px; }
 
 /* ==========================================================================
-   Мэдээний зургийн тохиргоо (News Image) - ЗӨВ БАЙРШИЛ
+   Мэдээний зургийн тохиргоо (News Image)
    ========================================================================== */
 .news-image {
     width: 100%;
@@ -391,11 +420,59 @@ footer {
     height: auto;
     object-fit: contain;
     display: block;
+    cursor: pointer;
+    
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
     -webkit-touch-callout: none;
+}
+
+/* ==========================================================================
+   Зургийг томоор харах хэсэг (Lightbox Modal)
+   ========================================================================== */
+.lightbox-modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.98); /* Минималист цагаан тунгалаг фон */
+    justify-content: center;
+    align-items: center;
+    touch-action: none; /* Утаснаас zoom болон гүйлгэхийг бүрэн хаана */
+}
+
+.lightbox-modal.active {
+    display: flex;
+}
+
+.lightbox-content {
+    max-width: 95%;
+    max-height: 90vh;
+    object-fit: contain;
+    
+    /* Зураг хадгалах болон контекст цэс дуудахыг хаах тохиргоо */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+    pointer-events: auto;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 30px;
+    right: 40px;
+    font-size: 38px;
+    font-weight: 300;
+    color: #000000;
+    cursor: pointer;
+    user-select: none;
 }
 
 /* ==========================================================================
@@ -413,5 +490,9 @@ footer {
     }
     .bottom-right {
         text-align: center;
+    }
+    .lightbox-close {
+        top: 20px;
+        right: 20px;
     }
 }
