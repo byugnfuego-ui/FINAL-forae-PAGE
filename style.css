@@ -15,7 +15,7 @@ body {
     flex-direction: column;
     min-height: 100vh;
     padding: 30px 40px;
-    overflow-x: hidden; /* Хуудас хажуу тийш халихаас сэргийлнэ */
+    overflow-x: hidden; /* Бүх дэлгэцэнд хажуу тийш халихаас сэргийлнэ */
 }
 
 /* ==========================================================================
@@ -29,7 +29,6 @@ header {
     font-weight: bold;     
     line-height: 1.5;
     padding-bottom: 20px;
-    width: 100%;
 }
 
 .header-left {
@@ -62,7 +61,6 @@ footer {
     background: #ffffff;
     position: relative;
     z-index: 10;
-    width: 100%;
 }
 
 .bottom-left {
@@ -99,7 +97,6 @@ footer {
     justify-content: center;
     align-items: center;
     padding: 40px 0;
-    width: 100%;
 }
 
 .image-container img {
@@ -107,15 +104,12 @@ footer {
     max-width: 100%;
     object-fit: contain;
     display: block;
-    cursor: pointer; /* Дарахад томрох дохио */
-    
-    /* Зураг татаж авах, хуулахыг хаах тохиргоо */
+    cursor: pointer; /* Дарах боломжтойг илтгэнэ */
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    -webkit-touch-callout: none;
-    pointer-events: auto; /* Лайтбокс клик ажиллуулахын тулд идэвхтэй байна */
+    -webkit-touch-callout: none; /* Утаснаас зураг татахыг хаана */
 }
 
 /* ==========================================================================
@@ -126,7 +120,6 @@ footer {
     overflow: hidden;
     transition: max-height 0.3s cubic-bezier(0.25, 1, 0.5, 1); 
     background-color: #ffffff;
-    width: 100%;
 }
 
 .reference-section.active {
@@ -177,13 +170,15 @@ footer {
     border-top: 1px solid #000000;
     margin-top: 10px;
     width: 100%;
-    clear: both; /* Халилтаас бүрэн сэргийлнэ */
+    display: block;
+    clear: both;
 }
 
 .project-item {
     border-bottom: 1px solid #000000;
     width: 100%;
-    display: block; /* Байрлалыг баталгаажуулна */
+    display: block;
+    clear: both;
 }
 
 .project-title-bar {
@@ -243,8 +238,6 @@ footer {
     display: block;
     margin-top: 20px;
     cursor: pointer;
-    
-    /* Зураг хадгалах, татахыг хязгаарлах */
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -368,7 +361,6 @@ footer {
     transition: opacity 0.0s ease-in-out; 
     z-index: 1;
     cursor: pointer;
-    
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -405,7 +397,7 @@ footer {
 .next-btn { right: 10px; }
 
 /* ==========================================================================
-   Мэдээний зургийн тохиргоо (News Image)
+   Мэдээний зургийн тохиргоо (News Image) - ЗӨВ БАЙРШИЛ
    ========================================================================== */
 .news-image {
     width: 100%;
@@ -421,7 +413,6 @@ footer {
     object-fit: contain;
     display: block;
     cursor: pointer;
-    
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -430,7 +421,7 @@ footer {
 }
 
 /* ==========================================================================
-   Зургийг томоор харах хэсэг (Lightbox Modal)
+   ТОМООР ХАРАХ МОДАЛ (Lightbox) ЦОГЦ СТИЛЬ
    ========================================================================== */
 .lightbox-modal {
     display: none;
@@ -438,12 +429,12 @@ footer {
     z-index: 9999;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(255, 255, 255, 0.98); /* Минималист цагаан тунгалаг фон */
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(255, 255, 255, 0.98); /* Цагаан минималист дэвсгэр */
     justify-content: center;
     align-items: center;
-    touch-action: none; /* Утаснаас zoom болон гүйлгэхийг бүрэн хаана */
+    touch-action: none; /* Утаснаас дэлгэц томруулах, гүйлгэхийг зогсооно */
 }
 
 .lightbox-modal.active {
@@ -451,28 +442,31 @@ footer {
 }
 
 .lightbox-content {
-    max-width: 95%;
-    max-height: 90vh;
+    max-width: 90vw;
+    max-height: 85vh;
     object-fit: contain;
-    
-    /* Зураг хадгалах болон контекст цэс дуудахыг хаах тохиргоо */
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
     -webkit-touch-callout: none;
-    pointer-events: auto;
 }
 
 .lightbox-close {
     position: absolute;
     top: 30px;
     right: 40px;
-    font-size: 38px;
-    font-weight: 300;
+    font-size: 45px;
+    font-weight: 200;
     color: #000000;
     cursor: pointer;
+    line-height: 1;
+    transition: opacity 0.2s ease;
     user-select: none;
+}
+
+.lightbox-close:hover {
+    opacity: 0.5;
 }
 
 /* ==========================================================================
@@ -494,5 +488,6 @@ footer {
     .lightbox-close {
         top: 20px;
         right: 20px;
+        font-size: 38px;
     }
 }

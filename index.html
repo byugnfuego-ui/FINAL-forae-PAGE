@@ -2,41 +2,40 @@
 <html lang="mn">
 <head>
     <meta charset="UTF-8">
+    <!-- Утаснаас чимхэж томруулах (pinch-to-zoom) үйлдлийг хөтөч түвшинд хаана -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>forae architects</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Дээд талын цэсүүд -->
     <header>
         <div class="header-left">
             <span class="nav-item">forae architects</span>
         </div>
         <div class="top-right">
-            <span class="nav-item">news</span>
-            <span class="nav-item">projects</span>
+            <span class="nav-item" id="news-btn">news</span>
+            <span class="nav-item" id="projects-btn">projects</span>
         </div>
     </header>
 
-    <!-- Голын зураг (Үндсэн нүүр) -->
+    <!-- Голын үндсэн галерей зураг -->
     <main class="gallery">
         <div class="image-container">
             <img src="Landscape Painting.jpg" alt="Landscape Painting">
         </div>
     </main>
 
-    <!-- PROJECTS ЦЭСНИЙ МИНИМАЛИСТ ДИЗАЙН -->
+    <!-- PROJECTS ХЭСЭГ -->
     <section class="reference-section" id="projects-section">
         <div class="content-wrapper">
             <div class="reference-header">
                 <h2>Projects</h2>
-                <span class="close-x">&times;</span>
+                <span class="close-x" id="projects-close">&times;</span>
             </div>
             
             <div class="projects-container">
-                
-                <!-- 01. Төсөл -->
+                <!-- Төсөл 1 -->
                 <div class="project-item">
                     <div class="project-title-bar">
                         <span class="project-name">01. ЧОЙЖИН ЛАМЫН СҮМ МУЗЕЙН САН ХӨМРӨГ, ЗАХИРГААНЫ БАРИЛГА</span>
@@ -44,21 +43,19 @@
                     </div>
                     <div class="project-details">
                         <div class="project-meta">
-                            <p><strong>location :</strong> Ulaanbaatar, Mongolia</p>
-                            <p><strong>year :</strong> 2026</p>
-                            <p><strong>use :</strong> Museum</p>
-                            <p><strong>area :</strong> 2000m²</p>
+                            <strong>location :</strong> Ulaanbaatar, Mongolia<br>
+                            <strong>year :</strong> 2026<br>
+                            <strong>use :</strong> Museum<br>
+                            <strong>area :</strong> 2000m²
                         </div>
-                        <div class="project-description">
-                            Удахгүй мэдээлэл орно.
-                        </div>
+                        <p class="project-description">Удахгүй мэдээлэл орно.</p>
                         <div class="project-images">
-                            <img src="Project 1 Image.jpg" alt="Project 1 Image">
+                            <img src="Project 1 Image.jpg" alt="Project 1">
                         </div>
                     </div>
                 </div>
 
-                <!-- 02. Төсөл -->
+                <!-- Төсөл 2 -->
                 <div class="project-item">
                     <div class="project-title-bar">
                         <span class="project-name">02. ХАУС САПИН</span>
@@ -66,21 +63,19 @@
                     </div>
                     <div class="project-details">
                         <div class="project-meta">
-                            <p><strong>location :</strong> Shargamorit, Ulaanbaatar</p>
-                            <p><strong>year :</strong> 2026</p>
-                            <p><strong>use :</strong> Single family use</p>
-                            <p><strong>area :</strong> 60m²</p>
+                            <strong>location :</strong> Shargamorit, Ulaanbaatar<br>
+                            <strong>year :</strong> 2026<br>
+                            <strong>use :</strong> Single family use<br>
+                            <strong>area :</strong> 60m²
                         </div>
-                        <div class="project-description">
-                            Удахгүй мэдээлэл орно.
-                        </div>
+                        <p class="project-description">Удахгүй мэдээлэл орно.</p>
                         <div class="project-images">
-                            <img src="Project 2 Image.jpg" alt="Project 2 Image">
+                            <img src="Project 2 Image.jpg" alt="Project 2">
                         </div>
                     </div>
                 </div>
 
-                <!-- 03. Төсөл -->
+                <!-- Төсөл 3 -->
                 <div class="project-item">
                     <div class="project-title-bar">
                         <span class="project-name">03. МЭДЭЭЛЛИЙН ТЕХНОЛОГИЙН ҮНДЭСНИЙ ПАРК (МТҮП) ХОЙД ЖИГҮҮРИЙН ДАХИН ТӨЛӨВЛӨЛТ</span>
@@ -88,27 +83,27 @@
                     </div>
                     <div class="project-details">
                         <div class="project-meta">
-                            <p><strong>location :</strong> Ulaanbaatar, Mongolia</p>
-                            <p><strong>year :</strong> 2026</p>
-                            <p><strong>use :</strong> Gut renovation</p>
-                            <p><strong>area :</strong> 2000m²</p>
+                            <strong>location :</strong> Ulaanbaatar, Mongolia<br>
+                            <strong>year :</strong> 2026<br>
+                            <strong>use :</strong> Gut renovation<br>
+                            <strong>area :</strong> 2000m²
                         </div>
-                        <div class="project-description">
-                            Энэхүү төсөл нь зөвхөн барилгын шийдэл бус, Монгол улсын үе үеийн залуучуудын төсөөлөл, шинжлэх ухаан, мэдээллийн технологийн мэдлэг хуримтлагдсан орчныг шинэ түвшинд хүргэх оролдлого юм. “Цуглах, холбогдох, хамтдаа хөгжих” үзэл санаанд тулгуурлан Park-ийн орон зайг амрах, уулзах, санал солилцох, мөн архитектурын үнэ цэнийг мэдрэх нээлттэй орчин болгон төлөвлөсөн. Анхны төлөвлөлтийн үзэл баримтлалыг дахин идэвхжүүлэх зорилгоор парк-н орон зайг нээн мөн тойрсон алхалтын зам /Promenade/-ыг шийдсэн. Энэхүү орон зай нь нийтийн болон хувийн бүсүүдийг тасралтгүй уялдуулж, дотор ба гадаад орчныг нэгдмэл урсгалд холбон, цуглах ба хамтрах боломжийг бүрдүүлнэ.
-                        </div>
+                        <p class="project-description">Энэхүү төсөл нь зөвхөн барилгын шийдэл бус, Монгол улсын үе үеийн залуучуудын төсөөлөл, шинжлэх ухаан, мэдээллийн технологийн мэдлэг хуримтлагдсан орчныг шинэ түвшинд хүргэх оролдлого юм. “Цуглах, холбогдох, хамтдаа хөгжих” үзэл санаанд тулгуурлан Park-ийн орон зайг амрах, уулзах, санал копилцох, мөн архитектурын үнэ цэнийг мэдрэх нээлттэй орчин болгон төлөвлөсөн.</p>
+                        
+                        <!-- Зургийн Слайдер -->
                         <div class="slider-container">
                             <div class="slider-slides">
-                                <img src="Зураг 1.jpg" alt="Зураг 1" class="active">
+                                <img src="Зураг 1.jpg" class="active" alt="Зураг 1">
                                 <img src="Зураг 2.jpg" alt="Зураг 2">
                                 <img src="Зураг 3.jpg" alt="Зураг 3">
                             </div>
-                            <button class="slider-btn prev-btn">&#x2039;</button>
-                            <button class="slider-btn next-btn">&#x203A;</button>
+                            <button class="slider-btn prev-btn">&#8249;</button>
+                            <button class="slider-btn next-btn">&#8250;</button>
                         </div>
                     </div>
                 </div>
 
-                <!-- 04. Төсөл -->
+                <!-- Төсөл 4 -->
                 <div class="project-item">
                     <div class="project-title-bar">
                         <span class="project-name">04. Одон резорт "Лонг Вайт"</span>
@@ -116,27 +111,24 @@
                     </div>
                     <div class="project-details">
                         <div class="project-meta">
-                            <p><strong>location :</strong> Ulaanbaatar, Mongolia</p>
-                            <p><strong>year :</strong> 2026</p>
-                            <p><strong>use :</strong> Apartment Hotel</p>
-                            <p><strong>area :</strong> 6000m²</p>
+                            <strong>location :</strong> Ulaanbaatar, Mongolia<br>
+                            <strong>year :</strong> 2026<br>
+                            <strong>use :</strong> Apartment Hotel<br>
+                            <strong>area :</strong> 6000m²
                         </div>
-                        <div class="project-description">
-                            Энэхүү төсөл нь 130мx18м урттай үндсэн 3 блок, холбох блок, дулаан зогсоолын 2 блокоос бүрдэнэ. Хотоос ирэх зочдыг амрах орон зайд шилжүүлэх үүднээс зогсоолын орон зайг амрах орон зайнаас салгаж төлөвлөсөн ба амрах, зугаалах, гүйлтийн зам, сагсан бөмбөг, теннисийн талбайг автозам, зогсоолоос тусдаа түвшинд шийдэж өгсөн. Цоолбортой металл фасадын хавтан нь гаднаасаа үргэлжилсэн урт цагаан цул харагдах бол дотор орон зайд нарны гэрэл бууруулах, нууцлалтай байдлыг ихэсгэх байдлаар төлөвлөгдсөн. Зогсоолын гэгээвчээр эхний вэлком байгалийн гэрлийг авах бол үндсэн барилгын дээврийн гэгээвчээр орж ирэх байгалийн гэрэл нь төслийг бусад төслөөс ялгарах байдлыг илэрхийлнэ.
-                        </div>
+                        <p class="project-description">Энэхүү төсөл нь 130мx18м урттай үндсэн 3 блок, холбох блок, дулаан зогсоолын 2 блокоос бүрдэнэ.</p>
                         <div class="slider-container">
                             <div class="slider-slides">
-                                <img src="Зураг 1.jpg" alt="Зураг 1" class="active">
+                                <img src="Зураг 1.jpg" class="active" alt="Зураг 1">
                                 <img src="Зураг 2.jpg" alt="Зураг 2">
-                                <img src="Зураг 3.jpg" alt="Зураг 3">
                             </div>
-                            <button class="slider-btn prev-btn">&#x2039;</button>
-                            <button class="slider-btn next-btn">&#x203A;</button>
+                            <button class="slider-btn prev-btn">&#8249;</button>
+                            <button class="slider-btn next-btn">&#8250;</button>
                         </div>
                     </div>
                 </div>
 
-                <!-- 05. Төсөл -->
+                <!-- Төсөл 5 -->
                 <div class="project-item">
                     <div class="project-title-bar">
                         <span class="project-name">05. BREAKTIME / ХАФ КОУРТ""</span>
@@ -144,27 +136,24 @@
                     </div>
                     <div class="project-details">
                         <div class="project-meta">
-                            <p><strong>location :</strong> Ulaanbaatar, Mongolia</p>
-                            <p><strong>year :</strong> 2026</p>
-                            <p><strong>use :</strong> Apartment Hotel</p>
-                            <p><strong>area :</strong> 6000m²</p>
+                            <strong>location :</strong> Ulaanbaatar, Mongolia<br>
+                            <strong>year :</strong> 2026<br>
+                            <strong>use :</strong> Apartment Hotel<br>
+                            <strong>area :</strong> 6000m²
                         </div>
-                        <div class="project-description">
-                            Энэхүү төсөл нь 130мx18м урттай үндсэн 3 блок, холбох блок, дулаан зогсоолын 2 блокоос бүрдэнэ. Хотоос ирэх зочдыг амрах орон зайд шилжүүлэх үүднээс зогсоолын орон зайг амрах орон зайнаас салгаж төлөвлөсөн ба амрах, зугаалах, гүйлтийн зам, сагсан бөмбөг, теннисийн талбайг автозам, зогсоолоос тусдаа түвшинд шийдэж өгсөн. Цоолбортой металл фасадын хавтан нь гаднаасаа үргэлжилсэн урт цагаан цул харагдах бол дотор орон зайд нарны гэрэл бууруулах, нууцлалтай байдлыг ихэсгэх байдлаар төлөвлөгдсөн. Зогсоолын гэгээвчээр эхний вэлком байгалийн гэрлийг авах бол үндсэн барилгын дээврийн гэгээвчээр орж ирэх байгалийн гэрэл нь төслийг бусад төслөөс ялгарах байдлыг илэрхийлнэ.
-                        </div>
+                        <p class="project-description">Энэхүү төсөл нь 130мx18м урттай үндсэн 3 блок, холбох блок, дулаан зогсоолын 2 блокоос бүрдэнэ.</p>
                         <div class="slider-container">
                             <div class="slider-slides">
-                                <img src="Зураг 1.jpg" alt="Зураг 1" class="active">
+                                <img src="Зураг 1.jpg" class="active" alt="Зураг 1">
                                 <img src="Зураг 2.jpg" alt="Зураг 2">
-                                <img src="Зураг 3.jpg" alt="Зураг 3">
                             </div>
-                            <button class="slider-btn prev-btn">&#x2039;</button>
-                            <button class="slider-btn next-btn">&#x203A;</button>
+                            <button class="slider-btn prev-btn">&#8249;</button>
+                            <button class="slider-btn next-btn">&#8250;</button>
                         </div>
                     </div>
                 </div>
 
-                <!-- 06. Төсөл -->
+                <!-- Төсөл 6 (Хальж байсныг зассан) -->
                 <div class="project-item">
                     <div class="project-title-bar">
                         <span class="project-name">06. ИРГЭН ГАНТУЛГА-ЫН АМИНЫ ОРОН СУУЦ</span>
@@ -172,27 +161,24 @@
                     </div>
                     <div class="project-details">
                         <div class="project-meta">
-                            <p><strong>location :</strong> Ulaanbaatar, Mongolia</p>
-                            <p><strong>year :</strong> 2025</p>
-                            <p><strong>use :</strong> Single family use</p>
-                            <p><strong>area :</strong> 60m²</p>
+                            <strong>location :</strong> Ulaanbaatar, Mongolia<br>
+                            <strong>year :</strong> 2025<br>
+                            <strong>use :</strong> Single family use<br>
+                            <strong>area :</strong> 60m²
                         </div>
-                        <div class="project-description">
-                            Удахгүй.
-                        </div>
+                        <p class="project-description">Удахгүй.</p>
                         <div class="slider-container">
                             <div class="slider-slides">
-                                <img src="Зураг 1.jpg" alt="Зураг 1" class="active">
+                                <img src="Зураг 1.jpg" class="active" alt="Зураг 1">
                                 <img src="Зураг 2.jpg" alt="Зураг 2">
-                                <img src="Зураг 3.jpg" alt="Зураг 3">
                             </div>
-                            <button class="slider-btn prev-btn">&#x2039;</button>
-                            <button class="slider-btn next-btn">&#x203A;</button>
+                            <button class="slider-btn prev-btn">&#8249;</button>
+                            <button class="slider-btn next-btn">&#8250;</button>
                         </div>
                     </div>
                 </div>
 
-                <!-- 07. Төсөл -->
+                <!-- Төсөл 7 (Хальж байсныг зассан) -->
                 <div class="project-item">
                     <div class="project-title-bar">
                         <span class="project-name">07. ИРГЭН САЙНБИЛЭГ-ЫН АМИНЫ ОРОН СУУЦ</span>
@@ -200,31 +186,46 @@
                     </div>
                     <div class="project-details">
                         <div class="project-meta">
-                            <p><strong>location :</strong> Ulaanbaatar, Mongolia</p>
-                            <p><strong>year :</strong> 2026</p>
-                            <p><strong>use :</strong> Apartment Hotel</p>
-                            <p><strong>area :</strong> 6000m²</p>
+                            <strong>location :</strong> Ulaanbaatar, Mongolia<br>
+                            <strong>year :</strong> 2026<br>
+                            <strong>use :</strong> Apartment Hotel<br>
+                            <strong>area :</strong> 6000m²
                         </div>
-                        <div class="project-description">
-                            Удахгүй.
-                        </div>
+                        <p class="project-description">Удахгүй.</p>
                         <div class="slider-container">
                             <div class="slider-slides">
-                                <img src="Зураг 1.jpg" alt="Зураг 1" class="active">
+                                <img src="Зураг 1.jpg" class="active" alt="Зураг 1">
                                 <img src="Зураг 2.jpg" alt="Зураг 2">
-                                <img src="Зураг 3.jpg" alt="Зураг 3">
                             </div>
-                            <button class="slider-btn prev-btn">&#x2039;</button>
-                            <button class="slider-btn next-btn">&#x203A;</button>
+                            <button class="slider-btn prev-btn">&#8249;</button>
+                            <button class="slider-btn next-btn">&#8250;</button>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
 
-    <!-- Хөл хэсэг (Footer) -->
+    <!-- NEWS ХЭСЭГ -->
+    <section class="reference-section" id="news-section">
+        <div class="content-wrapper">
+            <div class="reference-header">
+                <h2>News</h2>
+                <span class="close-x" id="news-close">&times;</span>
+            </div>
+            <div class="news-list">
+                <div class="news-item">
+                    <span class="news-date">2026.05</span>
+                    <p>VOLUME 2: КОНТЕМПОРАРИ АРХИТЕКТУРЫН ХИЛ ХЯЗГААР хүрээнд Архитектурын хүсэл сэдвээр илтгэл тавив.</p>
+                    <div class="news-image">
+                        <img src="Presentation Image.jpg" alt="Presentation Image">
+                    </div>
+                    <a href="#" class="news-link">Үзэх &#8599;</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <footer>
         <div class="bottom-left">
             <span class="nav-item" id="reference-btn">reference</span>
@@ -236,42 +237,50 @@
         </div>
     </footer>
 
-    <!-- Зургийг томоор харах Lightbox Modal -->
+    <!-- ТОВААР ХАРАХ МОДАЛ БҮТЭЦ (Lightbox) -->
     <div class="lightbox-modal">
         <span class="lightbox-close">&times;</span>
         <img class="lightbox-content" src="" alt="Zoomed Image">
     </div>
 
-    <!-- JavaScript функцууд -->
+    <!-- ИНТЕРАКТИВ ЛОГИК (JavaScript) -->
     <script>
-        // Projects нээж хаах Accordion ажиллагаа
+        // Цэс нээх, хаах логик
+        const newsBtn = document.getElementById('news-btn');
+        const projectsBtn = document.getElementById('projects-btn');
+        const newsSection = document.getElementById('news-section');
+        const projectsSection = document.getElementById('projects-section');
+        const newsClose = document.getElementById('news-close');
+        const projectsClose = document.getElementById('projects-close');
+
+        newsBtn.addEventListener('click', () => {
+            newsSection.classList.add('active');
+            projectsSection.classList.remove('active');
+        });
+        newsClose.addEventListener('click', () => newsSection.classList.remove('active'));
+
+        projectsBtn.addEventListener('click', () => {
+            projectsSection.classList.add('active');
+            newsSection.classList.remove('active');
+        });
+        projectsClose.addEventListener('click', () => projectsSection.classList.remove('active'));
+
+        // Accordion нээж хаах (Төслүүд дээр)
         document.querySelectorAll('.project-title-bar').forEach(bar => {
             bar.addEventListener('click', () => {
                 const item = bar.parentElement;
+                item.classList.toggle('open');
                 const icon = bar.querySelector('.toggle-icon');
-                
-                if (item.classList.contains('open')) {
-                    item.classList.remove('open');
-                    icon.textContent = '+';
-                } else {
-                    item.classList.add('open');
-                    icon.textContent = '-';
-                }
+                icon.textContent = item.classList.contains('open') ? '−' : '+';
             });
         });
 
-        // Слайдер (Carousel) ажиллагаа
+        // Слайдер (Carousel) ажиллуулах логик
         document.querySelectorAll('.slider-container').forEach(slider => {
             const slides = slider.querySelectorAll('.slider-slides img');
             const prevBtn = slider.querySelector('.prev-btn');
             const nextBtn = slider.querySelector('.next-btn');
             let currentIndex = 0;
-
-            if (slides.length <= 1) {
-                if(prevBtn) prevBtn.style.display = 'none';
-                if(nextBtn) nextBtn.style.display = 'none';
-                return;
-            }
 
             function showSlide(index) {
                 slides.forEach(img => img.classList.remove('active'));
@@ -279,42 +288,46 @@
             }
 
             prevBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
+                e.stopPropagation(); // Accordion хаагдахаас сэргийлнэ
                 currentIndex = (currentIndex === 0) ? slides.length - 1 : currentIndex - 1;
                 showSlide(currentIndex);
             });
 
             nextBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
+                e.stopPropagation(); // Accordion хаагдахаас сэргийлнэ
                 currentIndex = (currentIndex === slides.length - 1) ? 0 : currentIndex + 1;
                 showSlide(currentIndex);
             });
         });
 
-        // Зургийг томоор үздэг болгох (Lightbox) ажиллагаа
-        const lightbox = document.querySelector('.lightbox-modal');
-        const lightboxImg = document.querySelector('.lightbox-content');
-        const lightboxClose = document.querySelector('.lightbox-close');
+        // ЛАЙТБОКС (Зургийг томоор үзэх, утасны хамгаалалт)
+        const modal = document.querySelector('.lightbox-modal');
+        const modalImg = document.querySelector('.lightbox-content');
+        const modalClose = document.querySelector('.lightbox-close');
 
-        document.querySelectorAll('img:not(.lightbox-content)').forEach(img => {
+        // Вэб дээрх бүх зурагт дарах функц холбох
+        document.querySelectorAll('img').forEach(img => {
+            // Лайтбокс доторх зургийг алгасна
+            if (img.classList.contains('lightbox-content')) return;
+
             img.addEventListener('click', (e) => {
                 e.stopPropagation();
-                lightboxImg.src = img.src;
-                lightbox.classList.add('active');
+                modalImg.src = img.src;
+                modal.classList.add('active');
             });
         });
 
-        lightboxClose.addEventListener('click', () => {
-            lightbox.classList.remove('active');
-            lightboxImg.src = '';
-        });
+        // Хаах үйлдлүүд
+        modalClose.addEventListener('click', () => modal.classList.remove('active'));
+        modal.addEventListener('click', () => modal.classList.remove('active'));
+        modalImg.addEventListener('click', (e) => e.stopPropagation()); // Зурган дээр дарахад хаагдахгүй
 
-        lightbox.addEventListener('click', (e) => {
-            if (e.target === lightbox) {
-                lightbox.classList.remove('active');
-                lightboxImg.src = '';
+        // Утаснаас зураг дээр удаан дарж татах сонголт гарахыг хаах нэмэлт хамгаалалт
+        window.addEventListener('contextmenu', function (e) {
+            if (e.target.tagName === 'IMG') {
+                e.preventDefault();
             }
-        });
+        }, false);
     </script>
 </body>
 </html>
