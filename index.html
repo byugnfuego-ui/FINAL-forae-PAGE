@@ -323,13 +323,8 @@
         }
 
         function closeSection(section) {
-            // Одоогийн өндрөөс 0 рүү жигд шилжихийн тулд эхлээд бодит өндрийг нь тогтооно
-            section.style.maxHeight = section.scrollHeight + 'px';
-            requestAnimationFrame(() => {
-                requestAnimationFrame(() => {
-                    section.style.maxHeight = '0px';
-                });
-            });
+            // Одоогийн нээлттэй өндрөөс нь 0 рүү жигд хаана (transition нь CSS дээр аль хэдийн байгаа)
+            section.style.maxHeight = '0px';
             section.classList.remove('active');
         }
 
