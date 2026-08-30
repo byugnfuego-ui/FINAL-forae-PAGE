@@ -314,40 +314,69 @@
         const closeProjectsBtn = document.getElementById('close-projects-btn');
         const projectsContent = document.getElementById('projects-content');
 
-        function closeAllSections() {
-            bioContent.classList.remove('active');
-            refContent.classList.remove('active');
-            newsContent.classList.remove('active');
-            projectsContent.classList.remove('active');
+        function openSection(section) {
+            section.classList.add('active');
+            // Бодит контентын өндрийг тооцоод max-height-д онооно ⇒ ямар ч урттай текст таслагдахгүй
+            requestAnimationFrame(() => {
+                section.style.maxHeight = section.scrollHeight + 'px';
+            });
         }
+
+        function closeSection(section) {
+            // Одоогийн өндрөөс 0 рүү жигд шилжихийн тулд эхлээд бодит өндрийг нь тогтооно
+            section.style.maxHeight = section.scrollHeight + 'px';
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    section.style.maxHeight = '0px';
+                });
+            });
+            section.classList.remove('active');
+        }
+
+        function recalcSectionHeight(section) {
+            if (section.classList.contains('active')) {
+                section.style.maxHeight = section.scrollHeight + 'px';
+            }
+        }
+
+        const allSections = [bioContent, refContent, newsContent, projectsContent];
+
+        function closeAllSections() {
+            allSections.forEach(s => closeSection(s));
+        }
+
+        // Дэлгэц эргүүлэх/хэмжээ өөрчлөгдөхөд нээлттэй хэсгийн өндрийг дахин тооцоолно
+        window.addEventListener('resize', function() {
+            allSections.forEach(s => recalcSectionHeight(s));
+        });
 
         newsBtn.onclick = function() {
             const isOpen = newsContent.classList.contains('active'); closeAllSections();
-            if (!isOpen) { newsContent.classList.add('active'); setTimeout(() => { newsContent.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 150); }
+            if (!isOpen) { openSection(newsContent); setTimeout(() => { newsContent.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 150); }
             else window.scrollTo({ top: 0, behavior: 'smooth' });
         }
-        closeNewsBtn.onclick = function(e) { e.stopPropagation(); newsContent.classList.remove('active'); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+        closeNewsBtn.onclick = function(e) { e.stopPropagation(); closeSection(newsContent); window.scrollTo({ top: 0, behavior: 'smooth' }); }
 
         bioBtn.onclick = function() {
             const isOpen = bioContent.classList.contains('active'); closeAllSections();
-            if (!isOpen) { bioContent.classList.add('active'); setTimeout(() => { bioContent.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 150); }
+            if (!isOpen) { openSection(bioContent); setTimeout(() => { bioContent.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 150); }
             else window.scrollTo({ top: 0, behavior: 'smooth' });
         }
-        closeBioBtn.onclick = function(e) { e.stopPropagation(); bioContent.classList.remove('active'); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+        closeBioBtn.onclick = function(e) { e.stopPropagation(); closeSection(bioContent); window.scrollTo({ top: 0, behavior: 'smooth' }); }
 
         refBtn.onclick = function() {
             const isOpen = refContent.classList.contains('active'); closeAllSections();
-            if (!isOpen) { refContent.classList.add('active'); setTimeout(() => { refContent.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 150); }
+            if (!isOpen) { openSection(refContent); setTimeout(() => { refContent.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 150); }
             else window.scrollTo({ top: 0, behavior: 'smooth' });
         }
-        closeXBtn.onclick = function(e) { e.stopPropagation(); refContent.classList.remove('active'); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+        closeXBtn.onclick = function(e) { e.stopPropagation(); closeSection(refContent); window.scrollTo({ top: 0, behavior: 'smooth' }); }
 
         projectsBtn.onclick = function() {
             const isOpen = projectsContent.classList.contains('active'); closeAllSections();
-            if (!isOpen) { projectsContent.classList.add('active'); setTimeout(() => { projectsContent.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 150); }
+            if (!isOpen) { openSection(projectsContent); setTimeout(() => { projectsContent.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 150); }
             else window.scrollTo({ top: 0, behavior: 'smooth' });
         }
-        closeProjectsBtn.onclick = function(e) { e.stopPropagation(); projectsContent.classList.remove('active'); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+        closeProjectsBtn.onclick = function(e) { e.stopPropagation(); closeSection(projectsContent); window.scrollTo({ top: 0, behavior: 'smooth' }); }
 
         // Акордион
         const projectItems = document.querySelectorAll('.project-item');
@@ -358,6 +387,8 @@
                     const isOpen = item.classList.contains('open');
                     projectItems.forEach(i => { i.classList.remove('open'); const icon = i.querySelector('.toggle-icon'); if(icon) icon.textContent = '+'; });
                     if (!isOpen) { item.classList.add('open'); const icon = item.querySelector('.toggle-icon'); if(icon) icon.textContent = '−'; }
+                    // Дотоод project дэлгэрэнгүй нээгдэх/хаагдахад гадна Projects хэсгийн өндрийг дахин тооцоолно
+                    requestAnimationFrame(() => recalcSectionHeight(projectsContent));
                 }
             }
         });
@@ -446,7 +477,10 @@
 
         document.querySelectorAll('.project-images[data-image-folder]').forEach(container => {
             const folder = container.getAttribute('data-image-folder');
-            loadProjectImages(folder).then(urls => renderProjectImages(container, urls));
+            loadProjectImages(folder).then(urls => {
+                renderProjectImages(container, urls);
+                requestAnimationFrame(() => recalcSectionHeight(projectsContent));
+            });
         });
 
         // Project зургийг томруулж харах цонх (Lightbox) — дараагийн/өмнөх зураг руу шилжих боломжтой

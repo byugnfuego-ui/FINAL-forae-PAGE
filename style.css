@@ -142,7 +142,6 @@ footer {
 }
 
 .reference-section.active {
-    max-height: 6000px; 
     padding: 40px 0;
 }
 
@@ -377,24 +376,32 @@ footer {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background: none;
     border: none;
     color: #000000;
-    font-size: 40px;
-    font-weight: 300;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1;
     cursor: pointer;
     z-index: 10;
-    padding: 10px;
-    transition: opacity 0.0s ease;
+    padding: 0;
+    box-shadow: none;
+    transition: opacity 0.15s ease, transform 0.15s ease;
     user-select: none;
 }
 
 .slider-btn:hover {
     opacity: 0.5;
+    transform: translateY(-50%) scale(1.07);
 }
 
-.prev-btn { left: 10px; }
-.next-btn { right: 10px; }
+.prev-btn { left: 14px; }
+.next-btn { right: 14px; }
 
 /* ==========================================================================
    Мэдээний зургийн тохиргоо (News Image) - ЗӨВ БАЙРШИЛ
@@ -472,31 +479,39 @@ footer {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background: none;
     border: none;
     color: #ffffff;
-    font-size: 48px;
-    font-weight: 300;
+    font-size: 34px;
+    font-weight: 700;
+    line-height: 1;
     cursor: pointer;
     z-index: 1001;
-    padding: 10px 18px;
-    line-height: 1;
-    transition: opacity 0.2s ease;
+    padding: 0;
+    box-shadow: none;
+    transition: opacity 0.2s ease, transform 0.15s ease;
     user-select: none;
     pointer-events: auto;
 }
 
 .lightbox-btn:hover {
     opacity: 0.6;
+    transform: translateY(-50%) scale(1.07);
 }
 
-.lightbox-prev-btn { left: 10px; }
-.lightbox-next-btn { right: 10px; }
+.lightbox-prev-btn { left: 16px; }
+.lightbox-next-btn { right: 16px; }
 
 @media (max-width: 768px) {
     .lightbox-btn {
-        font-size: 36px;
-        padding: 8px 12px;
+        width: 42px;
+        height: 42px;
+        font-size: 26px;
     }
 }
 
