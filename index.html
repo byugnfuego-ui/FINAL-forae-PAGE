@@ -2,7 +2,7 @@
 <html lang="mn">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
     <title>forae architects</title>
     <link rel="icon" type="image/png" href="images/favicon.png">
     <link rel="stylesheet" href="style.css">
@@ -291,7 +291,9 @@
     <!-- Project зургийг томруулж харах цонх (Lightbox) -->
     <div class="lightbox-overlay" id="lightbox-overlay">
         <span class="lightbox-close" id="lightbox-close">&times;</span>
+        <button class="lightbox-btn lightbox-prev-btn" id="lightbox-prev">&#8249;</button>
         <img id="lightbox-img" src="" alt="Томруулсан зураг" ondragstart="return false;">
+        <button class="lightbox-btn lightbox-next-btn" id="lightbox-next">&#8250;</button>
     </div>
 
     <!-- JavaScript логик -->
@@ -447,34 +449,87 @@
             loadProjectImages(folder).then(urls => renderProjectImages(container, urls));
         });
 
-        // Project зургийг томруулж харах цонх (Lightbox)
+        // Project зургийг томруулж харах цонх (Lightbox) — дараагийн/өмнөх зураг руу шилжих боломжтой
         const lightboxOverlay = document.getElementById('lightbox-overlay');
         const lightboxImg = document.getElementById('lightbox-img');
         const lightboxClose = document.getElementById('lightbox-close');
+        const lightboxPrev = document.getElementById('lightbox-prev');
+        const lightboxNext = document.getElementById('lightbox-next');
 
-        function openLightbox(src) {
-            if (!src) return;
-            lightboxImg.src = src;
+        let lightboxImages = [];
+        let lightboxIndex = 0;
+
+        function updateLightboxNavVisibility() {
+            const show = lightboxImages.length > 1;
+            lightboxPrev.style.display = show ? '' : 'none';
+            lightboxNext.style.display = show ? '' : 'none';
+        }
+
+        function showLightboxImage(index) {
+            if (lightboxImages.length === 0) return;
+            lightboxIndex = (index + lightboxImages.length) % lightboxImages.length;
+            lightboxImg.src = lightboxImages[lightboxIndex];
+        }
+
+        function openLightbox(urls, startIndex) {
+            if (!urls || urls.length === 0) return;
+            lightboxImages = urls;
+            updateLightboxNavVisibility();
+            showLightboxImage(startIndex || 0);
             lightboxOverlay.classList.add('active');
         }
         function closeLightbox() {
             lightboxOverlay.classList.remove('active');
             lightboxImg.src = '';
+            lightboxImages = [];
         }
 
         document.querySelectorAll('.project-images').forEach(container => {
             container.addEventListener('click', function(e) {
                 if (e.target.closest('.slider-btn')) return; // слайдерийн товч бол алгасна
-                const activeSlide = container.querySelector('.slide.active');
+                const slides = container.querySelectorAll('.slide');
+                if (slides.length > 0) {
+                    const urls = Array.from(slides).map(img => img.src);
+                    const activeSlide = container.querySelector('.slide.active');
+                    const idx = Math.max(0, Array.from(slides).indexOf(activeSlide));
+                    openLightbox(urls, idx);
+                    return;
+                }
                 const singleImg = container.querySelector('img');
-                const src = activeSlide ? activeSlide.src : (singleImg ? singleImg.src : null);
-                openLightbox(src);
+                if (singleImg) openLightbox([singleImg.src], 0);
             });
         });
 
-        lightboxOverlay.addEventListener('click', closeLightbox);
+        lightboxPrev.addEventListener('click', function(e) { e.stopPropagation(); showLightboxImage(lightboxIndex - 1); });
+        lightboxNext.addEventListener('click', function(e) { e.stopPropagation(); showLightboxImage(lightboxIndex + 1); });
+
+        lightboxOverlay.addEventListener('click', function(e) {
+            if (e.target.closest('.lightbox-btn') || e.target.closest('.lightbox-close')) return;
+            closeLightbox();
+        });
         lightboxClose.addEventListener('click', function(e) { e.stopPropagation(); closeLightbox(); });
-        document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeLightbox(); });
+        document.addEventListener('keydown', function(e) {
+            if (!lightboxOverlay.classList.contains('active')) return;
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowRight') showLightboxImage(lightboxIndex + 1);
+            if (e.key === 'ArrowLeft') showLightboxImage(lightboxIndex - 1);
+        });
+
+        // 📱 Гар утсан дээр pinch болон давхар товшилтоор зумлахаас бүрэн хамгаалах
+        document.addEventListener('gesturestart', function(e) { e.preventDefault(); });
+        document.addEventListener('gesturechange', function(e) { e.preventDefault(); });
+        document.addEventListener('gestureend', function(e) { e.preventDefault(); });
+
+        document.addEventListener('touchmove', function(e) {
+            if (e.touches.length > 1) e.preventDefault(); // 2 хуруугаар зумлахыг хаах
+        }, { passive: false });
+
+        let lastTouchEndTime = 0;
+        document.addEventListener('touchend', function(e) {
+            const now = Date.now();
+            if (now - lastTouchEndTime <= 300) e.preventDefault(); // давхар товшилтоор зумлахыг хаах
+            lastTouchEndTime = now;
+        }, { passive: false });
 
         // 🛠️ F12 болон хөгжүүлэгчийн цонх нээдэг товчны хослолуудыг хаах
 document.onkeydown = function(e) {

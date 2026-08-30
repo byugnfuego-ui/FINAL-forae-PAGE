@@ -7,6 +7,10 @@
     padding: 0;
 }
 
+html {
+    touch-action: pan-y;
+}
+
 body {
     font-family: Arial, sans-serif;
     background-color: #ffffff;
@@ -15,6 +19,7 @@ body {
     flex-direction: column;
     min-height: 100vh;
     padding: 30px 40px;
+    touch-action: pan-y;
 }
 
 /* ==========================================================================
@@ -430,8 +435,8 @@ footer {
     align-items: center;
     padding: 20px;
     cursor: zoom-out;
-    /* Томруулсан зургийг гар утаснаас pinch хийж зумлаж болно */
-    touch-action: pinch-zoom;
+    /* Гар утаснаас pinch хийж зумлах боломжгүй болгосон */
+    touch-action: none;
 }
 
 .lightbox-overlay.active {
@@ -460,6 +465,39 @@ footer {
 
 .lightbox-close:hover {
     opacity: 0.7;
+}
+
+/* Lightbox доторх Дараагийн/Өмнөх зураг руу шилжих товчнууд */
+.lightbox-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 48px;
+    font-weight: 300;
+    cursor: pointer;
+    z-index: 1001;
+    padding: 10px 18px;
+    line-height: 1;
+    transition: opacity 0.2s ease;
+    user-select: none;
+    pointer-events: auto;
+}
+
+.lightbox-btn:hover {
+    opacity: 0.6;
+}
+
+.lightbox-prev-btn { left: 10px; }
+.lightbox-next-btn { right: 10px; }
+
+@media (max-width: 768px) {
+    .lightbox-btn {
+        font-size: 36px;
+        padding: 8px 12px;
+    }
 }
 
 /* Project зургийг дарж болохыг харуулах курсор */
