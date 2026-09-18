@@ -451,11 +451,9 @@
                     }
                     // Дотоод project дэлгэрэнгүй нээгдэх/хаагдахад гадна Projects хэсгийн өндрийг дахин тооцоолно
                     requestAnimationFrame(() => recalcSectionHeight(projectsContent));
-                    // Нээгдсэн төслийг хуудасны голд харагдахаар гүйлгэнэ
+                    // Тухайн төслийг нээхэд байрлал өөрчлөгдөхгүй, Projects хэсгийн эхэнд тогтмол байрлана
                     if (!isOpen) {
-                        setTimeout(() => {
-                            item.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                        }, 200);
+                        projectsContent.scrollIntoView({ behavior: 'auto', block: 'start' });
                     }
                 }
             }
