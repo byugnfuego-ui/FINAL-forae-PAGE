@@ -464,6 +464,26 @@
             projectsContent.scrollIntoView({ behavior: 'auto', block: 'start' });
         }
 
+        // Урт тайлбартай төслүүдэд "дэлгэрэнгүй / хураах" товч нэмнэ,
+        // ингэснээр анх дэлгэц дээр товч, товчилсон текст л харагдана
+        document.querySelectorAll('.project-description').forEach(desc => {
+            const p = desc.querySelector('p');
+            if (!p) return;
+            const text = p.textContent || '';
+            if (text.length > 260) {
+                desc.classList.add('clamped');
+                const toggle = document.createElement('span');
+                toggle.className = 'description-toggle';
+                toggle.textContent = 'дэлгэрэнгүй ↓';
+                toggle.onclick = function() {
+                    const expanded = desc.classList.toggle('expanded');
+                    toggle.textContent = expanded ? 'хураах ↑' : 'дэлгэрэнгүй ↓';
+                    requestAnimationFrame(() => recalcSectionHeight(projectsContent));
+                };
+                desc.insertAdjacentElement('afterend', toggle);
+            }
+        });
+
         // Project зургийг томруулж харах цонх (Lightbox) — бэлтгэлийг доор хийнэ
         // ==========================================================================
         // Project folder-с зургийг автоматаар олж, слайдер барих (нэрнээс үл хамааран)
