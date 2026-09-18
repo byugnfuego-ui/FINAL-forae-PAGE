@@ -44,8 +44,10 @@
                 <h2>Projects</h2>
                 <span id="close-projects-btn" class="close-x">&times;</span>
             </div>
-            
-            <div class="projects-container">
+
+            <div class="back-to-projects" id="back-to-projects-btn">&larr; back</div>
+
+            <div class="projects-container" id="projects-container">
                 <!-- Төсөл 1 -->
                 <div class="project-item">
                     <div class="project-title-bar">
@@ -135,10 +137,8 @@
                             <p><strong>area :</strong> 6000m²</p>
                         </div>
                         <div class="project-description">
-                            <p>Энэхүү төсөл нь ой мод, хаяагаа сөхсөн гэрийн сэрүүн, дулаан уур амьсгал зэрэг бидний хамтын дурсамжид гүн шингэсэн архетип дүрслэлүүдийг шингээсэн. Ой мод нь нарны гэрлийг хагас нэвтрүүлж гайхалтай орон зайн мэдрэмжийг төрүүлдэг бол гэрийн агаарын уур амьсгалын төлөв нь хамгийн дээд амрах орон зайг өгдөг. Үүний үр дүнд нар, салхийг шингээсэн байгалийн хэлбэр бий болсон.
-8 ширхэг физик чулуун хананы тусламжтайгаар орон зайг үүсгэн олон төрлийн амрах орчинг төлөвлөсөн. Габион хана нь бат бэх хэлбэрийг дэмжихийн хажуугаар нэвчимхий, нээлттэй чанар нь чулуугаар сүлжсэн, нэвтрэлттэй арьс шиг нар салхитай харьцана. Түр зуурын оршихуйтай энэхүү барилга нь үүрдийн дурсамжийг бий болгож, түр амс хийж эргэн эрчтэй хөдөлгөөнд орох үйлдлийг дэмжихэд оршино.
-Зуурдын болоод үүрдийн /Г.Пүрэвбат/
-</p>
+                            <p>Энэхүү төсөл нь 130мx18м урттай үндсэн 3 блок, холбох блок, дулаан зогсоолын 2 блокоос бүрдэнэ. Хотоос ирэх зочдыг амрах орон зайд шилжүүлэх үүднээс зогсоолын орон зайг амрах орон зайнаас салгаж төлөвлөсөн ба амрах, зугаалах, гүйлтийн зам, сагсан бөмбөг, теннисийн талбайг автозам, зогсоолоос тусдаа түвшинд шийдэж өгсөн.
+Цоолбортой металл фасадын хавтан нь гаднаасаа үргэлжилсэн урт цагаан цул харагдах бол дотор орон зайд нарны гэрэл бууруулах, нууцлалтай байдлыг ихэсгэх байдлаар төлөвлөгдсөн. Зогсоолын гэгээвчээр эхний вэлком байгалийн гэрлийг авах бол үндсэн барилгын дээврийн гэгээвчээр орж ирэх байгалийн гэрэл нь төслийг бусад төслөөс ялгарах байдлыг илэрхийлнэ.</p>
                          </div>    
                         <div class="project-images" data-image-folder="images/project5"></div>
                     </div>
@@ -304,7 +304,7 @@
             <span>reference</span>
         </div>
         <div class="bottom-right">
-        
+            <span>Ulaanbaatar, Mongolia</span>
             <span><a href="mailto:info@forae.net" class="footer-email">info@forae.net</a> &nbsp;&nbsp; TEL: +98105421</span>
         </div>
     </footer>
@@ -371,6 +371,10 @@
             section.style.maxHeight = '0px';
             section.classList.remove('active');
             updateGalleryVisibility();
+            // Projects хэсгийг хаахад дараагийн удаа нээхэд бүтэн жагсаалт харагдахаар шинэчилнэ
+            if (section.id === 'projects-content' && typeof closeProjectDetail === 'function') {
+                closeProjectDetail();
+            }
         }
 
         function recalcSectionHeight(section) {
@@ -420,13 +424,31 @@
 
         // Акордион
         const projectItems = document.querySelectorAll('.project-item');
+        const projectsContainer = document.getElementById('projects-container');
+        const backToProjectsBtn = document.getElementById('back-to-projects-btn');
+
+        function closeProjectDetail() {
+            projectItems.forEach(i => { i.classList.remove('open'); const icon = i.querySelector('.toggle-icon'); if(icon) icon.textContent = '+'; });
+            projectsContainer.classList.remove('has-open');
+            backToProjectsBtn.classList.remove('visible');
+            requestAnimationFrame(() => recalcSectionHeight(projectsContent));
+        }
+
         projectItems.forEach(item => {
             const titleBar = item.querySelector('.project-title-bar');
             if(titleBar) {
                 titleBar.onclick = function() {
                     const isOpen = item.classList.contains('open');
                     projectItems.forEach(i => { i.classList.remove('open'); const icon = i.querySelector('.toggle-icon'); if(icon) icon.textContent = '+'; });
-                    if (!isOpen) { item.classList.add('open'); const icon = item.querySelector('.toggle-icon'); if(icon) icon.textContent = '−'; }
+                    if (!isOpen) {
+                        item.classList.add('open');
+                        const icon = item.querySelector('.toggle-icon'); if(icon) icon.textContent = '−';
+                        projectsContainer.classList.add('has-open');
+                        backToProjectsBtn.classList.add('visible');
+                    } else {
+                        projectsContainer.classList.remove('has-open');
+                        backToProjectsBtn.classList.remove('visible');
+                    }
                     // Дотоод project дэлгэрэнгүй нээгдэх/хаагдахад гадна Projects хэсгийн өндрийг дахин тооцоолно
                     requestAnimationFrame(() => recalcSectionHeight(projectsContent));
                     // Нээгдсэн төслийг хуудасны голд харагдахаар гүйлгэнэ
@@ -438,6 +460,11 @@
                 }
             }
         });
+
+        backToProjectsBtn.onclick = function() {
+            closeProjectDetail();
+            projectsContent.scrollIntoView({ behavior: 'auto', block: 'start' });
+        }
 
         // Project зургийг томруулж харах цонх (Lightbox) — бэлтгэлийг доор хийнэ
         // ==========================================================================
