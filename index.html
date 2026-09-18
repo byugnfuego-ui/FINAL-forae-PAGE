@@ -333,18 +333,30 @@
         const closeProjectsBtn = document.getElementById('close-projects-btn');
         const projectsContent = document.getElementById('projects-content');
 
+        const mainGallery = document.getElementById('main-gallery');
+        // Зөвхөн reference, news, projects хэсгүүд нээгдэхэд нүүр хуудасны зургийг нуух
+        // ("forae architects" / bio хэсэгт нөлөөлөхгүй)
+        const galleryHidingSections = [refContent, newsContent, projectsContent];
+
+        function updateGalleryVisibility() {
+            const shouldHide = galleryHidingSections.some(s => s.classList.contains('active'));
+            mainGallery.style.display = shouldHide ? 'none' : 'flex';
+        }
+
         function openSection(section) {
             section.classList.add('active');
             // Бодит контентын өндрийг тооцоод max-height-д онооно ⇒ ямар ч урттай текст таслагдахгүй
             requestAnimationFrame(() => {
                 section.style.maxHeight = section.scrollHeight + 'px';
             });
+            updateGalleryVisibility();
         }
 
         function closeSection(section) {
             // Одоогийн нээлттэй өндрөөс нь 0 рүү жигд хаана (transition нь CSS дээр аль хэдийн байгаа)
             section.style.maxHeight = '0px';
             section.classList.remove('active');
+            updateGalleryVisibility();
         }
 
         function recalcSectionHeight(section) {
@@ -403,6 +415,12 @@
                     if (!isOpen) { item.classList.add('open'); const icon = item.querySelector('.toggle-icon'); if(icon) icon.textContent = '−'; }
                     // Дотоод project дэлгэрэнгүй нээгдэх/хаагдахад гадна Projects хэсгийн өндрийг дахин тооцоолно
                     requestAnimationFrame(() => recalcSectionHeight(projectsContent));
+                    // Нээгдсэн төслийг хуудасны голд харагдахаар гүйлгэнэ
+                    if (!isOpen) {
+                        setTimeout(() => {
+                            item.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }, 200);
+                    }
                 }
             }
         });
