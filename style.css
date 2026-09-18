@@ -18,7 +18,7 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    padding: 30px 40px;
+    padding: 0 40px;
     touch-action: pan-y;
 }
 
@@ -42,13 +42,19 @@ img {
    Дээд талын цэсүүд
    ========================================================================== */
 header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
     font-size: 18px;       
     font-weight: bold;     
     line-height: 1.5;
-    padding-bottom: 20px;
+    padding: 30px 40px 20px 40px;
+    background: #ffffff;
+    z-index: 100;
 }
 
 .header-left {
@@ -72,15 +78,18 @@ header {
    Хөл хэсэг (4 булан)
    ========================================================================== */
 footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
     display: flex;
     justify-content: space-between;
     font-size: 18px;       
     font-weight: bold;     
     line-height: 1.5;
-    padding-top: 20px;
+    padding: 20px 40px 30px 40px;
     background: #ffffff;
-    position: relative;
-    z-index: 10;
+    z-index: 100;
 }
 
 .bottom-left {
@@ -523,13 +532,15 @@ footer {
    ========================================================================== */
 @media (max-width: 768px) {
     body {
-        padding: 20px;
+        padding: 0 20px;
     }
     header, footer {
         flex-direction: column;
         align-items: center;
         text-align: center;
         gap: 10px;
+        padding-left: 20px;
+        padding-right: 20px;
     }
     .bottom-right {
         text-align: center;
