@@ -390,31 +390,31 @@
 
         newsBtn.onclick = function() {
             const isOpen = newsContent.classList.contains('active'); closeAllSections();
-            if (!isOpen) { openSection(newsContent); setTimeout(() => { newsContent.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 150); }
-            else window.scrollTo({ top: 0, behavior: 'smooth' });
+            if (!isOpen) { openSection(newsContent); newsContent.scrollIntoView({ behavior: 'auto', block: 'start' }); }
+            else window.scrollTo({ top: 0, behavior: 'auto' });
         }
-        closeNewsBtn.onclick = function(e) { e.stopPropagation(); closeSection(newsContent); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+        closeNewsBtn.onclick = function(e) { e.stopPropagation(); closeSection(newsContent); window.scrollTo({ top: 0, behavior: 'auto' }); }
 
         bioBtn.onclick = function() {
             const isOpen = bioContent.classList.contains('active'); closeAllSections();
-            if (!isOpen) { openSection(bioContent); setTimeout(() => { bioContent.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 150); }
-            else window.scrollTo({ top: 0, behavior: 'smooth' });
+            if (!isOpen) { openSection(bioContent); bioContent.scrollIntoView({ behavior: 'auto', block: 'start' }); }
+            else window.scrollTo({ top: 0, behavior: 'auto' });
         }
-        closeBioBtn.onclick = function(e) { e.stopPropagation(); closeSection(bioContent); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+        closeBioBtn.onclick = function(e) { e.stopPropagation(); closeSection(bioContent); window.scrollTo({ top: 0, behavior: 'auto' }); }
 
         refBtn.onclick = function() {
             const isOpen = refContent.classList.contains('active'); closeAllSections();
-            if (!isOpen) { openSection(refContent); setTimeout(() => { refContent.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 150); }
-            else window.scrollTo({ top: 0, behavior: 'smooth' });
+            if (!isOpen) { openSection(refContent); refContent.scrollIntoView({ behavior: 'auto', block: 'start' }); }
+            else window.scrollTo({ top: 0, behavior: 'auto' });
         }
-        closeXBtn.onclick = function(e) { e.stopPropagation(); closeSection(refContent); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+        closeXBtn.onclick = function(e) { e.stopPropagation(); closeSection(refContent); window.scrollTo({ top: 0, behavior: 'auto' }); }
 
         projectsBtn.onclick = function() {
             const isOpen = projectsContent.classList.contains('active'); closeAllSections();
-            if (!isOpen) { openSection(projectsContent); setTimeout(() => { projectsContent.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 150); }
-            else window.scrollTo({ top: 0, behavior: 'smooth' });
+            if (!isOpen) { openSection(projectsContent); projectsContent.scrollIntoView({ behavior: 'auto', block: 'start' }); }
+            else window.scrollTo({ top: 0, behavior: 'auto' });
         }
-        closeProjectsBtn.onclick = function(e) { e.stopPropagation(); closeSection(projectsContent); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+        closeProjectsBtn.onclick = function(e) { e.stopPropagation(); closeSection(projectsContent); window.scrollTo({ top: 0, behavior: 'auto' }); }
 
         // Акордион
         const projectItems = document.querySelectorAll('.project-item');
