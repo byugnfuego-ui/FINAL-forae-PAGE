@@ -601,4 +601,7 @@ footer {
     .bottom-right {
         text-align: center;
     }
+   .bio-text p:nth-child(2) {
+    margin-top: 24px;
+}
 }
