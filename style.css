@@ -607,13 +607,16 @@ footer {
 }
 
 /* ==========================================================================
-   Project нэр дээр курсор аваачихад хажууд гарч ирэх зураг (Hover preview)
+   Project нэр дээр курсор аваачихад нэрний яг доор гарч ирэх зураг (Hover preview)
    ========================================================================== */
+.project-item {
+    position: relative;
+}
+
 .hover-preview {
-    position: fixed;
-    top: 50%;
-    right: 40px;
-    transform: translateY(-50%);
+    position: absolute;
+    left: 0;
+    top: calc(100% - 8px);   /* нэрний доор шууд */
     z-index: 50;
     pointer-events: none;
     opacity: 0;
@@ -626,8 +629,8 @@ footer {
 
 .hover-preview img {
     display: block;
-    max-width: 38vw;
-    max-height: 60vh;
+    max-width: min(420px, 100%);
+    max-height: 300px;
     width: auto;
     height: auto;
     object-fit: contain;

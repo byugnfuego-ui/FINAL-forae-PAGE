@@ -706,6 +706,7 @@ document.onkeydown = function(e) {
             bar.addEventListener('mouseenter', () => {
                 if (item.classList.contains('open')) return;
                 active = item;
+                item.appendChild(preview);   // нэрний доор байрлуулна
                 getFirstImage(folder).then(url => {
                     if (active !== item || !url) return;
                     previewImg.onload = () => { if (active === item) preview.classList.add('visible'); };
