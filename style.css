@@ -605,3 +605,35 @@ footer {
     margin-top: 24px;
 }
 }
+
+/* ==========================================================================
+   Project нэр дээр курсор аваачихад хажууд гарч ирэх зураг (Hover preview)
+   ========================================================================== */
+.hover-preview {
+    position: fixed;
+    top: 50%;
+    right: 40px;
+    transform: translateY(-50%);
+    z-index: 50;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+}
+
+.hover-preview.visible {
+    opacity: 1;
+}
+
+.hover-preview img {
+    display: block;
+    max-width: 38vw;
+    max-height: 60vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+}
+
+/* Утас, таблет (hover байхгүй төхөөрөмж) дээр ажиллахгүй */
+@media (hover: none), (max-width: 768px) {
+    .hover-preview { display: none; }
+}

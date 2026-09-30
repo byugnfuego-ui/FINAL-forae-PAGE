@@ -674,5 +674,49 @@ document.onkeydown = function(e) {
 }
 
     </script>
+
+    <!-- Project нэр дээр курсор аваачихад зураг гарч ирэх -->
+    <div class="hover-preview" id="hover-preview"><img alt="" ondragstart="return false;"></div>
+    <script>
+    (function () {
+        if (!window.matchMedia('(hover: hover)').matches) return;
+
+        const preview = document.getElementById('hover-preview');
+        const previewImg = preview.querySelector('img');
+        const cache = {};          // folder -> Promise(url | null)
+        let active = null;         // одоо hover хийж буй төсөл
+
+        function getFirstImage(folder) {
+            if (!cache[folder]) cache[folder] = findImageAtIndex(folder, 1);
+            return cache[folder];
+        }
+
+        function hide() {
+            active = null;
+            preview.classList.remove('visible');
+        }
+
+        document.querySelectorAll('.project-item').forEach(item => {
+            const bar = item.querySelector('.project-title-bar');
+            const holder = item.querySelector('.project-images[data-image-folder]');
+            if (!bar || !holder) return;
+            const folder = holder.getAttribute('data-image-folder');
+            getFirstImage(folder); // урьдчилан ачаална
+
+            bar.addEventListener('mouseenter', () => {
+                if (item.classList.contains('open')) return;
+                active = item;
+                getFirstImage(folder).then(url => {
+                    if (active !== item || !url) return;
+                    previewImg.onload = () => { if (active === item) preview.classList.add('visible'); };
+                    previewImg.src = url;
+                    if (previewImg.complete) previewImg.onload();
+                });
+            });
+            bar.addEventListener('mouseleave', hide);
+            bar.addEventListener('click', hide);
+        });
+    })();
+    </script>
 </body>
 </html>
