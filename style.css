@@ -226,15 +226,55 @@ footer {
 }
 
 .project-title-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 0;
+    display: grid;
+    grid-template-columns: 50px minmax(0, 3fr) minmax(0, 1.6fr) 110px 100px minmax(0, 1.3fr) 24px;
+    align-items: baseline;
+    padding: 16px 0;
     cursor: pointer;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: bold;
-    letter-spacing: 0.5px;
-    gap: 12px;
+    letter-spacing: 0.3px;
+    gap: 16px;
+}
+
+.projects-head {
+    display: grid;
+    grid-template-columns: 50px minmax(0, 3fr) minmax(0, 1.6fr) 110px 100px minmax(0, 1.3fr) 24px;
+    gap: 16px;
+    padding: 0 0 12px 0;
+    font-size: 13px;
+    font-weight: bold;
+    color: #888888;
+    border-bottom: 1px solid #000000;
+}
+
+.projects-container.has-open .projects-head { display: none; }
+
+.project-col {
+    font-weight: normal;
+    word-break: break-word;
+}
+
+.project-item {
+    border-bottom: 1px solid #e6e6e6;
+    transition: opacity 0.2s ease;
+}
+
+/* Hover хийхэд бусад мөрүүд бүдгэрнэ */
+.projects-container:not(.has-open):hover .project-item:not(:hover) {
+    opacity: 0.3;
+}
+
+.toggle-icon {
+    text-align: right;
+}
+
+@media (max-width: 768px) {
+    .projects-head { display: none; }
+    .project-title-bar {
+        grid-template-columns: 36px minmax(0, 1fr) 24px;
+    }
+    .project-col { display: none; }
 }
 
 .project-name {
@@ -243,7 +283,7 @@ footer {
 }
 
 .project-title-bar:hover .project-name {
-    text-decoration: underline;
+    text-decoration: none;
 }
 
 .toggle-icon {
@@ -614,9 +654,9 @@ footer {
 }
 
 .hover-preview {
-    position: absolute;
+    position: fixed;
     left: 0;
-    top: calc(100% - 8px);   /* нэрний доор шууд */
+    top: 0;
     z-index: 50;
     pointer-events: none;
     opacity: 0;
@@ -629,7 +669,7 @@ footer {
 
 .hover-preview img {
     display: block;
-    max-width: min(420px, 100%);
+    max-width: min(380px, 40vw);
     max-height: 300px;
     width: auto;
     height: auto;
