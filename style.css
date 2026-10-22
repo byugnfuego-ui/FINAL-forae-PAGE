@@ -274,7 +274,8 @@ footer {
     .project-title-bar {
         grid-template-columns: 36px minmax(0, 1fr) 24px;
     }
-    .project-col { display: none; }
+    .project-col:nth-child(n+3):nth-child(-n+6) { display: none; }
+    .project-title-bar { gap: 10px; padding: 14px 0; }
 }
 
 .project-name {
