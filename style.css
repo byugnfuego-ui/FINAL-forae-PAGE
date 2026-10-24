@@ -226,56 +226,15 @@ footer {
 }
 
 .project-title-bar {
-    display: grid;
-    grid-template-columns: 50px minmax(0, 3fr) minmax(0, 1.6fr) 110px 100px minmax(0, 1.3fr) 24px;
-    align-items: baseline;
-    padding: 16px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: bold;
-    letter-spacing: 0.3px;
-    gap: 16px;
-}
-
-.projects-head {
-    display: grid;
-    grid-template-columns: 50px minmax(0, 3fr) minmax(0, 1.6fr) 110px 100px minmax(0, 1.3fr) 24px;
-    gap: 16px;
-    padding: 0 0 12px 0;
-    font-size: 13px;
-    font-weight: bold;
-    color: #888888;
-    border-bottom: 1px solid #000000;
-}
-
-.projects-container.has-open .projects-head { display: none; }
-
-.project-col {
-    font-weight: normal;
-    word-break: break-word;
-}
-
-.project-item {
-    border-bottom: 1px solid #e6e6e6;
-    transition: opacity 0.2s ease;
-}
-
-/* Hover хийхэд бусад мөрүүд бүдгэрнэ */
-.projects-container:not(.has-open):hover .project-item:not(:hover) {
-    opacity: 0.3;
-}
-
-.toggle-icon {
-    text-align: right;
-}
-
-@media (max-width: 768px) {
-    .projects-head { display: none; }
-    .project-title-bar {
-        grid-template-columns: 36px minmax(0, 1fr) 24px;
-    }
-    .project-col:nth-child(n+3):nth-child(-n+6) { display: none; }
-    .project-title-bar { gap: 10px; padding: 14px 0; }
+    letter-spacing: 0.5px;
+    gap: 12px;
 }
 
 .project-name {
@@ -284,7 +243,7 @@ footer {
 }
 
 .project-title-bar:hover .project-name {
-    text-decoration: none;
+    text-decoration: underline;
 }
 
 .toggle-icon {
@@ -655,9 +614,9 @@ footer {
 }
 
 .hover-preview {
-    position: fixed;
+    position: absolute;
     left: 0;
-    top: 0;
+    top: calc(100% - 8px);   /* нэрний доор шууд */
     z-index: 50;
     pointer-events: none;
     opacity: 0;
@@ -670,7 +629,7 @@ footer {
 
 .hover-preview img {
     display: block;
-    max-width: min(380px, 40vw);
+    max-width: min(420px, 100%);
     max-height: 300px;
     width: auto;
     height: auto;
@@ -680,55 +639,4 @@ footer {
 /* Утас, таблет (hover байхгүй төхөөрөмж) дээр ажиллахгүй */
 @media (hover: none), (max-width: 768px) {
     .hover-preview { display: none; }
-}
-
-
-/* ==========================================================================
-   Нүүр хуудасны тасралтгүй урсдаг зургууд (Marquee)
-   ========================================================================== */
-.gallery { overflow: hidden; }
-
-.marquee {
-    width: 100vw;
-    margin-left: calc(50% - 50vw);
-    overflow: hidden;
-}
-
-.marquee-track {
-    display: flex;
-    width: max-content;
-}
-
-.marquee-track.running {
-    animation: marquee-scroll linear infinite;
-}
-
-.marquee-set {
-    display: flex;
-    align-items: center;
-    flex-shrink: 0;
-}
-
-.marquee-set img {
-    height: 550px;
-    max-height: 60vh;
-    width: auto;
-    max-width: none;
-    margin-right: 60px;
-    flex-shrink: 0;
-    object-fit: contain;
-    display: block;
-}
-
-@keyframes marquee-scroll {
-    from { transform: translateX(0); }
-    to   { transform: translateX(-50%); }
-}
-
-@media (max-width: 768px) {
-    .marquee-set img { margin-right: 30px; max-height: 50vh; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .marquee-track.running { animation-duration: 600s !important; }
 }
