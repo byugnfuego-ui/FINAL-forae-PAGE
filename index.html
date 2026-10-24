@@ -32,8 +32,13 @@
 
     <!-- Голын цагаан дэвсгэртэй ганц зураг -->
     <main class="gallery" id="main-gallery">
-        <div class="image-container">
-            <img src="images/image_PzhztE.png" alt="Landscape Painting" ondragstart="return false;">
+        <!-- images/slides/ folder доторх 1.jpg, 2.jpg, 3.jpg... зурагнууд ар араасаа урсана -->
+        <div class="marquee" id="marquee">
+            <div class="marquee-track" id="marquee-track">
+                <div class="marquee-set" id="marquee-set">
+                    <img src="images/image_PzhztE.png" alt="Landscape Painting" ondragstart="return false;">
+                </div>
+            </div>
         </div>
     </main>
 
@@ -41,7 +46,7 @@
     <section id="projects-content" class="reference-section">
         <div class="content-wrapper">
             <div class="reference-header">
-                <h2> </h2>
+                <h2>Projects</h2>
                 <span id="close-projects-btn" class="close-x">&times;</span>
             </div>
 
@@ -710,6 +715,38 @@ document.onkeydown = function(e) {
             bar.insertBefore(c, icon);
         });
     });
+    </script>
+
+    <script>
+    // Нүүр хуудасны зургууд: images/slides/1.jpg, 2.jpg ... олдсон бүх зургийг тасралтгүй хажуугаар урсгана
+    (async function () {
+        const track = document.getElementById('marquee-track');
+        const set = document.getElementById('marquee-set');
+        const MAX = 60;
+        const urls = [];
+        for (let i = 1; i <= MAX; i++) {
+            const u = await findImageAtIndex('images/slides', i);
+            if (!u) break;
+            urls.push(u);
+        }
+        if (urls.length > 0) {
+            set.innerHTML = urls.map((u, i) =>
+                `<img src="${u}" alt="Slide ${i + 1}" ondragstart="return false;">`).join('');
+        }
+        const imgs = Array.from(set.querySelectorAll('img'));
+        await Promise.all(imgs.map(im => im.complete ? 1 : new Promise(r => { im.onload = im.onerror = r; })));
+
+        // Зураг цөөн бол дэлгэцийг дүүргэтэл давтана
+        const need = Math.max(1, Math.ceil(window.innerWidth * 2 / Math.max(set.scrollWidth, 1)));
+        const base = set.innerHTML;
+        for (let k = 1; k < need; k++) set.insertAdjacentHTML('beforeend', base);
+
+        // Тасралтгүй гогцоо болгохын тулд багцыг хоёр дахин хуулна
+        track.appendChild(set.cloneNode(true)).removeAttribute('id');
+        const speed = 60; // px/сек
+        track.style.animationDuration = (set.scrollWidth / speed) + 's';
+        track.classList.add('running');
+    })();
     </script>
 
     <!-- Project нэр дээр курсор аваачихад зураг гарч ирэх -->

@@ -681,3 +681,54 @@ footer {
 @media (hover: none), (max-width: 768px) {
     .hover-preview { display: none; }
 }
+
+
+/* ==========================================================================
+   Нүүр хуудасны тасралтгүй урсдаг зургууд (Marquee)
+   ========================================================================== */
+.gallery { overflow: hidden; }
+
+.marquee {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    overflow: hidden;
+}
+
+.marquee-track {
+    display: flex;
+    width: max-content;
+}
+
+.marquee-track.running {
+    animation: marquee-scroll linear infinite;
+}
+
+.marquee-set {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.marquee-set img {
+    height: 550px;
+    max-height: 60vh;
+    width: auto;
+    max-width: none;
+    margin-right: 60px;
+    flex-shrink: 0;
+    object-fit: contain;
+    display: block;
+}
+
+@keyframes marquee-scroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+}
+
+@media (max-width: 768px) {
+    .marquee-set img { margin-right: 30px; max-height: 50vh; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .marquee-track.running { animation-duration: 600s !important; }
+}
