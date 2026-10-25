@@ -665,16 +665,23 @@ footer {
     body {
         padding: 0 20px;
     }
+    /* Утсан дээр: forae architects зүүн, news/projects баруун; reference зүүн, info баруун */
     header, footer {
-        flex-direction: column;
+        flex-direction: row;
+        justify-content: space-between;
         align-items: center;
-        text-align: center;
-        gap: 10px;
+        text-align: left;
+        gap: 12px;
         padding-left: 20px;
         padding-right: 20px;
+        font-size: 14px;
     }
+    header { padding-top: 20px; padding-bottom: 14px; }
+    footer { align-items: flex-end; padding-top: 14px; padding-bottom: 20px; }
+    .top-right { gap: 16px; }
     .bottom-right {
-        text-align: center;
+        text-align: right;
+        align-items: flex-end;
     }
    .bio-text p:nth-child(2) {
     margin-top: 24px;
@@ -810,4 +817,4 @@ footer {
 
 /* "forae architects" цонх доторх гар бичмэл (for architecture) */
 .bio-handwriting { margin: 18px 0 10px; }
-.bio-handwriting img { width: 370px; max-width: 70%; height: auto; display: block; }
+.bio-handwriting img { width: 170px; max-width: 70%; height: auto; display: block; }
