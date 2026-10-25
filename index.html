@@ -801,6 +801,8 @@ document.onkeydown = function(e) {
                 const status = cols[4] ? cols[4].textContent : '';
                 const a = document.createElement('div');
                 a.className = 'home-item';
+                const holder = item.querySelector('.project-images[data-image-folder]');
+                if (holder) a.dataset.folder = holder.getAttribute('data-image-folder');
                 a.innerHTML = '<div class="home-num"></div><div class="home-title"></div><div class="home-meta"></div>';
                 a.querySelector('.home-num').textContent = n;
                 a.querySelector('.home-title').textContent = title;
@@ -865,6 +867,31 @@ document.onkeydown = function(e) {
             });
             bar.addEventListener('mouseleave', hide);
             bar.addEventListener('click', hide);
+        });
+
+        // Нүүр хуудасны жагсаалтын төсөл дээр курсор аваачихад эхний зураг гарна
+        document.querySelectorAll('.home-item[data-folder]').forEach(el => {
+            const folder = el.dataset.folder;
+            getFirstImage(folder);
+            el.addEventListener('mouseenter', () => {
+                active = el;
+                document.body.appendChild(preview);
+                getFirstImage(folder).then(url => {
+                    if (active !== el || !url) return;
+                    previewImg.onload = () => { if (active === el) preview.classList.add('visible'); };
+                    previewImg.src = url;
+                    if (previewImg.complete) previewImg.onload();
+                });
+            });
+            el.addEventListener('mousemove', e => {
+                const w = previewImg.offsetWidth || 300, hgt = previewImg.offsetHeight || 200;
+                let x = e.clientX + 24, y = e.clientY - hgt / 2;
+                if (x + w > window.innerWidth - 10) x = e.clientX - w - 24;
+                y = Math.max(10, Math.min(y, window.innerHeight - hgt - 10));
+                preview.style.transform = 'translate(' + x + 'px,' + y + 'px)';
+            });
+            el.addEventListener('mouseleave', hide);
+            el.addEventListener('click', hide);
         });
     })();
     </script>
