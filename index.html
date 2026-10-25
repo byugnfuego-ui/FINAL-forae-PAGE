@@ -476,12 +476,13 @@
         }
         closeXBtn.onclick = function(e) { e.stopPropagation(); closeSection(refContent); window.scrollTo({ top: 0, behavior: 'auto' }); }
 
-        projectsBtn.onclick = function() {
-            const isOpen = projectsContent.classList.contains('active'); closeAllSections();
-            if (!isOpen) { openSection(projectsContent); projectsContent.scrollIntoView({ behavior: 'auto', block: 'start' }); }
-            else window.scrollTo({ top: 0, behavior: 'auto' });
+        // "projects" дарахад нүүр хуудасны төслүүдийн жагсаалт руу очино
+        function goHome() {
+            closeAllSections();
+            window.scrollTo({ top: 0, behavior: 'auto' });
         }
-        closeProjectsBtn.onclick = function(e) { e.stopPropagation(); closeSection(projectsContent); window.scrollTo({ top: 0, behavior: 'auto' }); }
+        projectsBtn.onclick = goHome;
+        closeProjectsBtn.onclick = function(e) { e.stopPropagation(); goHome(); }
 
         // Акордион
         const projectItems = document.querySelectorAll('.project-item');
@@ -500,6 +501,7 @@
             if(titleBar) {
                 titleBar.onclick = function() {
                     const isOpen = item.classList.contains('open');
+                    if (isOpen) { goHome(); return; }
                     projectItems.forEach(i => { i.classList.remove('open'); const icon = i.querySelector('.toggle-icon'); if(icon) icon.textContent = '+'; });
                     if (!isOpen) {
                         item.classList.add('open');
@@ -520,10 +522,7 @@
             }
         });
 
-        backToProjectsBtn.onclick = function() {
-            closeProjectDetail();
-            projectsContent.scrollIntoView({ behavior: 'auto', block: 'start' });
-        }
+        backToProjectsBtn.onclick = function() { goHome(); }
 
         // Урт тайлбартай төслүүдэд "дэлгэрэнгүй / хураах" товч нэмнэ,
         // ингэснээр анх дэлгэц дээр товч, товчилсон текст л харагдана

@@ -801,3 +801,8 @@ footer {
 /* "forae architects" цонх доторх зураг */
 .bio-image { margin-top: 28px; }
 .bio-image img { width: 100%; height: auto; display: block; }
+
+
+/* Дэлгэрэнгүйд давхардаж байсан мэдээлэл (location, year, use, scale, status) нуугдана.
+   Эдгээр нь мөрийн толгойд харагддаг; HTML дотор хэвээр үлдэнэ (жагсаалт эндээс уншдаг). */
+.project-meta { display: none; }
