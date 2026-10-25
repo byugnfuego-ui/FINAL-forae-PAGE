@@ -34,9 +34,8 @@
 
     <!-- Голын цагаан дэвсгэртэй ганц зураг -->
     <main class="gallery" id="main-gallery">
-        <div class="image-container">
-            <img src="images/image_PzhztE.png" alt="Landscape Painting" ondragstart="return false;">
-        </div>
+        <!-- Төслүүдийн жагсаалтыг доорх скрипт Projects хэсгээс автоматаар бүтээнэ -->
+        <div class="home-index" id="home-index"></div>
     </main>
 
     <!-- PROJECTS ХЭСЭГ -->
@@ -270,6 +269,9 @@
     <p class="author" style="margin-top: 32px;">
   Батхуяг Ууганбаяр / Мэргэшсэн Архитектор-БА
 </p>
+                <div class="bio-image">
+                    <img src="images/image_PzhztE.png" alt="Landscape Painting" ondragstart="return false;">
+                </div>
             </div>
         </div>
     </section>
@@ -770,6 +772,49 @@ document.onkeydown = function(e) {
             bar.insertBefore(c, icon);
         });
     });
+    </script>
+
+        <script>
+    // Нүүр хуудасны төслүүдийн жагсаалт: 4 багана. Тоонууд нь project-ийн дарааллын индекс (1-ээс эхэлнэ).
+    // Багана тус бүрт аль төслүүд орохыг эндээс өөрчилнө.
+    (function () {
+        const COLUMNS = [
+            [1, 3],       // 1-р багана: Чойжин, МТҮП
+            [2, 6, 7],    // 2-р багана: Хаус сапин, Гантулга, Сайнбилэг
+            [4],          // 3-р багана: Одон резорт
+            [5]           // 4-р багана: Breaktime
+        ];
+        const root = document.getElementById('home-index');
+        const items = Array.from(document.querySelectorAll('.project-item'));
+        let n = 0;
+        COLUMNS.forEach(col => {
+            const colEl = document.createElement('div');
+            colEl.className = 'home-col';
+            col.forEach(idx => {
+                const item = items[idx - 1];
+                if (!item) return;
+                n++;
+                const nameEl = item.querySelector('.project-name');
+                const title = (nameEl.firstChild ? nameEl.firstChild.textContent : nameEl.textContent).trim();
+                const cols = item.querySelectorAll('.project-col');
+                const year = cols[2] ? cols[2].textContent : '';
+                const status = cols[4] ? cols[4].textContent : '';
+                const a = document.createElement('div');
+                a.className = 'home-item';
+                a.innerHTML = '<div class="home-num"></div><div class="home-title"></div><div class="home-meta"></div>';
+                a.querySelector('.home-num').textContent = n;
+                a.querySelector('.home-title').textContent = title;
+                a.querySelector('.home-meta').textContent = [year, status].filter(Boolean).join(' · ');
+                a.addEventListener('click', function () {
+                    closeAllSections();
+                    openSection(projectsContent);
+                    item.querySelector('.project-title-bar').click();
+                });
+                colEl.appendChild(a);
+            });
+            root.appendChild(colEl);
+        });
+    })();
     </script>
 
     <!-- Project нэр дээр курсор аваачихад зураг гарч ирэх -->

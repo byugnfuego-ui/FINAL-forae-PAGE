@@ -751,3 +751,53 @@ footer {
 @media (max-width: 768px) {
     #bio-content { left: 20px; width: calc(100vw - 40px); }
 }
+
+
+/* ==========================================================================
+   Нүүр хуудасны төслүүдийн жагсаалт (4 багана)
+   ========================================================================== */
+#main-gallery {
+    align-items: center;
+    justify-content: stretch;
+}
+
+.home-index {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    column-gap: 28px;
+    align-items: start;
+    padding-left: 24%;
+}
+
+.home-col {
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+}
+
+.home-item {
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 1.5;
+    transition: opacity 0.15s ease;
+}
+
+.home-num { color: var(--color-text); }
+.home-title { margin-top: 2px; word-break: break-word; overflow-wrap: break-word; }
+.home-meta { color: var(--color-muted); margin-top: 2px; }
+
+/* Нэг төсөл дээр аваачихад бусад нь бүдгэрнэ */
+.home-index:hover .home-item:not(:hover) { opacity: 0.3; }
+
+@media (max-width: 768px) {
+    .home-index {
+        grid-template-columns: 1fr;
+        padding-left: 0;
+        row-gap: 26px;
+    }
+}
+
+/* "forae architects" цонх доторх зураг */
+.bio-image { margin-top: 28px; }
+.bio-image img { width: 100%; height: auto; display: block; }
