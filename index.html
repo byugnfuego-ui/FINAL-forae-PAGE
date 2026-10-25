@@ -372,6 +372,7 @@
         const footerEl = document.querySelector('footer');
         function adjustFixedSpacing() {
             document.body.style.paddingTop = headerEl.offsetHeight + 'px';
+            document.documentElement.style.setProperty('--header-h', headerEl.offsetHeight + 'px');
             document.body.style.paddingBottom = footerEl.offsetHeight + 'px';
         }
         adjustFixedSpacing();
@@ -448,12 +449,21 @@
         }
         closeNewsBtn.onclick = function(e) { e.stopPropagation(); closeSection(newsContent); window.scrollTo({ top: 0, behavior: 'auto' }); }
 
-        bioBtn.onclick = function() {
-            const isOpen = bioContent.classList.contains('active'); closeAllSections();
-            if (!isOpen) { openSection(bioContent); bioContent.scrollIntoView({ behavior: 'auto', block: 'start' }); }
-            else window.scrollTo({ top: 0, behavior: 'auto' });
+        // "forae architects" дээр дарахад зүүн дээд буланд жижиг цонх шиг гарч ирээд, дахин дарахад алга болно
+        bioBtn.onclick = function(e) {
+            e.stopPropagation();
+            const isOpen = bioContent.classList.contains('active');
+            closeAllSections();
+            if (!isOpen) openSection(bioContent);
         }
-        closeBioBtn.onclick = function(e) { e.stopPropagation(); closeSection(bioContent); window.scrollTo({ top: 0, behavior: 'auto' }); }
+        closeBioBtn.onclick = function(e) { e.stopPropagation(); closeSection(bioContent); }
+        // Цонхны гадна дарвал эсвэл Esc дарвал хаагдана
+        document.addEventListener('click', function(e) {
+            if (bioContent.classList.contains('active') && !bioContent.contains(e.target)) closeSection(bioContent);
+        });
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && bioContent.classList.contains('active')) closeSection(bioContent);
+        });
 
         refBtn.onclick = function() {
             const isOpen = refContent.classList.contains('active'); closeAllSections();

@@ -715,3 +715,39 @@ footer {
 @media (hover: none), (max-width: 768px) {
     .hover-preview { display: none; }
 }
+
+
+/* ==========================================================================
+   "forae architects" — зүүн дээд буланд гарч ирдэг жижиг цонх (popup)
+   ========================================================================== */
+#bio-content {
+    display: none;
+    position: fixed;
+    top: calc(var(--header-h, 80px) + 8px);
+    left: 40px;
+    width: 360px;
+    max-width: calc(100vw - 40px);
+    max-height: calc(100vh - var(--header-h, 80px) - 100px) !important;
+    overflow-y: auto;
+    background-color: var(--color-bg);
+    z-index: 90;
+    padding: 0 !important;
+}
+
+#bio-content.active {
+    display: block;
+    animation: bio-fade 0.2s ease;
+}
+
+#bio-content .content-wrapper { padding: 0; }
+
+#bio-content .reference-header { margin-bottom: 18px; }
+
+@keyframes bio-fade {
+    from { opacity: 0; transform: translateY(-4px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+    #bio-content { left: 20px; width: calc(100vw - 40px); }
+}
