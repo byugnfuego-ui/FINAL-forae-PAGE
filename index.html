@@ -265,13 +265,12 @@
             </div>
             <div class="bio-text">
                 
-                <p>Архитектур нь эхлээд дуусах хүртлээ янз бүрийн нөхцөл байдал, зорилго, шийдвэр, шунал, баяр хөөр, уйтгар гуниг гэх мэт хүн төрөлхтний тоо тоолшгүй арвин мэдрэмжүүдийг тээсээр бий болдог, тиймээс энэ бүхнийг тээх мөн чанар, суурь байх ёстой. Жинхэнэ Архитектур мөн Архитектурын төлөө (for architecture)</p>
+                <p>Архитектур нь эхлээд дуусах хүртлээ янз бүрийн нөхцөл байдал, зорилго, шийдвэр, шунал, баяр хөөр, уйтгар гуниг гэх мэт хүн төрөлхтний тоо тоолшгүй арвин мэдрэмжүүдийг тээсээр бий болдог, тиймээс энэ бүхнийг тээх мөн чанар, суурь байх ёстой.</p>
+                <div class="bio-handwriting"><img src="images/for-architecture.png" alt="for architecture" ondragstart="return false;"></div>
+                <p>Жинхэнэ Архитектур мөн Архитектурын төлөө (for architecture)</p>
     <p class="author" style="margin-top: 32px;">
   Батхуяг Ууганбаяр / Мэргэшсэн Архитектор-БА
 </p>
-                <div class="bio-image">
-                    <img src="images/image_PzhztE.png" alt="Landscape Painting" ondragstart="return false;">
-                </div>
             </div>
         </div>
     </section>
@@ -407,6 +406,8 @@
         function updateGalleryVisibility() {
             const shouldHide = galleryHidingSections.some(s => s.classList.contains('active'));
             mainGallery.style.display = shouldHide ? 'none' : 'flex';
+            // "forae architects" цонх нээлттэй үед нүүрний жагсаалтыг түр нууна (давхцахгүйн тулд)
+            mainGallery.style.visibility = bioContent.classList.contains('active') ? 'hidden' : 'visible';
         }
 
         function openSection(section) {
