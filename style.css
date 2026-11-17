@@ -306,79 +306,65 @@ header {
 
 .project-details {
     display: block;
-    padding: 10px var(--pad-x) 40px var(--pad-x);
-    max-width: 1000px;
+    padding: 24px 0 40px 0;
 }
 
-.projects-container > .project-item > .project-details { padding-left: 0; padding-right: 0; }
+/* Дээд хэсэг: зүүн талд мэдээлэл, баруун талд нэр + тайлбар (Meili-ийн төслийн хуудас шиг) */
+.pd-top {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 24px;
+    padding-bottom: 48px;
+}
+.pd-main { padding-right: 12%; min-width: 0; }
+.pd-side { min-width: 0; }
 
 .project-detail-title {
-    font-size: 15px;
-    line-height: 1.5;
+    font-size: 20px;
+    line-height: 1.25;
+    letter-spacing: 0.02em;
     text-transform: uppercase;
-    margin-bottom: 14px;
+    margin-bottom: 28px;
     word-break: break-word;
 }
 
-.project-meta {
+.project-meta,
+.project-credits {
     font-size: 13px;
-    line-height: 1.9;
+    line-height: 1.8;
     margin-bottom: 18px;
-    color: var(--color-secondary);
 }
 
 .project-meta strong,
 .project-credits strong {
     display: inline-block;
-    width: 90px;
-    text-transform: lowercase;
-}
-
-.project-credits {
-    font-size: 14px;
-    line-height: 2;
-    margin-bottom: 25px;
+    width: 120px;
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--color-muted);
 }
 
 .project-description {
     font-size: 14px;
-    line-height: 1.8;
-    margin-bottom: 10px;
-    text-align: justify;
+    line-height: 1.6;
+    text-align: left;
     word-break: break-word;
     overflow-wrap: break-word;
 }
+.project-description p { display: block; white-space: pre-line; }
 
-.project-description p { display: block; }
-
-.project-description.clamped:not(.expanded) p {
-    display: -webkit-box;
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+/* Нэг төсөл нээлттэй үед агуулга зүүн захаас (цэстэй адил) эхэлнэ, зургийн эгнээ бүтэн өргөнтэй */
+#projects-content:has(.project-item.open) .content-wrapper > *:not(.reference-header) {
+    padding-left: var(--nav-pad-x);
+    padding-right: var(--nav-pad-x);
+}
+.project-images {
+    margin-left: calc(-1 * var(--nav-pad-x));
+    margin-right: calc(-1 * var(--nav-pad-x));
+    cursor: zoom-in;
 }
 
-.description-toggle {
-    display: inline-block;
-    font-size: 13px;
-    font-weight: normal;
-    cursor: pointer;
-    margin-bottom: 25px;
-}
-
-.description-toggle:hover { text-decoration: underline; }
-
-.project-images img {
-    width: auto;
-    max-width: 100%;
-    max-height: 280px;
-    object-fit: contain;
-    display: block;
-    margin: 20px auto 0 auto;
-}
-
-/* Project зургийг дарж болохыг харуулах курсор */
-.project-images { cursor: zoom-in; }
 
 /* ==========================================================================
    Бусад хэсгүүд (news, bio, reference)
@@ -478,75 +464,6 @@ header {
     object-fit: contain;
     display: block;
 }
-
-/* ==========================================================================
-   Минималист Зургийн Слайдер (Carousel)
-   ========================================================================== */
-.slider-container {
-    position: relative;
-    width: 100%;
-    max-height: 280px;
-    margin-top: 20px;
-    overflow: hidden;
-}
-
-.slider-slides {
-    position: relative;
-    width: 100%;
-    height: 280px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--color-bg);
-}
-
-.slider-slides img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    opacity: 0;
-    transition: opacity 0.0s ease-in-out;
-    z-index: 1;
-}
-
-.slider-slides img.active {
-    opacity: 1;
-    z-index: 2;
-}
-
-.slider-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 42px;
-    height: 42px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: none;
-    border: none;
-    color: var(--color-text);
-    font-size: 30px;
-    font-weight: normal;
-    line-height: 1;
-    cursor: pointer;
-    z-index: 10;
-    padding: 0;
-    box-shadow: none;
-    transition: opacity 0.15s ease, transform 0.15s ease;
-    user-select: none;
-}
-
-.slider-btn:hover {
-    opacity: 0.5;
-    transform: translateY(-50%) scale(1.07);
-}
-
-.prev-btn { left: 14px; }
-.next-btn { right: 14px; }
 
 /* ==========================================================================
    Project зургийг томруулж харах цонх (Lightbox)
@@ -672,6 +589,8 @@ header {
     header { padding: 10px var(--nav-pad-x) 8px var(--nav-pad-x); }
     .nav-contact { padding: 8px var(--nav-pad-x) 10px var(--nav-pad-x); }
 
+    .pd-top { grid-template-columns: 1fr; row-gap: 28px; }
+    .pd-main { order: -1; padding-right: 0; }
     .projects-grid { grid-template-columns: 1fr; gap: 26px; }
     .projects-grid .card { flex: none; width: 100%; }
 

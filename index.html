@@ -524,26 +524,6 @@
         }
         backToProjectsBtn.onclick = function() { showProjectsGrid(); }
 
-        // Урт тайлбартай төслүүдэд "дэлгэрэнгүй / хураах" товч нэмнэ,
-        // ингэснээр анх дэлгэц дээр товч, товчилсон текст л харагдана
-        document.querySelectorAll('.project-description').forEach(desc => {
-            const p = desc.querySelector('p');
-            if (!p) return;
-            const text = p.textContent || '';
-            if (text.length > 260) {
-                desc.classList.add('clamped');
-                const toggle = document.createElement('span');
-                toggle.className = 'description-toggle';
-                toggle.textContent = 'дэлгэрэнгүй ↓';
-                toggle.onclick = function() {
-                    const expanded = desc.classList.toggle('expanded');
-                    toggle.textContent = expanded ? 'хураах ↑' : 'дэлгэрэнгүй ↓';
-                    requestAnimationFrame(() => recalcSectionHeight(projectsContent));
-                };
-                desc.insertAdjacentElement('afterend', toggle);
-            }
-        });
-
         // Project зургийг томруулж харах цонх (Lightbox) — бэлтгэлийг доор хийнэ
         // ==========================================================================
         // Project folder-с зургийг автоматаар олж, слайдер барих (нэрнээс үл хамааран)
@@ -583,50 +563,53 @@
             return urls;
         }
 
-        function initSliderButtons(sliderContainer) {
-            const slides = sliderContainer.querySelectorAll('.slide');
-            const prevBtn = sliderContainer.querySelector('.prev-btn');
-            const nextBtn = sliderContainer.querySelector('.next-btn');
-            let currentIndex = 0;
-
-            if (slides.length <= 1) {
-                if (prevBtn) prevBtn.style.display = 'none';
-                if (nextBtn) nextBtn.style.display = 'none';
-                return;
+function enableStripScroll(scroller, hijackWheel) {
+            // Хулганын дугуйгаар хэвтээ гүйлгэх (зөвхөн нүүр хуудсанд), хулганаар чирэх
+            if (hijackWheel) {
+                scroller.addEventListener('wheel', function (e) {
+                    if (scroller.scrollWidth <= scroller.clientWidth) return;
+                    if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+                        scroller.scrollLeft += e.deltaY;
+                        e.preventDefault();
+                    }
+                }, { passive: false });
             }
-
-            function showSlide(index) {
-                slides[currentIndex].classList.remove('active');
-                currentIndex = (index + slides.length) % slides.length;
-                slides[currentIndex].classList.add('active');
-            }
-
-            nextBtn.onclick = function(e) { e.stopPropagation(); showSlide(currentIndex + 1); }
-            prevBtn.onclick = function(e) { e.stopPropagation(); showSlide(currentIndex - 1); }
+            let dragging = false, moved = false, startX = 0, startLeft = 0;
+            scroller.addEventListener('mousedown', e => { dragging = true; moved = false; startX = e.pageX; startLeft = scroller.scrollLeft; });
+            window.addEventListener('mousemove', e => {
+                if (!dragging) return;
+                const dx = e.pageX - startX;
+                if (Math.abs(dx) > 5) moved = true;
+                scroller.scrollLeft = startLeft - dx;
+            });
+            window.addEventListener('mouseup', () => { dragging = false; });
+            // Чирсний дараа санамсаргүй дарагдахаас сэргийлнэ
+            scroller.addEventListener('click', e => { if (moved) { e.stopPropagation(); e.preventDefault(); moved = false; } }, true);
         }
 
+        // Төслийн зургууд: нүүр хуудастай ижил том зураг, доор нь жижиг тайлбар, хажуу тийш гүйлгэнэ
         function renderProjectImages(container, urls) {
             if (urls.length === 0) {
                 container.innerHTML = '';
                 return;
             }
-            if (urls.length === 1) {
-                container.innerHTML = `<img src="${urls[0]}" alt="Project image" ondragstart="return false;">`;
-                return;
-            }
-            const slidesHtml = urls.map((u, i) =>
-                `<img src="${u}" alt="Зураг ${i + 1}" class="slide${i === 0 ? ' active' : ''}" ondragstart="return false;">`
+            const item = container.closest('.project-item');
+            const rawName = item.querySelector('.project-name').textContent.trim().replace(/^\d+\.\s*/, '');
+            const yearRow = Array.from(item.querySelectorAll('.project-meta p')).find(p => {
+                const st = p.querySelector('strong');
+                return st && st.textContent.trim().toLowerCase().startsWith('year');
+            });
+            const year = yearRow ? yearRow.textContent.replace(/^[^:]*:/, '').trim() : '';
+            const label = rawName + (year ? ', ' + year : '');
+            const cardsHtml = urls.map((u, i) =>
+                `<div class="card"><div class="card-img"><img src="${u}" alt="${label}" ondragstart="return false;"></div>` +
+                `<div class="card-caption"><span class="card-title">${label} | ${i + 1}/${urls.length}</span></div></div>`
             ).join('');
-            container.innerHTML = `
-                <div class="slider-container">
-                    <div class="slider-slides">${slidesHtml}</div>
-                    <button class="slider-btn prev-btn">&#8249;</button>
-                    <button class="slider-btn next-btn">&#8250;</button>
-                </div>`;
-            initSliderButtons(container.querySelector('.slider-container'));
+            container.innerHTML = `<div class="cards-scroll"><div class="cards">${cardsHtml}</div></div>`;
+            enableStripScroll(container.querySelector('.cards-scroll'), false);
         }
 
-        document.querySelectorAll('.project-images[data-image-folder]').forEach(container => {
+                document.querySelectorAll('.project-images[data-image-folder]').forEach(container => {
             const folder = container.getAttribute('data-image-folder');
             loadProjectImages(folder).then(urls => {
                 renderProjectImages(container, urls);
@@ -669,19 +652,13 @@
             lightboxImages = [];
         }
 
-        document.querySelectorAll('.project-images').forEach(container => {
+document.querySelectorAll('.project-images').forEach(container => {
             container.addEventListener('click', function(e) {
-                if (e.target.closest('.slider-btn')) return; // слайдерийн товч бол алгасна
-                const slides = container.querySelectorAll('.slide');
-                if (slides.length > 0) {
-                    const urls = Array.from(slides).map(img => img.src);
-                    const activeSlide = container.querySelector('.slide.active');
-                    const idx = Math.max(0, Array.from(slides).indexOf(activeSlide));
-                    openLightbox(urls, idx);
-                    return;
-                }
-                const singleImg = container.querySelector('img');
-                if (singleImg) openLightbox([singleImg.src], 0);
+                const imgs = Array.from(container.querySelectorAll('.card-img img'));
+                if (imgs.length === 0) return;
+                const card = e.target.closest('.card');
+                const idx = card ? Array.from(container.querySelectorAll('.card')).indexOf(card) : 0;
+                openLightbox(imgs.map(img => img.src), Math.max(0, idx));
             });
         });
 
@@ -751,13 +728,25 @@ document.onkeydown = function(e) {
             return row ? row.textContent.replace(/^[^:]*:/, '').trim() : '';
         };
 
-        // Дэлгэрэнгүй хуудасны толгой: нэр + location/year/use/scale/status
+        // Төслийн дэлгэрэнгүй: зүүн талд мэдээлэл (location, year...), баруун талд нэр + тайлбар; доор нь том зургууд
         projectItems.forEach(item => {
             const details = item.querySelector('.project-details');
-            const h = document.createElement('div');
-            h.className = 'project-detail-title';
-            h.textContent = item.querySelector('.project-name').textContent.trim();
-            details.insertBefore(h, details.firstChild);
+            const title = document.createElement('div');
+            title.className = 'project-detail-title';
+            title.textContent = nameOf(item);
+            const top = document.createElement('div');
+            top.className = 'pd-top';
+            const side = document.createElement('div');
+            side.className = 'pd-side';
+            const main = document.createElement('div');
+            main.className = 'pd-main';
+            ['.project-meta', '.project-credits'].forEach(sel => { const el = details.querySelector(sel); if (el) side.appendChild(el); });
+            main.appendChild(title);
+            const desc = details.querySelector('.project-description');
+            if (desc) main.appendChild(desc);
+            top.appendChild(side);
+            top.appendChild(main);
+            details.insertBefore(top, details.firstChild);
         });
 
         const firstImage = {};
@@ -798,30 +787,16 @@ document.onkeydown = function(e) {
             projectsGrid.appendChild(makeCard(item));
         });
 
-        // Нүүр хуудасны эгнээг хулганын дугуйгаар хэвтээ гүйлгэх
+        // Нүүр хуудасны эгнээ: дугуй, чирэх, сумтай товч
         const scroller = document.getElementById('home-scroll');
-        scroller.addEventListener('wheel', function (e) {
-            if (scroller.scrollWidth <= scroller.clientWidth) return;
-            if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-                scroller.scrollLeft += e.deltaY;
-                e.preventDefault();
-            }
-        }, { passive: false });
-        // Нүүр хуудасны эгнээг хулганаар чирж, сумтай товчоор гүйлгэх
-        let dragging = false, dragMoved = false, dragStartX = 0, dragStartLeft = 0;
-        scroller.addEventListener('mousedown', e => { dragging = true; dragMoved = false; dragStartX = e.pageX; dragStartLeft = scroller.scrollLeft; });
-        window.addEventListener('mousemove', e => {
-            if (!dragging) return;
-            const dx = e.pageX - dragStartX;
-            if (Math.abs(dx) > 5) dragMoved = true;
-            scroller.scrollLeft = dragStartLeft - dx;
-        });
-        window.addEventListener('mouseup', () => { dragging = false; });
-        scroller.addEventListener('click', e => { if (dragMoved) { e.stopPropagation(); e.preventDefault(); dragMoved = false; } }, true);
+        enableStripScroll(scroller, true);
         document.addEventListener('keydown', e => {
-            if (mainGallery.style.display === 'none' || lightboxOverlay.classList.contains('active')) return;
-            if (e.key === 'ArrowRight') scroller.scrollBy({ left: window.innerWidth * 0.6, behavior: 'smooth' });
-            if (e.key === 'ArrowLeft') scroller.scrollBy({ left: -window.innerWidth * 0.6, behavior: 'smooth' });
+            if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+            if (lightboxOverlay.classList.contains('active')) return;
+            const openStrip = document.querySelector('.project-item.open .cards-scroll');
+            const target = openStrip || (mainGallery.style.display !== 'none' ? scroller : null);
+            if (!target) return;
+            target.scrollBy({ left: (e.key === 'ArrowRight' ? 1 : -1) * window.innerWidth * 0.6, behavior: 'smooth' });
         });
     })();
     </script>
