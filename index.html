@@ -19,13 +19,21 @@
 </script>
     
 <style>
+body:not(:has(.reference-section.active)) {
+    height: 100dvh;
+    min-height: 0;
+    overflow: clip;
+}
+#main-gallery { min-height: 0; align-items: stretch; }
+#main-gallery .home-wrap { display: flex; flex-direction: column; min-height: 0; }
 #projects-grid {
     display: block;
     position: relative;
     isolation: isolate;
     overflow: hidden;
     padding: 0;
-    height: max(490px, calc(100svh - 110px));
+    flex: 1;
+    min-height: 0;
     background: white;
 }
 #projects-grid .card {
@@ -86,7 +94,6 @@
     <!-- Нүүр хуудас = Projects: төслүүдийн сүлжээ (скрипт доор бүтээнэ) -->
     <main class="gallery" id="main-gallery">
         <div class="home-wrap">
-            <div class="section-head"></div>
             <div class="projects-grid" id="projects-grid"></div>
         </div>
     </main>
