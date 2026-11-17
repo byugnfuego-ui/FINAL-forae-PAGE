@@ -35,13 +35,11 @@
         <span>TEL: +98105421</span>
     </div>
 
-    <!-- Нүүр хуудас: төслүүд хэвтээ эгнээгээр (скрипт доор бүтээнэ) -->
+    <!-- Нүүр хуудас = Projects: төслүүдийн сүлжээ (скрипт доор бүтээнэ) -->
     <main class="gallery" id="main-gallery">
         <div class="home-wrap">
             <div class="section-head"></div>
-            <div class="cards-scroll" id="home-scroll">
-                <div class="cards" id="home-index"></div>
-            </div>
+            <div class="projects-grid" id="projects-grid"></div>
         </div>
     </main>
 
@@ -54,8 +52,6 @@
             </div>
 
             <div class="back-to-projects" id="back-to-projects-btn">&larr; back</div>
-
-            <div class="projects-grid" id="projects-grid"></div>
 
             <div class="projects-container" id="projects-container">
                 <!-- Төсөл 1 -->
@@ -492,7 +488,6 @@
 
         function showProjectsGrid() {
             projectItems.forEach(i => i.classList.remove('open'));
-            projectsGrid.style.display = '';
             backToProjectsBtn.classList.remove('visible');
             requestAnimationFrame(() => recalcSectionHeight(projectsContent));
         }
@@ -500,29 +495,22 @@
 
         function showProject(item) {
             projectItems.forEach(i => i.classList.toggle('open', i === item));
-            projectsGrid.style.display = 'none';
             backToProjectsBtn.classList.add('visible');
             requestAnimationFrame(() => {
                 recalcSectionHeight(projectsContent);
                 projectsContent.scrollIntoView({ behavior: 'auto', block: 'start' });
             });
         }
-        // Нүүр хуудас эсвэл сүлжээнээс төсөл нээх
+        // Нүүр хуудасны сүлжээнээс төслийн дэлгэрэнгүй нээх
         function openProject(item) {
             closeAllSections();
             openSection(projectsContent);
             showProject(item);
         }
 
-        projectsBtn.onclick = function() {
-            const gridShown = projectsContent.classList.contains('active') && projectsGrid.style.display !== 'none';
-            closeAllSections();
-            if (gridShown) { window.scrollTo({ top: 0, behavior: 'auto' }); return; }
-            showProjectsGrid();
-            openSection(projectsContent);
-            projectsContent.scrollIntoView({ behavior: 'auto', block: 'start' });
-        }
-        backToProjectsBtn.onclick = function() { showProjectsGrid(); }
+        // "projects" болон "back" нь нүүр хуудас (төслүүдийн сүлжээ) руу буцаана
+        projectsBtn.onclick = function() { goHome(); }
+        backToProjectsBtn.onclick = function() { goHome(); }
 
         // Project зургийг томруулж харах цонх (Lightbox) — бэлтгэлийг доор хийнэ
         // ==========================================================================
@@ -563,31 +551,7 @@
             return urls;
         }
 
-function enableStripScroll(scroller, hijackWheel) {
-            // Хулганын дугуйгаар хэвтээ гүйлгэх (зөвхөн нүүр хуудсанд), хулганаар чирэх
-            if (hijackWheel) {
-                scroller.addEventListener('wheel', function (e) {
-                    if (scroller.scrollWidth <= scroller.clientWidth) return;
-                    if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-                        scroller.scrollLeft += e.deltaY;
-                        e.preventDefault();
-                    }
-                }, { passive: false });
-            }
-            let dragging = false, moved = false, startX = 0, startLeft = 0;
-            scroller.addEventListener('mousedown', e => { dragging = true; moved = false; startX = e.pageX; startLeft = scroller.scrollLeft; });
-            window.addEventListener('mousemove', e => {
-                if (!dragging) return;
-                const dx = e.pageX - startX;
-                if (Math.abs(dx) > 5) moved = true;
-                scroller.scrollLeft = startLeft - dx;
-            });
-            window.addEventListener('mouseup', () => { dragging = false; });
-            // Чирсний дараа санамсаргүй дарагдахаас сэргийлнэ
-            scroller.addEventListener('click', e => { if (moved) { e.stopPropagation(); e.preventDefault(); moved = false; } }, true);
-        }
-
-        // Төслийн зургууд: Meili-ийн төслийн хуудас шиг сүлжээ (нүүр хуудасныхаас жижиг, доор нь дугаар)
+// Төслийн зургууд: Meili-ийн төслийн хуудас шиг сүлжээ (нүүр хуудасныхаас жижиг, доор нь дугаар)
         function renderProjectImages(container, urls) {
             if (urls.length === 0) {
                 container.innerHTML = '';
@@ -772,22 +736,7 @@ document.onkeydown = function(e) {
             return card;
         }
 
-        const homeRoot = document.getElementById('home-index');
-        projectItems.forEach(item => {
-            homeRoot.appendChild(makeCard(item));
-            projectsGrid.appendChild(makeCard(item));
-        });
-
-        // Нүүр хуудасны эгнээ: дугуй, чирэх, сумтай товч
-        const scroller = document.getElementById('home-scroll');
-        enableStripScroll(scroller, true);
-        document.addEventListener('keydown', e => {
-            if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
-            if (lightboxOverlay.classList.contains('active')) return;
-            if (mainGallery.style.display === 'none') return;
-            const target = scroller;
-            target.scrollBy({ left: (e.key === 'ArrowRight' ? 1 : -1) * window.innerWidth * 0.6, behavior: 'smooth' });
-        });
+        projectItems.forEach(item => projectsGrid.appendChild(makeCard(item)));
     })();
     </script>
 </body>

@@ -288,6 +288,7 @@ header {
 }
 
 .card-caption { display: block; margin-top: 7px; }
+.home-wrap .projects-grid { padding: 0 var(--pad-x) 40px var(--pad-x); }
 .projects-grid .card-img,
 .projects-grid .card-img.empty { aspect-ratio: 4 / 3; overflow: hidden; }
 .projects-grid .card-img img { width: 100%; height: 100%; object-fit: cover; }
