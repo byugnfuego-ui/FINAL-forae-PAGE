@@ -27,11 +27,13 @@
         <div class="nav-item" id="projects-btn">projects</div>
         <div class="nav-item" id="news-btn">news</div>
         <div class="nav-item" id="reference-btn">reference</div>
-        <div class="nav-contact">
-            <a href="mailto:info@forae.net" class="footer-email">info@forae.net</a>
-            <span>TEL: +98105421</span>
-        </div>
     </header>
+
+    <!-- Холбоо барих: зүүн доод буланд -->
+    <div class="nav-contact" id="contact">
+        <a href="mailto:info@forae.net" class="footer-email">info@forae.net</a>
+        <span>TEL: +98105421</span>
+    </div>
 
     <!-- Нүүр хуудас: төслүүд хэвтээ эгнээгээр (скрипт доор бүтээнэ) -->
     <main class="gallery" id="main-gallery">
@@ -375,6 +377,7 @@
             const h = headerEl.offsetHeight;
             document.body.style.paddingTop = h + 'px';
             document.documentElement.style.setProperty('--header-h', h + 'px');
+            document.body.style.paddingBottom = document.getElementById('contact').offsetHeight + 'px';
         }
         adjustFixedSpacing();
         window.addEventListener('resize', adjustFixedSpacing);
@@ -766,7 +769,7 @@ document.onkeydown = function(e) {
         function makeCard(item) {
             const card = document.createElement('div');
             card.className = 'card';
-            card.innerHTML = '<div class="card-img empty"></div><div class="card-title"></div><div class="card-meta"></div>';
+            card.innerHTML = '<div class="card-img empty"></div><div class="card-caption"><span class="card-title"></span><span class="card-meta"></span></div>';
             card.querySelector('.card-title').textContent = nameOf(item);
             card.querySelector('.card-meta').textContent = [metaOf(item, 'year'), metaOf(item, 'use')].filter(Boolean).join(' · ');
             const holder = item.querySelector('.project-images[data-image-folder]');
@@ -804,6 +807,22 @@ document.onkeydown = function(e) {
                 e.preventDefault();
             }
         }, { passive: false });
+        // Нүүр хуудасны эгнээг хулганаар чирж, сумтай товчоор гүйлгэх
+        let dragging = false, dragMoved = false, dragStartX = 0, dragStartLeft = 0;
+        scroller.addEventListener('mousedown', e => { dragging = true; dragMoved = false; dragStartX = e.pageX; dragStartLeft = scroller.scrollLeft; });
+        window.addEventListener('mousemove', e => {
+            if (!dragging) return;
+            const dx = e.pageX - dragStartX;
+            if (Math.abs(dx) > 5) dragMoved = true;
+            scroller.scrollLeft = dragStartLeft - dx;
+        });
+        window.addEventListener('mouseup', () => { dragging = false; });
+        scroller.addEventListener('click', e => { if (dragMoved) { e.stopPropagation(); e.preventDefault(); dragMoved = false; } }, true);
+        document.addEventListener('keydown', e => {
+            if (mainGallery.style.display === 'none' || lightboxOverlay.classList.contains('active')) return;
+            if (e.key === 'ArrowRight') scroller.scrollBy({ left: window.innerWidth * 0.6, behavior: 'smooth' });
+            if (e.key === 'ArrowLeft') scroller.scrollBy({ left: -window.innerWidth * 0.6, behavior: 'smooth' });
+        });
     })();
     </script>
 </body>
