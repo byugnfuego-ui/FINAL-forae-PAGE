@@ -21,20 +21,26 @@
 </head>
 <body oncontextmenu="return false;">
 
-    <!-- Дээд талын цэсүүд -->
+    <!-- Дээд цэс: зүүн талд, картуудын баганын торонд таарна -->
     <header>
-        <div class="header-left">
-            <div class="nav-item" id="bio-btn">forae architects</div>
-        </div>
-        <div class="top-right">
-            <div class="nav-item" id="news-btn">news</div>
+        <div class="nav-item" id="bio-btn">forae architects</div>
+        <div class="nav-item" id="projects-btn">projects</div>
+        <div class="nav-item" id="news-btn">news</div>
+        <div class="nav-item" id="reference-btn">reference</div>
+        <div class="nav-contact">
+            <a href="mailto:info@forae.net" class="footer-email">info@forae.net</a>
+            <span>TEL: +98105421</span>
         </div>
     </header>
 
-    <!-- Голын цагаан дэвсгэртэй ганц зураг -->
+    <!-- Нүүр хуудас: төслүүд хэвтээ эгнээгээр (скрипт доор бүтээнэ) -->
     <main class="gallery" id="main-gallery">
-        <!-- Төслүүдийн жагсаалтыг доорх скрипт Projects хэсгээс автоматаар бүтээнэ -->
-        <div class="home-index" id="home-index"></div>
+        <div class="home-wrap">
+            <div class="section-head">projects</div>
+            <div class="cards-scroll" id="home-scroll">
+                <div class="cards" id="home-index"></div>
+            </div>
+        </div>
     </main>
 
     <!-- PROJECTS ХЭСЭГ -->
@@ -47,10 +53,9 @@
 
             <div class="back-to-projects" id="back-to-projects-btn">&larr; back</div>
 
+            <div class="projects-grid" id="projects-grid"></div>
+
             <div class="projects-container" id="projects-container">
-                <div class="projects-head">
-                    <span>No.</span><span>Project</span><span>Location</span><span>Year</span><span>Scale</span><span>Status</span><span></span>
-                </div>
                 <!-- Төсөл 1 -->
                 <div class="project-item">
                     <div class="project-title-bar">
@@ -351,15 +356,7 @@
         </div>
     </section>
 
-    <!-- Хөлийн холбоо барих хэсэг -->
-    <footer>
-        <div class="bottom-left" id="reference-btn" style="cursor: pointer;">
-            <span>reference</span>
-        </div>
-        <div class="bottom-right">
-            <span><a href="mailto:info@forae.net" class="footer-email">info@forae.net</a> &nbsp;&nbsp; TEL: +98105421</span>
-        </div>
-    </footer>
+    
 
     <!-- Project зургийг томруулж харах цонх (Lightbox) -->
     <div class="lightbox-overlay" id="lightbox-overlay">
@@ -374,11 +371,10 @@
         // Header, footer нь fixed болсон тул тэдгээрийн өндрийг тооцож
         // body-д тохирох padding өгснөөр контент дор нь нуугдахгүй байхаар зохицуулна
         const headerEl = document.querySelector('header');
-        const footerEl = document.querySelector('footer');
         function adjustFixedSpacing() {
-            document.body.style.paddingTop = headerEl.offsetHeight + 'px';
-            document.documentElement.style.setProperty('--header-h', headerEl.offsetHeight + 'px');
-            document.body.style.paddingBottom = footerEl.offsetHeight + 'px';
+            const h = headerEl.offsetHeight;
+            document.body.style.paddingTop = h + 'px';
+            document.documentElement.style.setProperty('--header-h', h + 'px');
         }
         adjustFixedSpacing();
         window.addEventListener('resize', adjustFixedSpacing);
@@ -396,6 +392,7 @@
         const closeNewsBtn = document.getElementById('close-news-btn');
         const newsContent = document.getElementById('news-content');
 
+        const projectsBtn = document.getElementById('projects-btn');
         const closeProjectsBtn = document.getElementById('close-projects-btn');
         const projectsContent = document.getElementById('projects-content');
 
@@ -485,45 +482,44 @@
         }
         closeProjectsBtn.onclick = function(e) { e.stopPropagation(); goHome(); }
 
-        // Акордион
-        const projectItems = document.querySelectorAll('.project-item');
-        const projectsContainer = document.getElementById('projects-container');
+        // Төслүүд: сүлжээ (grid) эсвэл нэг төслийн дэлгэрэнгүй
+        const projectItems = Array.from(document.querySelectorAll('.project-item'));
+        const projectsGrid = document.getElementById('projects-grid');
         const backToProjectsBtn = document.getElementById('back-to-projects-btn');
 
-        function closeProjectDetail() {
-            projectItems.forEach(i => { i.classList.remove('open'); const icon = i.querySelector('.toggle-icon'); if(icon) icon.textContent = '+'; });
-            projectsContainer.classList.remove('has-open');
+        function showProjectsGrid() {
+            projectItems.forEach(i => i.classList.remove('open'));
+            projectsGrid.style.display = '';
             backToProjectsBtn.classList.remove('visible');
             requestAnimationFrame(() => recalcSectionHeight(projectsContent));
         }
+        function closeProjectDetail() { showProjectsGrid(); }
 
-        projectItems.forEach(item => {
-            const titleBar = item.querySelector('.project-title-bar');
-            if(titleBar) {
-                titleBar.onclick = function() {
-                    const isOpen = item.classList.contains('open');
-                    if (isOpen) { goHome(); return; }
-                    projectItems.forEach(i => { i.classList.remove('open'); const icon = i.querySelector('.toggle-icon'); if(icon) icon.textContent = '+'; });
-                    if (!isOpen) {
-                        item.classList.add('open');
-                        const icon = item.querySelector('.toggle-icon'); if(icon) icon.textContent = '−';
-                        projectsContainer.classList.add('has-open');
-                        backToProjectsBtn.classList.add('visible');
-                    } else {
-                        projectsContainer.classList.remove('has-open');
-                        backToProjectsBtn.classList.remove('visible');
-                    }
-                    // Дотоод project дэлгэрэнгүй нээгдэх/хаагдахад гадна Projects хэсгийн өндрийг дахин тооцоолно
-                    requestAnimationFrame(() => recalcSectionHeight(projectsContent));
-                    // Тухайн төслийг нээхэд байрлал өөрчлөгдөхгүй, Projects хэсгийн эхэнд тогтмол байрлана
-                    if (!isOpen) {
-                        projectsContent.scrollIntoView({ behavior: 'auto', block: 'start' });
-                    }
-                }
-            }
-        });
+        function showProject(item) {
+            projectItems.forEach(i => i.classList.toggle('open', i === item));
+            projectsGrid.style.display = 'none';
+            backToProjectsBtn.classList.add('visible');
+            requestAnimationFrame(() => {
+                recalcSectionHeight(projectsContent);
+                projectsContent.scrollIntoView({ behavior: 'auto', block: 'start' });
+            });
+        }
+        // Нүүр хуудас эсвэл сүлжээнээс төсөл нээх
+        function openProject(item) {
+            closeAllSections();
+            openSection(projectsContent);
+            showProject(item);
+        }
 
-        backToProjectsBtn.onclick = function() { goHome(); }
+        projectsBtn.onclick = function() {
+            const gridShown = projectsContent.classList.contains('active') && projectsGrid.style.display !== 'none';
+            closeAllSections();
+            if (gridShown) { window.scrollTo({ top: 0, behavior: 'auto' }); return; }
+            showProjectsGrid();
+            openSection(projectsContent);
+            projectsContent.scrollIntoView({ behavior: 'auto', block: 'start' });
+        }
+        backToProjectsBtn.onclick = function() { showProjectsGrid(); }
 
         // Урт тайлбартай төслүүдэд "дэлгэрэнгүй / хураах" товч нэмнэ,
         // ингэснээр анх дэлгэц дээр товч, товчилсон текст л харагдана
@@ -740,159 +736,74 @@ document.onkeydown = function(e) {
     </script>
 
     <script>
-    // Мөр бүр: No. | Project (+ тайлбар мөр) | Location | Year | Scale | Status
-    document.querySelectorAll('.project-item').forEach(item => {
-        const bar = item.querySelector('.project-title-bar');
-        const nameEl = bar.querySelector('.project-name');
-        const icon = bar.querySelector('.toggle-icon');
-        const m = nameEl.textContent.trim().match(/^(\d+)\.\s*(.*)$/);
-        const num = document.createElement('span');
-        num.className = 'project-col';
-        num.textContent = m ? m[1] : '';
-        if (m) nameEl.textContent = m[2];
-        const get = key => {
+    // Төслийн карт (зураг + нэр + жил) бүтээж, нүүр хуудас болон Projects сүлжээнд оруулна.
+    // Мэдээллийг доорх .project-item-үүдээс уншина (HTML-ээ засахад хоёр газар автоматаар өөрчлөгдөнө).
+    (function () {
+        const nameOf = item => item.querySelector('.project-name').textContent.trim().replace(/^\d+\.\s*/, '').trim();
+        const metaOf = (item, key) => {
             const row = Array.from(item.querySelectorAll('.project-meta p')).find(p => {
                 const st = p.querySelector('strong');
                 return st && st.textContent.trim().toLowerCase().startsWith(key);
             });
             return row ? row.textContent.replace(/^[^:]*:/, '').trim() : '';
         };
-        bar.insertBefore(num, nameEl);
-        const use = get('use');
-        if (use) {
-            const sub = document.createElement('span');
-            sub.className = 'project-sub';
-            sub.textContent = use;
-            nameEl.appendChild(sub);
-        }
-        ['location', 'year', 'scale', 'status'].forEach(k => {
-            const c = document.createElement('span');
-            c.className = 'project-col';
-            c.textContent = get(k);
-            bar.insertBefore(c, icon);
+
+        // Дэлгэрэнгүй хуудасны толгой: нэр + location/year/use/scale/status
+        projectItems.forEach(item => {
+            const details = item.querySelector('.project-details');
+            const h = document.createElement('div');
+            h.className = 'project-detail-title';
+            h.textContent = item.querySelector('.project-name').textContent.trim();
+            details.insertBefore(h, details.firstChild);
         });
-    });
-    </script>
 
-        <script>
-    // Нүүр хуудасны төслүүдийн жагсаалт: 4 багана. Тоонууд нь project-ийн дарааллын индекс (1-ээс эхэлнэ).
-    // Багана тус бүрт аль төслүүд орохыг эндээс өөрчилнө.
-    (function () {
-        const COLUMNS = [
-            [1, 3],       // 1-р багана: Чойжин, МТҮП
-            [2, 6, 7],    // 2-р багана: Хаус сапин, Гантулга, Сайнбилэг
-            [4],          // 3-р багана: Одон резорт
-            [5]           // 4-р багана: Breaktime
-        ];
-        const root = document.getElementById('home-index');
-        const items = Array.from(document.querySelectorAll('.project-item'));
-        let n = 0;
-        COLUMNS.forEach(col => {
-            const colEl = document.createElement('div');
-            colEl.className = 'home-col';
-            col.forEach(idx => {
-                const item = items[idx - 1];
-                if (!item) return;
-                n++;
-                const nameEl = item.querySelector('.project-name');
-                const title = (nameEl.firstChild ? nameEl.firstChild.textContent : nameEl.textContent).trim();
-                const cols = item.querySelectorAll('.project-col');
-                const year = cols[2] ? cols[2].textContent : '';
-                const status = cols[4] ? cols[4].textContent : '';
-                const a = document.createElement('div');
-                a.className = 'home-item';
-                const holder = item.querySelector('.project-images[data-image-folder]');
-                if (holder) a.dataset.folder = holder.getAttribute('data-image-folder');
-                a.innerHTML = '<div class="home-num"></div><div class="home-title"></div><div class="home-meta"></div>';
-                a.querySelector('.home-num').textContent = n;
-                a.querySelector('.home-title').textContent = title;
-                a.querySelector('.home-meta').textContent = [year, status].filter(Boolean).join(' · ');
-                a.addEventListener('click', function () {
-                    closeAllSections();
-                    openSection(projectsContent);
-                    item.querySelector('.project-title-bar').click();
-                });
-                colEl.appendChild(a);
-            });
-            root.appendChild(colEl);
-        });
-    })();
-    </script>
-
-    <!-- Project нэр дээр курсор аваачихад зураг гарч ирэх -->
-    <div class="hover-preview" id="hover-preview"><img alt="" ondragstart="return false;"></div>
-    <script>
-    (function () {
-        if (!window.matchMedia('(hover: hover)').matches) return;
-
-        const preview = document.getElementById('hover-preview');
-        const previewImg = preview.querySelector('img');
-        const cache = {};          // folder -> Promise(url | null)
-        let active = null;         // одоо hover хийж буй төсөл
-
+        const firstImage = {};
         function getFirstImage(folder) {
-            if (!cache[folder]) cache[folder] = findImageAtIndex(folder, 1);
-            return cache[folder];
+            if (!firstImage[folder]) firstImage[folder] = findImageAtIndex(folder, 1);
+            return firstImage[folder];
         }
 
-        function hide() {
-            active = null;
-            preview.classList.remove('visible');
-        }
-
-        document.querySelectorAll('.project-item').forEach(item => {
-            const bar = item.querySelector('.project-title-bar');
+        function makeCard(item) {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = '<div class="card-img empty"></div><div class="card-title"></div><div class="card-meta"></div>';
+            card.querySelector('.card-title').textContent = nameOf(item);
+            card.querySelector('.card-meta').textContent = [metaOf(item, 'year'), metaOf(item, 'use')].filter(Boolean).join(' · ');
             const holder = item.querySelector('.project-images[data-image-folder]');
-            if (!bar || !holder) return;
-            const folder = holder.getAttribute('data-image-folder');
-            getFirstImage(folder); // урьдчилан ачаална
-
-            bar.addEventListener('mouseenter', () => {
-                if (item.classList.contains('open')) return;
-                active = item;
-                document.body.appendChild(preview);
-                getFirstImage(folder).then(url => {
-                    if (active !== item || !url) return;
-                    previewImg.onload = () => { if (active === item) preview.classList.add('visible'); };
-                    previewImg.src = url;
-                    if (previewImg.complete) previewImg.onload();
+            if (holder) {
+                getFirstImage(holder.getAttribute('data-image-folder')).then(url => {
+                    if (!url) return;
+                    const box = card.querySelector('.card-img');
+                    const img = new Image();
+                    img.alt = '';
+                    img.ondragstart = () => false;
+                    img.onload = () => {
+                        box.classList.remove('empty');
+                        box.appendChild(img);
+                        recalcSectionHeight(projectsContent);
+                    };
+                    img.src = url;
                 });
-            });
-            bar.addEventListener('mousemove', e => {
-                const w = previewImg.offsetWidth || 300, hgt = previewImg.offsetHeight || 200;
-                let x = e.clientX + 24, y = e.clientY - hgt / 2;
-                if (x + w > window.innerWidth - 10) x = e.clientX - w - 24;
-                y = Math.max(10, Math.min(y, window.innerHeight - hgt - 10));
-                preview.style.transform = 'translate(' + x + 'px,' + y + 'px)';
-            });
-            bar.addEventListener('mouseleave', hide);
-            bar.addEventListener('click', hide);
+            }
+            card.addEventListener('click', () => openProject(item));
+            return card;
+        }
+
+        const homeRoot = document.getElementById('home-index');
+        projectItems.forEach(item => {
+            homeRoot.appendChild(makeCard(item));
+            projectsGrid.appendChild(makeCard(item));
         });
 
-        // Нүүр хуудасны жагсаалтын төсөл дээр курсор аваачихад эхний зураг гарна
-        document.querySelectorAll('.home-item[data-folder]').forEach(el => {
-            const folder = el.dataset.folder;
-            getFirstImage(folder);
-            el.addEventListener('mouseenter', () => {
-                active = el;
-                document.body.appendChild(preview);
-                getFirstImage(folder).then(url => {
-                    if (active !== el || !url) return;
-                    previewImg.onload = () => { if (active === el) preview.classList.add('visible'); };
-                    previewImg.src = url;
-                    if (previewImg.complete) previewImg.onload();
-                });
-            });
-            el.addEventListener('mousemove', e => {
-                const w = previewImg.offsetWidth || 300, hgt = previewImg.offsetHeight || 200;
-                let x = e.clientX + 24, y = e.clientY - hgt / 2;
-                if (x + w > window.innerWidth - 10) x = e.clientX - w - 24;
-                y = Math.max(10, Math.min(y, window.innerHeight - hgt - 10));
-                preview.style.transform = 'translate(' + x + 'px,' + y + 'px)';
-            });
-            el.addEventListener('mouseleave', hide);
-            el.addEventListener('click', hide);
-        });
+        // Нүүр хуудасны эгнээг хулганын дугуйгаар хэвтээ гүйлгэх
+        const scroller = document.getElementById('home-scroll');
+        scroller.addEventListener('wheel', function (e) {
+            if (scroller.scrollWidth <= scroller.clientWidth) return;
+            if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+                scroller.scrollLeft += e.deltaY;
+                e.preventDefault();
+            }
+        }, { passive: false });
     })();
     </script>
 </body>
