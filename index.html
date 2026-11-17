@@ -18,6 +18,55 @@
   gtag('config', 'G-R3C8NEM5V2');
 </script>
     
+<style>
+#projects-grid {
+    display: block;
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    padding: 0;
+    height: max(490px, calc(100svh - 110px));
+    background: white;
+}
+#projects-grid .card {
+    position: absolute;
+    --w: var(--card-width);
+    width: var(--w);
+    height: auto;
+    aspect-ratio: var(--card-ratio);
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+    border-radius: 0;
+    background: white;
+    color: #222;
+    box-shadow: none;
+    text-align: left;
+    font: inherit;
+    cursor: grab;
+    touch-action: none;
+    user-select: none;
+}
+#projects-grid .card:focus-visible { outline: 2px solid #333; outline-offset: -3px; }
+#projects-grid .card-img { position: absolute; inset: 0; aspect-ratio: auto; background: transparent; }
+#projects-grid .card-img img { width: 100%; height: 100%; object-fit: contain; }
+#projects-grid .card-caption {
+    position: absolute; inset: 0; margin: 0; padding: 5%;
+    background: white; opacity: 0; pointer-events: none;
+    font: 500 clamp(13px, 1.45vw, 22px)/1.25 system-ui,sans-serif;
+    overflow-wrap: anywhere;
+}
+#projects-grid .card:has(.empty) .card-caption,
+#projects-grid .card:focus-visible .card-caption { opacity: 1; }
+#projects-grid .card:has(.empty) .card-caption { background: white; }
+@media (hover: hover) { #projects-grid .card:hover .card-caption { opacity: 1; } }
+#projects-grid .card.moving { cursor: grabbing; }
+#projects-grid .card.moving:has(img) .card-caption { opacity: 0; }
+@media (hover: none) {
+    #projects-grid .card-caption { inset: auto 0 0; padding: 3%; opacity: 1; }
+}
+@media (max-width: 600px) { #projects-grid .card { --w: calc(var(--card-width) * 1.65); } }
+</style>
 </head>
 <body oncontextmenu="return false;">
 
@@ -711,7 +760,8 @@ document.onkeydown = function(e) {
         }
 
         function makeCard(item) {
-            const card = document.createElement('div');
+            const card = document.createElement('button');
+            card.type = 'button';
             card.className = 'card';
             card.innerHTML = '<div class="card-img empty"></div><div class="card-caption"><span class="card-title"></span><span class="card-meta"></span></div>';
             card.querySelector('.card-title').textContent = nameOf(item);
@@ -736,7 +786,67 @@ document.onkeydown = function(e) {
             return card;
         }
 
+        function enableProjectDesk(board) {
+    const slots = [[0.4364, 0.2155, 12.632, 2.0093], [0.2087, 0.3418, 12.338, 1.9091], [0.7323, 0.289, 14.336, 1.9837], [0.1703, 0.6173, 12.456, 1.6183], [0.7979, 0.5385, 19.095, 2.3551], [0.3757, 0.8937, 21.798, 1.984], [0.7378, 0.8299, 17.274, 1.8968]];
+    let layer = 0;
+    const cards = Array.from(board.children);
+    cards.forEach((card, index) => {
+        const [x, y, width, ratio] = slots[index % slots.length];
+        let position = { x, y };
+        function place() {
+            if (!board.clientWidth) return;
+            const roomX = Math.max(0, board.clientWidth - card.offsetWidth - 16);
+            const roomY = Math.max(0, board.clientHeight - card.offsetHeight - 16);
+            card.style.left = (8 + position.x * roomX) + 'px';
+            card.style.top = (8 + position.y * roomY) + 'px';
+        }
+        card.style.setProperty('--card-width', width + '%');
+        card.style.setProperty('--card-ratio', ratio);
+        const observer = new ResizeObserver(place);
+        observer.observe(board);
+        observer.observe(card);
+        place();
+        let start = null;
+        let suppressClick = false;
+        card.addEventListener('focus', () => card.style.zIndex = ++layer);
+        card.addEventListener('pointerdown', e => {
+            if (!e.isPrimary || e.button !== 0) return;
+            card.style.zIndex = ++layer;
+            suppressClick = false;
+            start = { id: e.pointerId, x: e.clientX, y: e.clientY, left: card.offsetLeft, top: card.offsetTop };
+            card.setPointerCapture(e.pointerId);
+        });
+        card.addEventListener('pointermove', e => {
+            if (!start || start.id !== e.pointerId) return;
+            const dx = e.clientX - start.x, dy = e.clientY - start.y;
+            if (!suppressClick && Math.hypot(dx,dy) < 6) return;
+            suppressClick = true;
+            card.classList.add('moving');
+            const clamp = n => Math.max(0, Math.min(1, n));
+            position = {
+                x: clamp((start.left + dx - 8) / Math.max(1,board.clientWidth - card.offsetWidth - 16)),
+                y: clamp((start.top + dy - 8) / Math.max(1,board.clientHeight - card.offsetHeight - 16))
+            };
+            place();
+        });
+        const finish = e => {
+            if (start?.id !== e.pointerId) return;
+            start = null;
+            card.classList.remove('moving');
+        };
+        for (const event of ['pointerup','pointercancel','lostpointercapture']) card.addEventListener(event, finish);
+        card.addEventListener('click', e => {
+            if (suppressClick && e.detail !== 0) {
+                e.preventDefault();
+                e.stopImmediatePropagation();
+            }
+            suppressClick = false;
+        }, true);
+    });
+}
+
         projectItems.forEach(item => projectsGrid.appendChild(makeCard(item)));
+        enableProjectDesk(projectsGrid);
     })();
     </script>
 </body>
