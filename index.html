@@ -103,7 +103,6 @@ body:not(:has(.reference-section.active)) {
         <div class="content-wrapper">
             <div class="reference-header">
                 <h2></h2>
-                <span id="close-projects-btn" class="close-x">&times;</span>
             </div>
 
             <div class="back-to-projects" id="back-to-projects-btn">&larr; back</div>
@@ -448,7 +447,6 @@ body:not(:has(.reference-section.active)) {
         const newsContent = document.getElementById('news-content');
 
         const projectsBtn = document.getElementById('projects-btn');
-        const closeProjectsBtn = document.getElementById('close-projects-btn');
         const projectsContent = document.getElementById('projects-content');
 
         const mainGallery = document.getElementById('main-gallery');
@@ -535,7 +533,6 @@ body:not(:has(.reference-section.active)) {
             closeAllSections();
             window.scrollTo({ top: 0, behavior: 'auto' });
         }
-        closeProjectsBtn.onclick = function(e) { e.stopPropagation(); goHome(); }
 
         // Төслүүд: сүлжээ (grid) эсвэл нэг төслийн дэлгэрэнгүй
         const projectItems = Array.from(document.querySelectorAll('.project-item'));
