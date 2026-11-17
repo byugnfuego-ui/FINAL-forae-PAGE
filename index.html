@@ -70,8 +70,8 @@ body:not(:has(.reference-section.active)) {
 @media (hover: hover) { #projects-grid .card:hover .card-caption { opacity: 1; } }
 #projects-grid .card.moving { cursor: grabbing; }
 #projects-grid .card.moving:has(img) .card-caption { opacity: 0; }
-@media (hover: none) {
-    #projects-grid .card-caption { inset: auto 0 0; padding: 3%; opacity: 1; }
+@media (hover: none), (max-width: 768px) {
+    #projects-grid .card-caption { display: none; }
 }
 </style>
 </head>
@@ -771,7 +771,9 @@ document.onkeydown = function(e) {
             card.type = 'button';
             card.className = 'card';
             card.innerHTML = '<div class="card-img empty"></div><div class="card-caption"><span class="card-title"></span><span class="card-meta"></span></div>';
-            card.querySelector('.card-title').textContent = nameOf(item);
+            const title = nameOf(item);
+            card.setAttribute('aria-label', title);
+            card.querySelector('.card-title').textContent = title;
             card.querySelector('.card-meta').textContent = [metaOf(item, 'year'), metaOf(item, 'use')].filter(Boolean).join(' · ');
             const holder = item.querySelector('.project-images[data-image-folder]');
             if (holder) {
