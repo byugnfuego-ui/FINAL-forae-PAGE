@@ -30,10 +30,10 @@
 }
 #projects-grid .card {
     position: absolute;
-    --w: var(--card-width);
-    width: var(--w);
-    height: auto;
-    aspect-ratio: var(--card-ratio);
+    height: clamp(72px, 10vw, 155px);
+    width: auto;
+    max-width: calc(100% - 16px);
+    aspect-ratio: var(--image-ratio, 1.5);
     padding: 0;
     overflow: hidden;
     border: 0;
@@ -53,7 +53,7 @@
 #projects-grid .card-caption {
     position: absolute; inset: 0; margin: 0; padding: 5%;
     background: white; opacity: 0; pointer-events: none;
-    font: 500 clamp(13px, 1.45vw, 22px)/1.25 system-ui,sans-serif;
+    font: normal var(--nav-size)/1.5 var(--font-main);
     overflow-wrap: anywhere;
 }
 #projects-grid .card:has(.empty) .card-caption,
@@ -65,7 +65,6 @@
 @media (hover: none) {
     #projects-grid .card-caption { inset: auto 0 0; padding: 3%; opacity: 1; }
 }
-@media (max-width: 600px) { #projects-grid .card { --w: calc(var(--card-width) * 1.65); } }
 </style>
 </head>
 <body oncontextmenu="return false;">
@@ -775,6 +774,7 @@ document.onkeydown = function(e) {
                     img.alt = '';
                     img.ondragstart = () => false;
                     img.onload = () => {
+                        card.style.setProperty('--image-ratio', img.naturalWidth / img.naturalHeight);
                         box.classList.remove('empty');
                         box.appendChild(img);
                         recalcSectionHeight(projectsContent);
@@ -787,11 +787,11 @@ document.onkeydown = function(e) {
         }
 
         function enableProjectDesk(board) {
-    const slots = [[0.4364, 0.2155, 12.632, 2.0093], [0.2087, 0.3418, 12.338, 1.9091], [0.7323, 0.289, 14.336, 1.9837], [0.1703, 0.6173, 12.456, 1.6183], [0.7979, 0.5385, 19.095, 2.3551], [0.3757, 0.8937, 21.798, 1.984], [0.7378, 0.8299, 17.274, 1.8968]];
+    const slots = [[0.4364, 0.2155], [0.2087, 0.3418], [0.7323, 0.289], [0.1703, 0.6173], [0.7979, 0.5385], [0.3757, 0.8937], [0.7378, 0.8299]];
     let layer = 0;
     const cards = Array.from(board.children);
     cards.forEach((card, index) => {
-        const [x, y, width, ratio] = slots[index % slots.length];
+        const [x, y] = slots[index % slots.length];
         let position = { x, y };
         function place() {
             if (!board.clientWidth) return;
@@ -800,8 +800,6 @@ document.onkeydown = function(e) {
             card.style.left = (8 + position.x * roomX) + 'px';
             card.style.top = (8 + position.y * roomY) + 'px';
         }
-        card.style.setProperty('--card-width', width + '%');
-        card.style.setProperty('--card-ratio', ratio);
         const observer = new ResizeObserver(place);
         observer.observe(board);
         observer.observe(card);
