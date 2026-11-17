@@ -38,7 +38,7 @@
     <!-- Нүүр хуудас: төслүүд хэвтээ эгнээгээр (скрипт доор бүтээнэ) -->
     <main class="gallery" id="main-gallery">
         <div class="home-wrap">
-            <div class="section-head">projects</div>
+            <div class="section-head"></div>
             <div class="cards-scroll" id="home-scroll">
                 <div class="cards" id="home-index"></div>
             </div>
@@ -49,7 +49,7 @@
     <section id="projects-content" class="reference-section">
         <div class="content-wrapper">
             <div class="reference-header">
-                <h2>Projects</h2>
+                <h2></h2>
                 <span id="close-projects-btn" class="close-x">&times;</span>
             </div>
 
@@ -587,26 +587,17 @@ function enableStripScroll(scroller, hijackWheel) {
             scroller.addEventListener('click', e => { if (moved) { e.stopPropagation(); e.preventDefault(); moved = false; } }, true);
         }
 
-        // Төслийн зургууд: нүүр хуудастай ижил том зураг, доор нь жижиг тайлбар, хажуу тийш гүйлгэнэ
+        // Төслийн зургууд: Meili-ийн төслийн хуудас шиг сүлжээ (нүүр хуудасныхаас жижиг, доор нь дугаар)
         function renderProjectImages(container, urls) {
             if (urls.length === 0) {
                 container.innerHTML = '';
                 return;
             }
-            const item = container.closest('.project-item');
-            const rawName = item.querySelector('.project-name').textContent.trim().replace(/^\d+\.\s*/, '');
-            const yearRow = Array.from(item.querySelectorAll('.project-meta p')).find(p => {
-                const st = p.querySelector('strong');
-                return st && st.textContent.trim().toLowerCase().startsWith('year');
-            });
-            const year = yearRow ? yearRow.textContent.replace(/^[^:]*:/, '').trim() : '';
-            const label = rawName + (year ? ', ' + year : '');
-            const cardsHtml = urls.map((u, i) =>
-                `<div class="card"><div class="card-img"><img src="${u}" alt="${label}" ondragstart="return false;"></div>` +
-                `<div class="card-caption"><span class="card-title">${label} | ${i + 1}/${urls.length}</span></div></div>`
+            const cells = urls.map((u, i) =>
+                `<div class="pg-cell"><div class="pg-img"><img src="${u}" alt="" ondragstart="return false;"></div>` +
+                `<div class="pg-cap">${i + 1} / ${urls.length}</div></div>`
             ).join('');
-            container.innerHTML = `<div class="cards-scroll"><div class="cards">${cardsHtml}</div></div>`;
-            enableStripScroll(container.querySelector('.cards-scroll'), false);
+            container.innerHTML = `<div class="pg-grid">${cells}</div>`;
         }
 
                 document.querySelectorAll('.project-images[data-image-folder]').forEach(container => {
@@ -654,10 +645,10 @@ function enableStripScroll(scroller, hijackWheel) {
 
 document.querySelectorAll('.project-images').forEach(container => {
             container.addEventListener('click', function(e) {
-                const imgs = Array.from(container.querySelectorAll('.card-img img'));
+                const imgs = Array.from(container.querySelectorAll('.pg-cell img'));
                 if (imgs.length === 0) return;
-                const card = e.target.closest('.card');
-                const idx = card ? Array.from(container.querySelectorAll('.card')).indexOf(card) : 0;
+                const cell = e.target.closest('.pg-cell');
+                const idx = cell ? Array.from(container.querySelectorAll('.pg-cell')).indexOf(cell) : 0;
                 openLightbox(imgs.map(img => img.src), Math.max(0, idx));
             });
         });
@@ -728,7 +719,7 @@ document.onkeydown = function(e) {
             return row ? row.textContent.replace(/^[^:]*:/, '').trim() : '';
         };
 
-        // Төслийн дэлгэрэнгүй: зүүн талд мэдээлэл (location, year...), баруун талд нэр + тайлбар; доор нь том зургууд
+        // Төслийн дэлгэрэнгүй: нэр, зүүн талд тайлбар, баруун талд мэдээлэл; доор нь зургийн сүлжээ
         projectItems.forEach(item => {
             const details = item.querySelector('.project-details');
             const title = document.createElement('div');
@@ -736,17 +727,17 @@ document.onkeydown = function(e) {
             title.textContent = nameOf(item);
             const top = document.createElement('div');
             top.className = 'pd-top';
-            const side = document.createElement('div');
-            side.className = 'pd-side';
-            const main = document.createElement('div');
-            main.className = 'pd-main';
-            ['.project-meta', '.project-credits'].forEach(sel => { const el = details.querySelector(sel); if (el) side.appendChild(el); });
-            main.appendChild(title);
+            const text = document.createElement('div');
+            text.className = 'pd-text';
+            const info = document.createElement('div');
+            info.className = 'pd-info';
             const desc = details.querySelector('.project-description');
-            if (desc) main.appendChild(desc);
-            top.appendChild(side);
-            top.appendChild(main);
+            if (desc) text.appendChild(desc);
+            ['.project-meta', '.project-credits'].forEach(sel => { const el = details.querySelector(sel); if (el) info.appendChild(el); });
+            top.appendChild(text);
+            top.appendChild(info);
             details.insertBefore(top, details.firstChild);
+            details.insertBefore(title, details.firstChild);
         });
 
         const firstImage = {};
@@ -793,9 +784,8 @@ document.onkeydown = function(e) {
         document.addEventListener('keydown', e => {
             if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
             if (lightboxOverlay.classList.contains('active')) return;
-            const openStrip = document.querySelector('.project-item.open .cards-scroll');
-            const target = openStrip || (mainGallery.style.display !== 'none' ? scroller : null);
-            if (!target) return;
+            if (mainGallery.style.display === 'none') return;
+            const target = scroller;
             target.scrollBy({ left: (e.key === 'ArrowRight' ? 1 : -1) * window.innerWidth * 0.6, behavior: 'smooth' });
         });
     })();

@@ -20,6 +20,7 @@
     --nav-gap: 18px;      /* цэсийн үгс хоорондын зай */
     --caption-size: 12px; /* картын нэр, тайлбарын үсгийн хэмжээ */
     --hero-h: clamp(260px, calc(100vh - 190px), 640px); /* нүүр хуудасны том зургийн өндөр */
+    --cell-h: 190px;            /* төслийн хуудасны зургийн нүдний өндөр */
     --home-caption-size: 11px;  /* нүүр хуудасны зургийн доорх жижиг нэр */
     --color-caption: #a8a8a8;   /* нүүр хуудасны зургийн доорх нэрний өнгө */
 }
@@ -102,7 +103,9 @@ header {
     bottom: 0;
     z-index: 100;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
+    column-gap: var(--nav-gap);
     padding: 12px var(--nav-pad-x) 12px var(--nav-pad-x);
     font-size: var(--nav-size);
     line-height: 1.5;
@@ -213,8 +216,7 @@ header {
 .cards .card-caption { display: block; width: 0; min-width: 100%; margin-top: 6px; }
 
 @media (hover: hover) {
-    .cards:hover .card:not(:hover),
-    .projects-grid:hover .card:not(:hover) { opacity: 0.3; }
+    .cards:hover .card:not(:hover) { opacity: 0.3; }
 }
 
 /* ==========================================================================
@@ -285,6 +287,13 @@ header {
     padding-bottom: 40px;
 }
 
+.card-caption { display: block; margin-top: 7px; }
+.projects-grid .card-img,
+.projects-grid .card-img.empty { aspect-ratio: 4 / 3; overflow: hidden; }
+.projects-grid .card-img img { width: 100%; height: 100%; object-fit: cover; }
+.projects-grid .card-title,
+.projects-grid .card-meta { display: block; margin-top: 0; }
+
 .back-to-projects {
     display: none;
     font-size: 13px;
@@ -309,62 +318,87 @@ header {
     padding: 24px 0 40px 0;
 }
 
-/* Дээд хэсэг: зүүн талд мэдээлэл, баруун талд нэр + тайлбар (Meili-ийн төслийн хуудас шиг) */
+/* Төслийн дэлгэрэнгүй (Meili-ийн төслийн хуудас шиг): нэр, зүүн талд тайлбар, баруун талд мэдээлэл, доор нь зургийн сүлжээ */
+.project-detail-title {
+    font-size: 24px;
+    line-height: 1.2;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    margin: 26px 0 38px 0;
+    word-break: break-word;
+}
+
 .pd-top {
     display: grid;
     grid-template-columns: 1fr 1fr;
     column-gap: 24px;
-    padding-bottom: 48px;
+    padding-bottom: 56px;
 }
-.pd-main { padding-right: 12%; min-width: 0; }
-.pd-side { min-width: 0; }
-
-.project-detail-title {
-    font-size: 20px;
-    line-height: 1.25;
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
-    margin-bottom: 28px;
-    word-break: break-word;
-}
-
-.project-meta,
-.project-credits {
-    font-size: 13px;
-    line-height: 1.8;
-    margin-bottom: 18px;
-}
-
-.project-meta strong,
-.project-credits strong {
-    display: inline-block;
-    width: 120px;
-    font-size: 11px;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    color: var(--color-muted);
-}
+.pd-text, .pd-info { min-width: 0; }
 
 .project-description {
-    font-size: 14px;
-    line-height: 1.6;
+    font-size: 13px;
+    line-height: 1.45;
     text-align: left;
+    max-width: 640px;
     word-break: break-word;
     overflow-wrap: break-word;
 }
 .project-description p { display: block; white-space: pre-line; }
 
-/* Нэг төсөл нээлттэй үед агуулга зүүн захаас (цэстэй адил) эхэлнэ, зургийн эгнээ бүтэн өргөнтэй */
+.pd-info {
+    font-size: 11px;
+    line-height: 1.35;
+    text-transform: uppercase;
+}
+.project-meta,
+.project-credits {
+    font-size: 11px;
+    line-height: 1.35;
+}
+.project-credits { margin-top: 10px; }
+.project-meta strong,
+.project-credits strong {
+    display: inline;
+    width: auto;
+    font-weight: normal;
+    color: var(--color-text);
+}
+
+/* Нэг төсөл нээлттэй үед агуулга зүүн захаас (цэстэй адил) эхэлнэ */
 #projects-content:has(.project-item.open) .content-wrapper > *:not(.reference-header) {
     padding-left: var(--nav-pad-x);
     padding-right: var(--nav-pad-x);
 }
-.project-images {
-    margin-left: calc(-1 * var(--nav-pad-x));
-    margin-right: calc(-1 * var(--nav-pad-x));
-    cursor: zoom-in;
-}
 
+/* Зургийн сүлжээ: нүд бүр тогтмол хэмжээтэй, зураг нь нүдэндээ багтаж доод талдаа тулна */
+.project-images { margin: 0; cursor: zoom-in; }
+.pg-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, var(--col));
+    gap: 22px var(--gap);
+    align-items: start;
+}
+.pg-img {
+    height: var(--cell-h);
+    display: flex;
+    align-items: flex-end;
+}
+.pg-img img {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+}
+.pg-cap {
+    margin-top: 5px;
+    font-family: var(--font-caption);
+    font-size: 10px;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: var(--color-caption);
+}
 
 /* ==========================================================================
    Бусад хэсгүүд (news, bio, reference)
@@ -589,8 +623,9 @@ header {
     header { padding: 10px var(--nav-pad-x) 8px var(--nav-pad-x); }
     .nav-contact { padding: 8px var(--nav-pad-x) 10px var(--nav-pad-x); }
 
+    :root { --cell-h: 130px; }
     .pd-top { grid-template-columns: 1fr; row-gap: 28px; }
-    .pd-main { order: -1; padding-right: 0; }
+    .pg-grid { grid-template-columns: 1fr 1fr; }
     .projects-grid { grid-template-columns: 1fr; gap: 26px; }
     .projects-grid .card { flex: none; width: 100%; }
 
