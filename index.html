@@ -7,7 +7,7 @@
     <link rel="icon" type="image/png" href="images/favicon.png?v=4d4d4403">
     <link rel="shortcut icon" type="image/png" href="images/favicon.png?v=4d4d4403">
     <link rel="apple-touch-icon" href="images/favicon.png?v=4d4d4403">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=lightbox-thumbnails-1">
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-R3C8NEM5V2"></script>
 <script>
@@ -417,6 +417,7 @@ body:not(:has(.reference-section.active)) {
         <button class="lightbox-btn lightbox-prev-btn" id="lightbox-prev">&#8249;</button>
         <img id="lightbox-img" src="" alt="Томруулсан зураг" ondragstart="return false;">
         <button class="lightbox-btn lightbox-next-btn" id="lightbox-next">&#8250;</button>
+        <nav class="lightbox-thumbnails" id="lightbox-thumbnails" aria-label="Төслийн зургууд"></nav>
     </div>
 
     <!-- JavaScript логик -->
@@ -633,6 +634,7 @@ body:not(:has(.reference-section.active)) {
         const lightboxPrev = document.getElementById('lightbox-prev');
         const lightboxNext = document.getElementById('lightbox-next');
 
+        const lightboxThumbnails = document.getElementById('lightbox-thumbnails');
         let lightboxImages = [];
         let lightboxIndex = 0;
 
@@ -646,19 +648,42 @@ body:not(:has(.reference-section.active)) {
             if (lightboxImages.length === 0) return;
             lightboxIndex = (index + lightboxImages.length) % lightboxImages.length;
             lightboxImg.src = lightboxImages[lightboxIndex];
+            lightboxImg.alt = 'Төслийн зураг ' + (lightboxIndex + 1) + ' / ' + lightboxImages.length;
+            Array.from(lightboxThumbnails.children).forEach((button, i) => {
+                button.setAttribute('aria-current', i === lightboxIndex ? 'true' : 'false');
+            });
+            const selected = lightboxThumbnails.children[lightboxIndex];
+            if (selected) {
+                lightboxThumbnails.scrollLeft = selected.offsetLeft - lightboxThumbnails.clientWidth / 2 + selected.offsetWidth / 2;
+            }
         }
 
         function openLightbox(urls, startIndex) {
             if (!urls || urls.length === 0) return;
             lightboxImages = urls;
+            lightboxThumbnails.replaceChildren();
+            urls.forEach((url, index) => {
+                const button = document.createElement('button');
+                button.type = 'button';
+                button.className = 'lightbox-thumbnail';
+                button.setAttribute('aria-label', 'Зураг ' + (index + 1) + ' / ' + urls.length);
+                const img = document.createElement('img');
+                img.src = url;
+                img.alt = '';
+                img.draggable = false;
+                button.appendChild(img);
+                button.addEventListener('click', () => showLightboxImage(index));
+                lightboxThumbnails.appendChild(button);
+            });
             updateLightboxNavVisibility();
-            showLightboxImage(startIndex || 0);
             lightboxOverlay.classList.add('active');
+            showLightboxImage(startIndex || 0);
         }
         function closeLightbox() {
             lightboxOverlay.classList.remove('active');
             lightboxImg.src = '';
             lightboxImages = [];
+            lightboxThumbnails.replaceChildren();
         }
 
 document.querySelectorAll('.project-images').forEach(container => {
@@ -675,15 +700,15 @@ document.querySelectorAll('.project-images').forEach(container => {
         lightboxNext.addEventListener('click', function(e) { e.stopPropagation(); showLightboxImage(lightboxIndex + 1); });
 
         lightboxOverlay.addEventListener('click', function(e) {
-            if (e.target.closest('.lightbox-btn') || e.target.closest('.lightbox-close')) return;
+            if (e.target.closest('.lightbox-btn, .lightbox-close, .lightbox-thumbnails')) return;
             closeLightbox();
         });
         lightboxClose.addEventListener('click', function(e) { e.stopPropagation(); closeLightbox(); });
         document.addEventListener('keydown', function(e) {
             if (!lightboxOverlay.classList.contains('active')) return;
             if (e.key === 'Escape') closeLightbox();
-            if (e.key === 'ArrowRight') showLightboxImage(lightboxIndex + 1);
-            if (e.key === 'ArrowLeft') showLightboxImage(lightboxIndex - 1);
+            if (e.key === 'ArrowRight') { e.preventDefault(); showLightboxImage(lightboxIndex + 1); }
+            if (e.key === 'ArrowLeft') { e.preventDefault(); showLightboxImage(lightboxIndex - 1); }
         });
 
         // 📱 Гар утсан дээр pinch болон давхар товшилтоор зумлахаас бүрэн хамгаалах
