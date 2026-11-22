@@ -853,9 +853,9 @@ document.onkeydown = function(e) {
         function enableProjectDesk(board) {
     // Initial thumbnail centers as fractions of the visible gallery.
     const slots = [
-        [0.502, 0.234], [0.364, 0.315], [0.625, 0.320],
-        [0.298, 0.520], [0.383, 0.705], [0.525, 0.758],
-        [0.632, 0.581], [0.415, 0.100]
+        [0.620, 0.128], [0.206, 0.314], [0.838, 0.275],
+        [0.205, 0.609], [0.386, 0.802], [0.640, 0.852],
+        [0.862, 0.599], [0.408, 0.143]
     ];
     let layer = 0;
     const cards = Array.from(board.children);
@@ -869,15 +869,7 @@ document.onkeydown = function(e) {
             const left = position ? position.x * roomX : x * board.clientWidth - card.offsetWidth / 2 - 8;
             const top = position ? position.y * roomY : y * board.clientHeight - card.offsetHeight / 2 - 8;
             card.style.left = (8 + Math.max(0, Math.min(roomX, left))) + 'px';
-            let safeTop = 8 + Math.max(0, Math.min(roomY, top));
-            // Keep the new upper-left card clear of the two neighboring cards.
-            if (index === 7 && !position) {
-                const neighborTops = [0, 1].map(i =>
-                    slots[i][1] * board.clientHeight - cards[i].offsetHeight / 2
-                );
-                safeTop = Math.max(8, Math.min(safeTop, Math.min(...neighborTops) - card.offsetHeight - 16));
-            }
-            card.style.top = safeTop + 'px';
+            card.style.top = (8 + Math.max(0, Math.min(roomY, top))) + 'px';
         }
         const observer = new ResizeObserver(place);
         observer.observe(board);
