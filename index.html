@@ -298,9 +298,22 @@ body:not(:has(.reference-section.active)) {
                         <span class="toggle-icon">+</span>
                     </div>
                     <div class="project-details">
-                        <div class="project-meta"></div>
-                        <div class="project-credits"></div>
-                        <div class="project-description"></div>
+                        <div class="project-meta">
+                            <p><strong>location :</strong> —</p>
+                            <p><strong>year :</strong> —</p>
+                            <p><strong>use :</strong> —</p>
+                            <p><strong>scale :</strong> —</p>
+                            <p><strong>status :</strong> —</p>
+                        </div>
+                        <div class="project-credits">
+                            <p><strong>client :</strong> —</p>
+                            <p><strong>design :</strong> —</p>
+                            <p><strong>team :</strong> —</p>
+                            <p><strong>filed under :</strong> <span class="project-tags">—</span></p>
+                        </div>
+                        <div class="project-description">
+                            <p>Удахгүй мэдээлэл орно.</p>
+                        </div>
                         <div class="project-images" data-image-folder="images/project8"></div>
                     </div>
                 </div>
@@ -593,7 +606,7 @@ body:not(:has(.reference-section.active)) {
         // Код 1-ээс эхлээд дараалуулан зураг байгаа эсэхийг шалгаж, олдохгүй
         // болмогц зогсоно. Ингэснээр HTML огт засалгүйгээр зураг нэмэх/хасах боломжтой.
         const MAX_IMAGES_PER_PROJECT = 40; // нэг project-д байж болох дээд зургийн тоо
-        const IMAGE_VERSION = 4; // Ижил нэртэй зураг солихдоо энэ дугаарыг нэгээр нэмнэ.
+        const IMAGE_VERSION = 5; // Ижил нэртэй зураг солихдоо энэ дугаарыг нэгээр нэмнэ.
         const IMAGE_EXTENSIONS = ['jpg', 'jpeg', 'png', 'JPG', 'JPEG', 'PNG'];
 
         function tryLoadOneImage(url) {
