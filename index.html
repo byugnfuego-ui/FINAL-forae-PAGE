@@ -57,21 +57,39 @@ body:not(:has(.reference-section.active)) {
 }
 #projects-grid .card:focus-visible { outline: 2px solid #333; outline-offset: -3px; }
 #projects-grid .card-img { position: absolute; inset: 0; aspect-ratio: auto; background: transparent; }
-#projects-grid .card-img img { width: 100%; height: 100%; object-fit: contain; }
+#projects-grid .card-img img {
+    width: 100%; height: 100%; object-fit: contain;
+    opacity: 1; transition: opacity 160ms ease;
+}
 #projects-grid .card-caption {
     position: absolute; inset: 0; margin: 0; padding: 5%;
-    background: white; opacity: 0; pointer-events: none;
+    display: flex; align-items: center; justify-content: center;
+    background: transparent; opacity: 0; pointer-events: none;
     font: normal 10px/1.4 var(--font-main);
-    overflow-wrap: anywhere;
+    text-align: center; overflow-wrap: anywhere;
+    transition: opacity 160ms ease;
 }
+#projects-grid .card-title {
+    display: block; width: fit-content; max-width: 100%; margin: 0;
+    padding: 3px 5px; background: white; color: #000;
+}
+#projects-grid .card-meta { display: none; }
 #projects-grid .card:has(.empty) .card-caption,
 #projects-grid .card:focus-visible .card-caption { opacity: 1; }
-#projects-grid .card:has(.empty) .card-caption { background: white; }
-@media (hover: hover) { #projects-grid .card:hover .card-caption { opacity: 1; } }
+#projects-grid .card:focus-visible .card-img img { opacity: 0.5; }
+@media (hover: hover) and (min-width: 769px) {
+    #projects-grid .card:hover .card-caption { opacity: 1; }
+    #projects-grid .card:hover .card-img img { opacity: 0.5; }
+}
 #projects-grid .card.moving { cursor: grabbing; }
 #projects-grid .card.moving:has(img) .card-caption { opacity: 0; }
+#projects-grid .card.moving .card-img img { opacity: 1; }
 @media (hover: none), (max-width: 768px) {
     #projects-grid .card-caption { display: none; }
+    #projects-grid .card .card-img img { opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+    #projects-grid .card-img img, #projects-grid .card-caption { transition: none; }
 }
 </style>
 </head>
